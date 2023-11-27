@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Pages import
 import Selection from "./pages/Selection";
+
 import ProductDescription from "./Pages/ProductDescription";
 import FlashScreen from "./pages/FlashScreen/FlashScreen";
 
 function App() {
 
+
   
+
 
   return (
     <Router>
@@ -18,11 +21,15 @@ function App() {
         <Route path="/flashscreen" element={<FlashScreen/>}/>
 
         <Route path="/" element={<Selection />}></Route>
-        <Route path="/products/:id" element={<ProductDescription />} />
+<Route path="/products/:id" element={<ProductDescription />} />
 
       </Routes>
     </Router>
   );
+
+        
+
+
 
 }
 
