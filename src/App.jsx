@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Selection from "./pages/Selection";
 
 import ProductDescription from "./Pages/ProductDescription";
-import FlashScreen from "./pages/FlashScreen/FlashScreen";
+import FlashScreen from "./pages/FlashScreen";
 
 function App() {
 
