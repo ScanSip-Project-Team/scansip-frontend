@@ -26,9 +26,8 @@ const Selection = () => {
 
     return isLoading ? <p>Loading...</p> : (<div>
         <p>Page Selection</p>
-        <div className="flex-parent">
-
-        </div>
+        <p>Just another line</p>
+        <div className="flex-parent"></div>
         <input 
         type="submit"
         value="Valider le panier" />
