@@ -14,7 +14,7 @@ const Selection = () => {
                 console.log("response.data >>>>", response.data);
                 setData(response.data);
                 setIsLoading(false);
-            }catch(error) {console.log(error)};
+            }catch(error) {console.log(error)}
         };
         fetchData();
 
