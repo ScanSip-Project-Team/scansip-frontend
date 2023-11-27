@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Selection = () => {
+
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,12 +28,15 @@ const Selection = () => {
   ) : (
     <div>
       <p>Page Selection</p>
+      <p>Just another line</p>
       <div className="flex-parent"></div>
       <input type="submit" value="Valider le panier" />
 
       <Link to={"/products"}>Modal Yohann</Link>
     </div>
   );
+
+
 };
 
 export default Selection;
