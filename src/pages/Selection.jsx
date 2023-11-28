@@ -77,12 +77,16 @@ const Selection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+<<<<<<< Updated upstream
         const response = await axios.get(
           "https://site--scansip-backend--jswmm7jk2mlr.code.run/products"
         );
 
         // console.log("response.data >>>>", response.data);
 
+=======
+        const response = await axios.get("http://localhost:3000/products");
+>>>>>>> Stashed changes
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -95,21 +99,17 @@ const Selection = () => {
   return isLoading ? (
     <p>Loading...</p>
   ) : (
-    <div className="w-screen flex justify-center items-center flex-col">
-      <div className="flex items-center justify-center gap-2 w-11/12 border-black border-2 my-6">
+    <div className="flex w-screen flex-col items-center justify-center">
+      <div className="my-6 flex w-11/12 items-center justify-center gap-2 border-2 border-black">
         <div
-          className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5"
+          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
           onClick={handleClickSofts}
         >
-          <img
-            className="h-12 w-8"
-            src="../src/assets/soft.png"
-            alt="soft"
-          />
+          <img className="h-12 w-8" src="../src/assets/soft.png" alt="soft" />
           <p>Soft</p>
         </div>
         <div
-          className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5"
+          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
           onClick={handleClickSnacks}
         >
           <img
@@ -120,18 +120,14 @@ const Selection = () => {
           <p>Snacks</p>
         </div>
         <div
-          className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5"
+          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
           onClick={handleClickAlcools}
         >
-          <img
-            className="h-12 w-8"
-            src="../src/assets/biere.png"
-            alt="beer"
-          />
+          <img className="h-12 w-8" src="../src/assets/biere.png" alt="beer" />
           <p>Alcools</p>
         </div>
         <div
-          className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5"
+          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
           onClick={handleClickCocktails}
         >
           <img
@@ -146,7 +142,7 @@ const Selection = () => {
       {category === "Softs" && softs.length !== 0 ? (
         softs.map((item) => (
           <div
-            className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full"
+            className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
             key={item._id}
           >
             <div className="w-1/5">
@@ -162,12 +158,15 @@ const Selection = () => {
             <div className="w-4/5">
               <p>{item.product_name}</p> <p>{item.product_price} €</p>
             </div>
+            <div>
+              <button className="h-10 w-10 rounded-full bg-[#E8E8E8]">+</button>
+            </div>
           </div>
         ))
       ) : category === "Snacks" && snacks.length !== 0 ? (
         snacks.map((item) => (
           <div
-            className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full"
+            className="  flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
             key={item._id}
           >
             <div className="w-1/5">
@@ -175,17 +174,17 @@ const Selection = () => {
                 className="w-15 h-20 bg-[#F3F3F3]"
                 src={item.product_image.secure_url}
                 alt="product"
-              />{" "}
+              />
             </div>
             <div className="w-4/5">
               <p>{item.product_name}</p> <p>{item.product_price} €</p>{" "}
-            </div>{" "}
+            </div>
           </div>
         ))
       ) : category === "Alcools" && alcools.length !== 0 ? (
         alcools.map((item) => (
           <div
-            className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full"
+            className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
             key={item._id}
           >
             <div className="w-1/5">
@@ -204,7 +203,7 @@ const Selection = () => {
       ) : category === "Cocktails" && cocktails.length !== 0 ? (
         cocktails.map((item) => (
           <div
-            className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full"
+            className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
             key={item._id}
           >
             <div className="w-1/5">
@@ -223,7 +222,12 @@ const Selection = () => {
         <p>Sélectionner une catégorie</p>
       )}
 
+<<<<<<< Updated upstream
       <input className="w-11/12 bg-black text-white p-1.5 my-6"
+=======
+      <input
+        className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
+>>>>>>> Stashed changes
         type="submit"
         value="Valider le panier" />
         <Link to={"/products"}>go to products (yohann)</Link>
