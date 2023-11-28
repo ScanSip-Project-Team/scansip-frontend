@@ -27,6 +27,11 @@ const Selection = () => {
     return isLoading ? <p>Loading...</p> : (<div>
         <p>Page Selection</p>
         <p>Just another line</p>
+        
+        {data.map((item)=> {
+            return <div key={item._id}> 
+            <p>{item.product_name}</p></div>
+        })}
         <div className="flex-parent"></div>
         <input 
         type="submit"
