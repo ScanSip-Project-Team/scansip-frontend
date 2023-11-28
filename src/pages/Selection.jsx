@@ -154,13 +154,13 @@ useEffect(() => {
 
      
 {category === "Softs" && softs.length !==0 ?  softs.map((item)=> {
-        return <div  className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/><div><p>{item.product_name}</p> <p>{item.product_price} €</p></div></div>
+        return <div  className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <div className="w-1/5"><img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/></div><div className="w-4/5"><p>{item.product_name}</p> <p>{item.product_price} €</p></div></div>
        }) : category === "Snacks" && snacks.length !== 0 ?  snacks.map((item)=> {
-        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/> <div><p>{item.product_name}</p> <p>{item.product_price} €</p> </div> </div>
+        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <div className="w-1/5"><img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/> </div><div className="w-4/5"><p>{item.product_name}</p> <p>{item.product_price} €</p> </div> </div>
        }): category === "Alcools" && alcools.length !==0 ? alcools.map((item)=> {
-        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/> <div><p>{item.product_name}</p> <p>{item.product_price} €</p> </div> </div>
+        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <div className="w-1/5"><img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/> </div><div className="w-4/5"><p>{item.product_name}</p> <p>{item.product_price} €</p> </div> </div>
        }) : category === "Cocktails" && cocktails.length !==0 ? cocktails.map((item)=> {
-        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/><div> <p>{item.product_name}</p> <p>{item.product_price} €</p></div></div>
+        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <div className="w-1/5"> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/></div><div className="w-4/5"> <p>{item.product_name}</p> <p>{item.product_price} €</p></div></div>
        }) : <p>Sélectionner une catégorie</p>
        }
 
