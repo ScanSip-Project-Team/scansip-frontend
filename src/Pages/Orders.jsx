@@ -12,9 +12,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://site--scansip-backend--jswmm7jk2mlr.code.run/orders`,
-        );
+        const response = await axios.get(`http://localhost:3000/orders`);
         console.log("response ==> ", response.data);
         setData(response.data);
         setIsLoading(false);
@@ -44,11 +42,6 @@ const Orders = () => {
               <div key={element.id}>
                 <p>{element.order_number}</p>
               </div>
-              //   <img
-              //     key={element.id}
-              //     src={element.product_list[0].product.product_image.secure_url}
-              //     alt="image"
-              //   />
             );
           })}
           <div className="flex gap-5 rounded bg-slate-200  p-4 ">
