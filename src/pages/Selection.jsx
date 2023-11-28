@@ -23,20 +23,19 @@ const Selection = () => {
     fetchData();
   }, []);
 
-  return isLoading ? (
-    <p>Loading...</p>
-  ) : (
-    <div>
-      <p>Page Selection</p>
-      <p>Just another line</p>
-      <div className="flex-parent"></div>
-      <input type="submit" value="Valider le panier" />
-
-      <Link to={"/products"}>Modal Yohann</Link>
-    </div>
-  );
-
-
+    return isLoading ? <p>Loading...</p> : (<div>
+        <p>Page Selection</p>
+        <p>Just another line</p>
+        
+        {data.map((item)=> {
+            return <div key={item._id}> 
+            <p>{item.product_name}</p></div>
+        })}
+        <div className="flex-parent"></div>
+        <input 
+        type="submit"
+        value="Valider le panier" />
+    </div>)
 };
 
 export default Selection;
