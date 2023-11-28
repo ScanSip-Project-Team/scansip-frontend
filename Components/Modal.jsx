@@ -1,5 +1,9 @@
 const Modal = () => {
-  return <section>Modal</section>;
+  return (
+    <div className="h-3/4 bg-blue-400 flex justify-center">
+      <div>MODAL</div>
+    </div>
+  );
 };
 
 export default Modal;

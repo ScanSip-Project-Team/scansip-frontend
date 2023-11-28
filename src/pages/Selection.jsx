@@ -29,7 +29,6 @@ const Selection = () => {
       <p>Page Selection</p>
       <div className="flex-parent"></div>
       <input type="submit" value="Valider le panier" />
-
       <Link to={"/products"}>Modal Yohann</Link>
     </div>
   );
