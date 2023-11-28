@@ -2,19 +2,18 @@ import { useState } from "react";
 import Modal from "../../Components/Modal";
 
 const ProductDescription = () => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleModal = () => {
-    setIsClicked(true);
+    setOpenModal(true);
   };
 
   return (
-    <section className="flex h-screen w-screen flex-col justify-around bg-red-500">
-      <div onClick={handleModal} className="h-3/4">
+    <section className="flex h-screen w-screen bg-red-700 flex-col items-center">
+      <div onClick={handleModal}>
         Coca cola
       </div>
-
-      <Modal />
+      {openModal && <Modal setOpenModal={setOpenModal} />}  
     </section>
   );
 };

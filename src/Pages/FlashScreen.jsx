@@ -1,5 +1,5 @@
 // Import Style
-import logo from "../../assets/logo.svg"
+import logo from "../assets/logo.svg"
 const FlashScreen=()=>{
 
     return<main className="w-screen h-screen justify-center items-center flex">
