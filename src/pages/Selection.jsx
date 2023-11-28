@@ -1,6 +1,9 @@
+// Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+
 
 const Selection = () => {
 
@@ -20,7 +23,7 @@ useEffect(() => {
         const response = await axios.get(
           "https://site--scansip-backend--jswmm7jk2mlr.code.run/products"
         );
-        console.log("response.data >>>>", response.data);
+        // console.log("response.data >>>>", response.data);
         setData(response.data);
         setIsLoading(false);
 
@@ -47,8 +50,7 @@ useEffect(() => {
 
     return isLoading ? <p>Loading...</p> : (<div className="w-screen flex justify-center items-center flex-col">
       
-       
-        
+      
         {/* {data.map((item)=> {
             return <div key={item._id} className="justify-center inline-flex"> 
             <p>{item.product_category}</p>
@@ -87,6 +89,9 @@ useEffect(() => {
             </div>
         </div>
 
+
+        <div className="flex-parent"></div>
+
         
 
         {/* {softs.map((item)=> {
@@ -96,10 +101,15 @@ useEffect(() => {
         {/* {category === "Softs" ? softs[0].product_name : <p>Cas non traité</p>} */}
         
         <p> Category : {category}</p>
+
         <input 
         type="submit"
         value="Valider le panier" />
+        <Link to={"/products"}>go to products (yohann)</Link>
     </div>)
+
 };
 
 export default Selection;
+
+

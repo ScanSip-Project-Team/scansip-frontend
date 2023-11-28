@@ -1,22 +1,48 @@
-import { useState } from "react";
+// Import Package
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 // Components
 import Modal from "../../Components/Modal";
 
+
 const ProductDescription = () => {
-  const [isClicked, setIsClicked] = useState(false);
 
-  const handleModal = () => {
-    setIsClicked(true);
-  };
+  const [data, setData] = useState()
+  const [isLoading, setIsLoading] = useState(true) 
 
-  return (
-    <section className="h-screen w-screen bg-red-500 flex flex-col justify-around">
-      <div onClick={handleModal}>Coca cola</div>
+  const [openModal, setOpenModal] = useState(false);
+  const [productID, setProductID] = useState()
 
-      <Modal />
+
+useEffect(() => {
+  const fetchData = async () => {
+    const response = await axios.get('https://site--scansip-backend--jswmm7jk2mlr.code.run/products')
+    // console.log(response.data);
+    setData(response.data)
+    setIsLoading(false)
+  }
+  fetchData()
+}, [])
+
+ 
+  return isLoading ? <p>Loading page</p> : (
+    <section className="flex h-screen w-screen bg-red-700 flex-col items-center">
+      {data.map((elem) =>{
+      //  console.log(elem);
+       return <div key={elem._id} onClick={() => {
+        setOpenModal(true);
+        setProductID(elem._id)
+      
+       }}>
+          <p>{elem.product_name}</p>
+       </div>
+      })}
+
+    {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
+      
     </section>
-  );
+  ) 
 };
 
 export default ProductDescription;
