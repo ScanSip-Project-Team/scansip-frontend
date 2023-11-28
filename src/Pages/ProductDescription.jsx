@@ -1,21 +1,48 @@
-import { useState } from "react";
+// Import Package
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+// Components
 import Modal from "../../Components/Modal";
 
+
 const ProductDescription = () => {
+
+  const [data, setData] = useState()
+  const [isLoading, setIsLoading] = useState(true) 
+
   const [openModal, setOpenModal] = useState(false);
+  const [productID, setProductID] = useState()
 
-  const handleModal = () => {
-    setOpenModal(true);
-  };
 
-  return (
+useEffect(() => {
+  const fetchData = async () => {
+    const response = await axios.get('http://localhost:3000/products')
+    // console.log(response.data);
+    setData(response.data)
+    setIsLoading(false)
+  }
+  fetchData()
+}, [])
+
+ 
+  return isLoading ? <p>Loading page</p> : (
     <section className="flex h-screen w-screen bg-red-700 flex-col items-center">
-      <div onClick={handleModal}>
-        Coca cola
-      </div>
-      {openModal && <Modal setOpenModal={setOpenModal} />}  
+      {data.map((elem) =>{
+      //  console.log(elem);
+       return <div key={elem._id} onClick={() => {
+        setOpenModal(true);
+        setProductID(elem._id)
+      
+       }}>
+          <p>{elem.product_name}</p>
+       </div>
+      })}
+
+    {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
+      
     </section>
-  );
+  ) 
 };
 
 export default ProductDescription;

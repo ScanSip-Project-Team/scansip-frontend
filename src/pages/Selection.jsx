@@ -3,16 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-// Component
-import Modal from "./Components/Modal.jsx"
 
 
 const Selection = () => {
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-
-  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,23 +26,41 @@ const Selection = () => {
     fetchData();
   }, []);
 
-    return isLoading ? <p>Loading...</p> : (<div>
-        <p>Page Selection</p>
-        <p>Just another line</p>
-        
-        {data.map((item)=> {
-          console.log(item);
-            return <div key={item._id} onClick={() => {
-              console.log("hello");
-          
-            }}> 
-            <p>{item.product_name}</p>
+    return isLoading ? <p>Loading...</p> : (<div className="w-screen flex justify-center items-center flex-col">
+      
+      
+        {/* {data.map((item)=> {
+            return <div key={item._id} className="justify-center inline-flex"> 
+            <p>{item.product_category}</p>
+            
             </div>
-        })}
+        })} */}
+
+        <div className="flex items-center justify-center gap-2 w-11/12 border-black border-2 my-6">
+            <div className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5">
+                <img className="h-12 w-8"src="../src/assets/soft.png" alt="soft" />
+                
+                <p>Soft</p>
+            </div>
+            <div className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5">
+            <img className="h-12 w-8"src="../src/assets/HotDog.png" alt="snacks" />
+                <p>Snacks</p>
+            </div>
+            <div className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5">
+            <img className="h-12 w-8"src="../src/assets/biere.png" alt="beer" />
+            <p>Alcools</p>
+            </div>
+            <div className="flex flex-col h-70 w-1/4 bg-[#F3F3F3] items-center rounded p-1.5">
+            <img className="h-12 w-8"src="../src/assets/Cocktail.png" alt="cocktail" />
+            <p>Cocktails</p>
+            </div>
+        </div>
+
         <div className="flex-parent"></div>
         <input 
         type="submit"
         value="Valider le panier" />
+        <Link to={"/products"}>go to products (yohann)</Link>
     </div>)
 
 };
@@ -54,13 +68,3 @@ const Selection = () => {
 export default Selection;
 
 
-  // return isLoading ? (
-  //   <p>Loading...</p>
-  // ) : (
-  //   <div>
-  //     <p>Page Selection</p>
-  //     <div className="flex-parent"></div>
-  //     <input type="submit" value="Valider le panier" />
-    
-  //   </div>
-  // );
