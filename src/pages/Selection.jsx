@@ -6,7 +6,7 @@ const Selection = () => {
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [category, setCategory] = useState()
+  const [category, setCategory] = useState("Softs")
   const [softs, setSofts] = useState([])
   const [snacks, setSnacks] = useState([])
   const [alcools, setAlcools] = useState([])
@@ -78,7 +78,7 @@ const handleClickCocktails =()=> {
     const cocktailsCopy = [...cocktails];
     // on parcourt le tableau data et on cherche les produits dont la catégory est Soft
     for (let l=0; l<data.length; l++) {
-        if (data[l].product_category === "Cocktails") {
+        if (data[l].product_category === "Coktails") {
             console.log("data[l].product_category >>>", data[l].product_category)
             console.log("data[l].product._id >>>>", data[l]._id);
         // on veut ensuite savoir si l'id de ce produit est déjà dans le tableau soft
@@ -105,37 +105,6 @@ useEffect(() => {
         console.log("response.data >>>>", response.data);
         setData(response.data);
         setIsLoading(false);
-        
-
-         
-        
-
-         // to update state snacks
-        //  const snacksCopy = [...snacks];
-        //  for (let j=0; j<data.length; j++) {
-        //      if (data[j].product_category === "Snacks") {
-        //          console.log("data[j].product_category >>>", data[j].product_category)
-        //          snacksCopy.push(data[j])
-        //          console.log("snacksCopy>>>>",snacksCopy);
-        //      }
-        //  }
-        //  setSnacks(snacksCopy)
-        //  console.log("snacks >>>>", snacks)
-
-          // to update state alcools
-        //   const alcoolsCopy = [...alcools];
-        //   for (let k=0; k<data.length; k++) {
-        //       if (data[k].product_category === "Snacks") {
-        //           console.log("data[k].product_category >>>", data[k].product_category)
-        //           alcoolsCopy.push(data[k])
-        //           console.log("alcoolsCopy>>>>",alcoolsCopy);
-        //       }
-        //   }
-        //   setAlcools(alcoolsCopy)
-        //   console.log("alcools >>>>", alcools)
-
-
-         
     
       } catch (error) {
         console.log(error);
@@ -150,12 +119,7 @@ useEffect(() => {
       
        
         
-        {/* {data.map((item)=> {
-            return <div key={item._id} className="justify-center inline-flex"> 
-            <p>{item.product_category}</p>
-            
-            </div>
-        })} */}
+       
 
         <div 
         className="flex items-center justify-center gap-2 w-11/12 border-black border-2 my-6">
@@ -188,14 +152,25 @@ useEffect(() => {
 
         
 
-        {/* {softs.map((item)=> {
-            return <p key={item._id}> {item.product_name}</p>
-        })} */}
+     
+{category === "Softs" && softs.length !==0 ?  softs.map((item)=> {
+        return <div  className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/><div><p>{item.product_name}</p> <p>{item.product_price} €</p></div></div>
+       }) : category === "Snacks" && snacks.length !== 0 ?  snacks.map((item)=> {
+        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/> <div><p>{item.product_name}</p> <p>{item.product_price} €</p> </div> </div>
+       }): category === "Alcools" && alcools.length !==0 ? alcools.map((item)=> {
+        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/> <div><p>{item.product_name}</p> <p>{item.product_price} €</p> </div> </div>
+       }) : category === "Cocktails" && cocktails.length !==0 ? cocktails.map((item)=> {
+        return <div className="flex justify-start items-center bg-[#F3F3F3] border-gray-300 border w-full" key={item._id}> <img className="w-15 h-20 bg-[#F3F3F3]"src={item.product_image.secure_url} alt="product"/><div> <p>{item.product_name}</p> <p>{item.product_price} €</p></div></div>
+       }) : <p>Sélectionner une catégorie</p>
+       }
 
-        {/* {category === "Softs" ? softs[0].product_name : <p>Cas non traité</p>} */}
+       
+      
+
+       
         
-        <p> Category : {category}</p>
-        <input 
+        
+        <input className="w-11/12 bg-black text-white p-1.5 my-6"
         type="submit"
         value="Valider le panier" />
     </div>)
