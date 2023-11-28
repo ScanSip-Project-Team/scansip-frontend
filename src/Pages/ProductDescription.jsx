@@ -17,7 +17,7 @@ const ProductDescription = () => {
 
 useEffect(() => {
   const fetchData = async () => {
-    const response = await axios.get('http://localhost:3000/products')
+    const response = await axios.get('https://site--scansip-backend--jswmm7jk2mlr.code.run/products')
     // console.log(response.data);
     setData(response.data)
     setIsLoading(false)

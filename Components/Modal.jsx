@@ -11,7 +11,7 @@ const Modal = ({ setOpenModal, productID }) => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const response = await axios.get(`http://localhost:3000/product-description/${productID}`);
+        const response = await axios.get(`https://site--scansip-backend--jswmm7jk2mlr.code.run/product-description/${productID}`);
         setData(response.data);
       };
   
