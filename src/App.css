@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --color-primary: #06c167;
@@ -22,7 +21,7 @@
 .btn-primary:hover {
   background-color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
-
+}
 .container {
   margin: 15px 10px;
 }
@@ -33,5 +32,4 @@
   flex-direction: row;
   gap: 5px;
   font-weight: 600;
-
 }
