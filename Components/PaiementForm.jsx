@@ -1,52 +1,72 @@
-// src/CheckoutForm.jsx
 import { useState } from "react";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import {
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
 
-import axios from "axios";
-
-const CheckoutForm = () => {
+const PaiementForm = ({ clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
+  //   const appearance = {
+  //     theme: "flat",
+  //     variables: {
+  //       colorPrimary: "#525252",
+  //     },
+  //   };
+  //   const paymentElement = elements.create("payment", {
+  //     fields: {
+  //       billingDetails: {
+  //         address: {
+  //           country: "never",
+  //         },
+  //       },
+  //     },
+  //   });
 
-  const [completed, setCompleted] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // // On récupère ici les données bancaires que l'utilisateur rentre
-    // const cardElement = elements.getElement(CardElement);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // // Demande de création d'un token via l'API Stripe
-    // // On envoie les données bancaires dans la requête
-    // const stripeResponse = await stripe.createToken(cardElement, {
-    //   name: "L'id de l'acheteur",
-    // });
-    // console.log(stripeResponse);
-    // const stripeToken = stripeResponse.token.id;
-    // // Une fois le token reçu depuis l'API Stripe
-    // // Requête vers notre serveur
-    // // On envoie le token reçu depuis l'API Stripe
-    // const response = await axios.post("http://localhost:3100/pay", {
-    //   stripeToken,
-    // });
-    // console.log(response.data);
-    // // Si la réponse du serveur est favorable, la transaction a eu lieu
-    // if (response.data.status === "succeeded") {
-    //   setCompleted(true);
-    // }
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+    setIsProcessing(true);
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        return_url: `${window.location.origin}/completion`,
+      },
+    });
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message);
+    } else {
+      setMessage("An unexpected error occured.");
+    }
+
+    setIsProcessing(false);
   };
 
   return (
-    <>
-      {!completed ? (
-        <form onSubmit={handleSubmit}>
-          <CardElement />
-          <button type="submit">Valider</button>
-        </form>
-      ) : (
-        <span>Paiement effectué ! </span>
-      )}
-    </>
+    <form id="payment-form" onSubmit={handleSubmit}>
+      <PaymentElement id="payment-element" />
+      <button disabled={isProcessing || !stripe || !elements} id="submit">
+        <span id="button-text">
+          {isProcessing ? "Processing ... " : "Pay now"}
+        </span>
+      </button>
+      {/* Show any error or success messages */}
+      {message && <div id="payment-message">{message}</div>}
+    </form>
   );
 };
 
-export default CheckoutForm;
+export default PaiementForm;

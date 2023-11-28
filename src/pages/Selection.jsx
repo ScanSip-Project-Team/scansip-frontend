@@ -3,8 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
-
 const Selection = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -77,16 +75,7 @@ const Selection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-<<<<<<< Updated upstream
-        const response = await axios.get(
-          "https://site--scansip-backend--jswmm7jk2mlr.code.run/products"
-        );
-
-        // console.log("response.data >>>>", response.data);
-
-=======
         const response = await axios.get("http://localhost:3000/products");
->>>>>>> Stashed changes
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -151,9 +140,6 @@ const Selection = () => {
                 src={item.product_image.secure_url}
                 alt="product"
               />
-
-   
-
             </div>
             <div className="w-4/5">
               <p>{item.product_name}</p> <p>{item.product_price} €</p>
@@ -197,7 +183,6 @@ const Selection = () => {
             <div className="w-4/5">
               <p>{item.product_name}</p> <p>{item.product_price} €</p>
             </div>
-
           </div>
         ))
       ) : category === "Cocktails" && cocktails.length !== 0 ? (
@@ -222,19 +207,14 @@ const Selection = () => {
         <p>Sélectionner une catégorie</p>
       )}
 
-<<<<<<< Updated upstream
-      <input className="w-11/12 bg-black text-white p-1.5 my-6"
-=======
       <input
         className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
->>>>>>> Stashed changes
         type="submit"
-        value="Valider le panier" />
-        <Link to={"/products"}>go to products (yohann)</Link>
+        value="Valider le panier"
+      />
+      <Link to={"/products"}>go to products (yohann)</Link>
     </div>
   );
 };
 
 export default Selection;
-
-
