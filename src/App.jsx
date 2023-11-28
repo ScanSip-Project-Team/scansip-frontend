@@ -1,18 +1,23 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+//Import Package
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Pages import
-import Selection from "./pages/Selection";
-import ProductDescription from "./pages/ProductDescription";
+//Import Components
 import FlashScreen from "./pages/FlashScreen";
+import Selection from "./pages/Selection";
+import ProductDescription from "./Pages/ProductDescription";
+import UserPaiement from "./Pages/UserPaiement";
+
+// Import Assets
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/flashscreen" element={<FlashScreen />} />
-        <Route path="/" element={<Selection />} />
+        <Route path="/" element={<FlashScreen />} />
+        <Route path="/home" element={<Selection />} />
         <Route path="/products" element={<ProductDescription />} />
+        <Route path="/paiement" element={<UserPaiement />} />
       </Routes>
     </Router>
   );
