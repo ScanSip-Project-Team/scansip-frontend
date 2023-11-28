@@ -6,11 +6,11 @@ const Selection = () => {
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [category, setCategory] = useState("Softs")
+  const [category, setCategory] = useState()
   const [softs, setSofts] = useState([])
-  const [snacks, setSnacks] = useState([])
-  const [alcools, setAlcools] = useState([])
-  const [cocktails, setCocktails] = useState([])
+//   const [snacks, setSnacks] = useState([])
+//   const [alcools, setAlcools] = useState([])
+//   const [cocktails, setCocktails] = useState([])
 
 
      
@@ -24,15 +24,17 @@ useEffect(() => {
         setData(response.data);
         setIsLoading(false);
 
-       
-
-
-
-
-        
-
-        
-
+         // to update state softs
+         const softsCopy = [...softs];
+         for (let i=0; i<data.length; i++) {
+             if (data[i].product_category === "Soft") {
+                 console.log("data[i].product_category >>>", data[i].product_category)
+                 softsCopy.push(data[i])
+                 console.log("softsCopy>>>>",softsCopy);
+             }
+         }
+         setSofts(softsCopy)
+         console.log("softs >>>>", softs)
     
       } catch (error) {
         console.log(error);
@@ -91,8 +93,7 @@ useEffect(() => {
             return <p key={item._id}> {item.product_name}</p>
         })} */}
 
-        {/* {category === softs ? softs[0].product_name : category === "Snacks" ? snacks[0].product_name : category === "Alcools" ? alcools[0].product_name : cocktails[0].product_name} */}
-        
+        {/* {category === "Softs" ? softs[0].product_name : <p>Cas non traité</p>} */}
         
         <p> Category : {category}</p>
         <input 
