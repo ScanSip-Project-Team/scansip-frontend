@@ -1,4 +1,4 @@
-const SumUpOrder = ({
+const SumUpOrderDelivered = ({
   element,
   handleOrderStatus,
   setIsOrderInProgress,
@@ -6,12 +6,12 @@ const SumUpOrder = ({
 }) => {
   return (
     <div
-      className="w-3/3 h-3/3 flex flex-col gap-6 
-        lg:w-1/3"
+      className="w-3/3 flex h-auto flex-col 
+      gap-6"
     >
-      <h3 className="font-bold">Récapitulatif :</h3>
-      <div className="flex flex-row justify-between lg:flex-col">
-        <div className="flex flex-1 flex-col gap-3">
+      <h3>Récapitulatif :</h3>
+      <div className="flex flex-row justify-between gap-2 p-3">
+        <div className="flex flex-col gap-3">
           <span className="text-sm ">
             Nombres d'article :
             <span className="font-semibold"> {element.total_items}</span>
@@ -21,10 +21,10 @@ const SumUpOrder = ({
             <span className="font-semibold"> {element.order_status}</span>
           </span>
         </div>
-        <div className="flex  flex-1 flex-col gap-3">
+        <div className="flex flex-col gap-3">
           <span className="text-sm ">
             Nom (carte):
-            <span className="font-semibold">Tiktac </span>
+            <span className="font-semibold"> Tiktac </span>
           </span>
           <span className="mb-4 text-sm ">
             Prix :
@@ -50,4 +50,4 @@ const SumUpOrder = ({
     </div>
   );
 };
-export default SumUpOrder;
+export default SumUpOrderDelivered;
