@@ -1,7 +1,11 @@
 // Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
+// Yohann code ----------------
+//Import components
+import Modal from "../Components/Modal";
+// Yohann code ----------------
 
 const Selection = () => {
   const [data, setData] = useState();
@@ -11,6 +15,13 @@ const Selection = () => {
   const [snacks, setSnacks] = useState([]);
   const [alcools, setAlcools] = useState([]);
   const [cocktails, setCocktails] = useState([]);
+
+  // Yohann code -----------------------------
+
+  const [openModal, setOpenModal] = useState(false);
+  const [productID, setProductID] = useState();
+
+  // Yohann code -----------------------------
 
   const handleClickSofts = () => {
     setCategory("Softs");
@@ -127,7 +138,6 @@ const Selection = () => {
           <p>Cocktails</p>
         </div>
       </div>
-
       {category === "Softs" && softs.length !== 0 ? (
         softs.map((item) => (
           <div
@@ -139,6 +149,13 @@ const Selection = () => {
                 className="w-15 h-20 bg-[#F3F3F3]"
                 src={item.product_image.secure_url}
                 alt="product"
+                // Yohann code -----------------------------
+                onClick={() => {
+                  console.log(item._id);
+                  setOpenModal(true);
+                  setProductID(item._id);
+                }}
+                // Yohann code -----------------------------
               />
             </div>
             <div className="w-4/5">
@@ -160,6 +177,13 @@ const Selection = () => {
                 className="w-15 h-20 bg-[#F3F3F3]"
                 src={item.product_image.secure_url}
                 alt="product"
+                // Yohann code -----------------------------
+                onClick={() => {
+                  console.log(item._id);
+                  setOpenModal(true);
+                  setProductID(item._id);
+                }}
+                // Yohann code -----------------------------
               />
             </div>
             <div className="w-4/5">
@@ -178,6 +202,13 @@ const Selection = () => {
                 className="w-15 h-20 bg-[#F3F3F3]"
                 src={item.product_image.secure_url}
                 alt="product"
+                // Yohann code -----------------------------
+                onClick={() => {
+                  console.log(item._id);
+                  setOpenModal(true);
+                  setProductID(item._id);
+                }}
+                // Yohann code -----------------------------
               />
             </div>
             <div className="w-4/5">
@@ -196,6 +227,13 @@ const Selection = () => {
                 className="w-15 h-20 bg-[#F3F3F3]"
                 src={item.product_image.secure_url}
                 alt="product"
+                // Yohann code -----------------------------
+                onClick={() => {
+                  console.log(item._id);
+                  setOpenModal(true);
+                  setProductID(item._id);
+                }}
+                // Yohann code -----------------------------
               />
             </div>
             <div className="w-4/5">
@@ -206,13 +244,14 @@ const Selection = () => {
       ) : (
         <p>Sélectionner une catégorie</p>
       )}
-
       <input
         className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
         type="submit"
         value="Valider le panier"
       />
-      <Link to={"/products"}>go to products (yohann)</Link>
+      {/* Yohann code ----------------------------- */}
+      {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
+      {/* Yohann code ----------------------------- */}
     </div>
   );
 };

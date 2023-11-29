@@ -1,4 +1,4 @@
-import chevron from "../src/assets/chevron.svg";
+import chevron from "../assets/chevron.svg";
 
 const BreadCrumb = ({ text, func }) => {
   return (

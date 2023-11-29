@@ -5,8 +5,8 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 //Import Components
 import FlashScreen from "./pages/FlashScreen";
-import Orders from "./pages/Orders";
-import Selection from "./pages/Selection";
+import Orders from "./Components/OrderComponent";
+import Selection from "./Pages/Selection";
 import ProductDescription from "./Pages/ProductDescription";
 import UserPaiement from "./Pages/UserPaiement";
 

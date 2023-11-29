@@ -4,8 +4,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 // Import Components
-import BreadCrumb from "../../Components/Breadcrumb";
-import PaiementForm from "../../Components/PaiementForm";
+import BreadCrumb from "../Components/Breadcrumb";
+import PaiementForm from "../Components/PaiementForm";
 
 // Import Assets
 import timer from "./../assets/timer.svg";
