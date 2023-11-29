@@ -51,6 +51,7 @@ const SumUpOrder = ({ element, setIsOrderInProgress, isOrderInProgress }) => {
         func={handleOrderDelivered}
         elementId={element._id}
         className={"btn-primary"}
+        text={"Commande servie"}
       />
     </div>
   );
