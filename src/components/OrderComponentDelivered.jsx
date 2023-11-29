@@ -6,23 +6,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const OrderComponentDelivered = ({
   element,
-  handleOrderStatus,
-  handleDropDown,
-  handleDropUp,
+
   setIsOrderInProgress,
   isOrderInProgress,
-  isDropDown,
-  targetDropDown,
-  displayIconDown,
-  displayIconUp,
 }) => {
-  console.log("targetDropDown=>", targetDropDown);
+  const [isDropDown, setIsDropDown] = useState(false);
+
+  const [displayIconDown, setDisplayIconDown] = useState("block");
+  const [displayIconUp, setDisplayIconUp] = useState("hidden");
+  const handleDropDown = (id) => {
+    setIsDropDown(!isDropDown);
+    setDisplayIconDown("hidden");
+    setDisplayIconUp("block");
+  };
+  const handleDropUp = (id) => {
+    setIsDropDown(!isDropDown);
+
+    setDisplayIconDown("block");
+    setDisplayIconUp("hidden");
+  };
+
   return (
     <div
       className={`mb-4 flex  flex-col gap-5 rounded bg-slate-200 p-4  ${
-        isDropDown && targetDropDown.includes(element._id)
-          ? "h-auto overflow-auto"
-          : "h-16 overflow-hidden"
+        isDropDown ? "h-auto overflow-auto" : "h-16 overflow-hidden"
       }`}
     >
       <div className="flex  flex-col gap-5">
@@ -53,7 +60,6 @@ const OrderComponentDelivered = ({
 
       <SumUpOrderDelivered
         element={element}
-        handleOrderStatus={handleOrderStatus}
         setIsOrderInProgress={setIsOrderInProgress}
         isOrderInProgress={isOrderInProgress}
       />

@@ -1,9 +1,21 @@
-const SumUpOrder = ({
-  element,
-  handleOrderStatus,
-  setIsOrderInProgress,
-  isOrderInProgress,
-}) => {
+import { useState } from "react";
+import axios from "axios";
+import Button from "./Button";
+const SumUpOrder = ({ element, setIsOrderInProgress, isOrderInProgress }) => {
+  const handleOrderDelivered = async (id) => {
+    try {
+      const status = "delivered";
+      const response = await axios.put(
+        `http://localhost:3000/orders/${id}/${status}`,
+      );
+
+      setIsOrderInProgress(!isOrderInProgress);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("CLICK to order id ==>", id);
+  };
+
   return (
     <div
       className="w-3/3 h-3/3 flex flex-col gap-6 
@@ -34,19 +46,12 @@ const SumUpOrder = ({
           </span>
         </div>
       </div>
-      <button
-        onClick={() => {
-          const orderStatus =
-            element.order_status === "delivered" ? "in progress" : "delivered";
-          handleOrderStatus(element._id, orderStatus);
-          setIsOrderInProgress(!isOrderInProgress);
-        }}
-        className={`m-auto ${
-          element.order_status === "in progress" ? "btn-primary" : "btn-black"
-        }`}
-      >
-        Commande servie
-      </button>
+
+      <Button
+        func={handleOrderDelivered}
+        elementId={element._id}
+        className={"btn-primary"}
+      />
     </div>
   );
 };
