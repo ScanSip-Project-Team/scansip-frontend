@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 
 // Yohann code ----------------
 //Import components
-import Modal from "../components/Modal";
+import Modal from "../Components/Modal";
+import { Link } from "react-router-dom";
 // Yohann code ----------------
 
 const Selection = () => {
@@ -19,10 +20,8 @@ const Selection = () => {
   const [total, setTotal] = useState(0);
 
   // Yohann code -----------------------------
-
   const [openModal, setOpenModal] = useState(false);
   const [productID, setProductID] = useState();
-
   // Yohann code -----------------------------
 
   const handleClickSofts = () => {
@@ -413,6 +412,7 @@ const Selection = () => {
 
       {/* Yohann code ----------------------------- */}
       {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
+      <Link to={"/billing"}>go billing</Link>
       {/* Yohann code ----------------------------- */}
     </div>
   );

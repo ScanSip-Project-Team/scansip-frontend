@@ -1,49 +1,54 @@
-// Import Package
-import { useEffect, useState } from "react";
-import axios from "axios";
+// // Import Package
+// import { useEffect, useState } from "react";
+// import axios from "axios";
 
+<<<<<<< HEAD:src/Pages/ProductDescription.jsx
+// // Components
+// import Modal from "../Components/Modal";
+=======
 // Components
 import Modal from "../components/Modal";
+>>>>>>> main:src/pages/ProductDescription.jsx
 
-const ProductDescription = () => {
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+// const ProductDescription = () => {
+//   const [data, setData] = useState();
+//   const [isLoading, setIsLoading] = useState(true);
 
-  const [openModal, setOpenModal] = useState(false);
-  const [productID, setProductID] = useState();
+//   const [openModal, setOpenModal] = useState(false);
+//   const [productID, setProductID] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("http://localhost:3000/products");
-      // console.log(response.data);
-      setData(response.data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const response = await axios.get("http://localhost:3000/products");
+//       // console.log(response.data);
+//       setData(response.data);
+//       setIsLoading(false);
+//     };
+//     fetchData();
+//   }, []);
 
-  return isLoading ? (
-    <p>Loading page</p>
-  ) : (
-    <section className="flex h-screen w-screen flex-col items-center bg-red-700">
-      {data.map((elem) => {
-        //  console.log(elem);
-        return (
-          <div
-            key={elem._id}
-            onClick={() => {
-              setOpenModal(true);
-              setProductID(elem._id);
-            }}
-          >
-            <p>{elem.product_name}</p>
-          </div>
-        );
-      })}
+//   return isLoading ? (
+//     <p>Loading page</p>
+//   ) : (
+//     <section className="flex h-screen w-screen flex-col items-center bg-red-700">
+//       {data.map((elem) => {
+//         //  console.log(elem);
+//         return (
+//           <div
+//             key={elem._id}
+//             onClick={() => {
+//               setOpenModal(true);
+//               setProductID(elem._id);
+//             }}
+//           >
+//             <p>{elem.product_name}</p>
+//           </div>
+//         );
+//       })}
 
-      {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
-    </section>
-  );
-};
+//       {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
+//     </section>
+//   );
+// };
 
-export default ProductDescription;
+// export default ProductDescription;
