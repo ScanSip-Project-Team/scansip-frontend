@@ -7,8 +7,8 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import FlashScreen from "./pages/FlashScreen";
 import Orders from "./Components/OrderComponent";
 import Selection from "./Pages/Selection";
-// import ProductDescription from "./Pages/ProductDescription";
 import UserPaiement from "./Pages/UserPaiement";
+import Billing from "./Pages/Billing";
 
 // Import Assets
 import "./App.css";
@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<FlashScreen />} />
         <Route path="/home" element={<Selection />} />
-        {/* <Route path="/products" element={<ProductDescription />} /> */}
+        <Route path="/billing" element={<Billing />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/paiement" element={<UserPaiement />} />
       </Routes>

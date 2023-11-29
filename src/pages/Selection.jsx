@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // Yohann code ----------------
 //Import components
 import Modal from "../Components/Modal";
+import { Link } from "react-router-dom";
 // Yohann code ----------------
 
 const Selection = () => {
@@ -249,6 +250,7 @@ const Selection = () => {
       />
       {/* Yohann code ----------------------------- */}
       {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
+      <Link to={"/billing"}>go billing</Link>
       {/* Yohann code ----------------------------- */}
     </div>
   );

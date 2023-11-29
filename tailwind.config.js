@@ -11,6 +11,7 @@ export default {
       colors: {
         "grey-232": "#E8E8E8",
         black: "#000",
+        "greenScanSip": "#18C166"
       },
       spacing: {
         "5px": "5px",
@@ -24,7 +25,6 @@ export default {
         semibold: "600",
         bold: "700",
         extrabold: "800",
-
         black: "900",
       },
 
