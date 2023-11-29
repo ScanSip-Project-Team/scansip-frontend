@@ -15,6 +15,7 @@ const Selection = () => {
   const [snacks, setSnacks] = useState([]);
   const [alcools, setAlcools] = useState([]);
   const [cocktails, setCocktails] = useState([]);
+  const [cart, setCart] = useState([]);
 
   // Yohann code -----------------------------
 
@@ -99,6 +100,7 @@ const Selection = () => {
   return isLoading ? (
     <p>Loading...</p>
   ) : (
+    // SELECTION BANNER
     <div className="flex w-screen flex-col items-center justify-center">
       <div className="my-6 flex w-11/12 items-center justify-center gap-2 border-2 border-black">
         <div
@@ -138,6 +140,7 @@ const Selection = () => {
           <p>Cocktails</p>
         </div>
       </div>
+
       {category === "Softs" && softs.length !== 0 ? (
         softs.map((item) => (
           <div
@@ -162,7 +165,34 @@ const Selection = () => {
               <p>{item.product_name}</p> <p>{item.product_price} €</p>
             </div>
             <div>
-              <button className="h-10 w-10 rounded-full bg-[#E8E8E8]">+</button>
+              <button
+                className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                onClick={() => {
+                  // je vérifie si le produit est déjà dans le panier
+                  const productToFind = cart.find((e) => e._id === item._id);
+                  console.log("productToFind >>>", productToFind);
+                  // s'il n'est pas dans le panier, je lui ajoute une clé quantité et je le push dans le panier
+
+                  if (productToFind === undefined) {
+                    const cartCopy = [...cart];
+                    item.quantity = 1;
+                    console.log("item >>>", item);
+                    cartCopy.push(item);
+                    console.log("cartCopy >>>", cartCopy);
+                    setCart(cartCopy);
+                  }
+                  // s'il est déjà dans le panier j'augmente la quantité de 1
+                  else {
+                    const indexOfProduct = cart.indexOf(productToFind);
+                    const cartCopy = [...cart];
+                    cartCopy[indexOfProduct].quantity =
+                      cart[indexOfProduct].quantity + 1;
+                    setCart(cartCopy);
+                  }
+                }}
+              >
+                +
+              </button>
             </div>
           </div>
         ))
