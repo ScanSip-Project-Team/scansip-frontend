@@ -1,10 +1,13 @@
-
 export default {
   content: [
-    "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
-    "./Components/Modal.jsx", "./src/**/*.{js,ts,jsx,tsx}",
-    "./Pages", "./src/**/*.{js,ts,jsx,tsx}",
-    "./App.jsx", "./src/**/*.{js,ts,jsx,tsx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/components/Modal.jsx",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./pages",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./App.jsx",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -27,7 +30,6 @@ export default {
 
         black: "900",
       },
-
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],

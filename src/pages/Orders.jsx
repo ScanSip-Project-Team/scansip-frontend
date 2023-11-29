@@ -3,8 +3,8 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //Import components
-import OrderComponent from "../Components/OrderComponent";
-import OrderComponentDelivered from "../Components/OrderComponentDelivered";
+import OrderComponent from "../components/OrderComponent";
+import OrderComponentDelivered from "../components/OrderComponentDelivered";
 //Import Assets
 
 const Orders = () => {

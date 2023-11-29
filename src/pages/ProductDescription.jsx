@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 // Components
-import Modal from "../Components/Modal";
+import Modal from "../components/Modal";
 
 const ProductDescription = () => {
   const [data, setData] = useState();
