@@ -1,10 +1,11 @@
 //Import Package
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 //Import Components
 import FlashScreen from "./pages/FlashScreen";
-
-import Orders from "./pages/Orders";
+import Orders from "./Components/OrderComponent";
 import Selection from "./Pages/Selection";
 import ProductDescription from "./Pages/ProductDescription";
 import UserPaiement from "./Pages/UserPaiement";
@@ -12,6 +13,7 @@ import UserPaiement from "./Pages/UserPaiement";
 // Import Assets
 import "./App.css";
 
+library.add(faChevronDown);
 function App() {
   return (
     <Router>

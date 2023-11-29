@@ -1,33 +1,47 @@
 // Import Package
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 // Import Components
-import BreadCrumb from "../../Components/Breadcrumb";
-import PaiementType from "../../Components/PaiementType";
-import PaiementForm from "../../Components/PaiementForm";
-// import CheckoutForm from "./components/CheckoutForm";
+import BreadCrumb from "../Components/Breadcrumb";
+import PaiementForm from "../Components/PaiementForm";
 
 // Import Assets
 import timer from "./../assets/timer.svg";
-import applepay from "./../assets/applepay.svg";
-import googlepay from "./../assets/googlepay.svg";
-import paypal from "./../assets/paypal.svg";
 
 const UserPaiement = () => {
-  const [selected, setSelected] = useState("cb");
-  const stripePromise = loadStripe(
-    "pk_test_51N5sWrEP7RE31YxqwqUoKGcFKSmfZaaPhYmtqF76G9zR8CN2atBlKelEpFGdfdoM34wGEKDLVE0goGEzHurfVcIk00JWycFKI2",
-  );
+  const [stripePromise, setStripePromise] = useState(null);
+  const [clientSecret, setClientSecret] = useState("");
+
+  const options = {
+    clientSecret,
+  };
+
   //   Variable de developpement
   const numberOfSecond = 160;
   let estimateTime = Math.ceil(numberOfSecond / 60);
-  const totalPrice = 17;
+
+  useEffect(() => {
+    fetch("http://localhost:3000/pay/config").then(async (r) => {
+      const { publishableKey } = await r.json();
+      setStripePromise(loadStripe(publishableKey));
+    });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/pay/create-payment-intent", {
+      method: "POST",
+      body: JSON.stringify({}),
+    }).then(async (result) => {
+      var { clientSecret } = await result.json();
+      setClientSecret(clientSecret);
+    });
+  }, []);
 
   return (
     <>
-      <main className="container flex flex-col items-center">
+      <main className="margin-container flex flex-col items-center">
         <nav className="self-start">
           <BreadCrumb
             text={"Retourner au panier"}
@@ -51,43 +65,13 @@ const UserPaiement = () => {
         <p className="w-full py-2 text-xs font-medium">
           Choisissez votre moyen de paiement
         </p>
-        <ul className="flex flex-row gap-3">
-          <li>
-            <PaiementType
-              name={"cb"}
-              selected={selected}
-              setSelected={setSelected}
-              img={applepay}
-            />
-          </li>
-          <li>
-            <PaiementType
-              name={"applePay"}
-              selected={selected}
-              setSelected={setSelected}
-              img={applepay}
-            />
-          </li>
-          <li>
-            <PaiementType
-              name={"googlepay"}
-              selected={selected}
-              setSelected={setSelected}
-              img={googlepay}
-            />
-          </li>
-          <li>
-            <PaiementType
-              name={"paypal"}
-              selected={selected}
-              setSelected={setSelected}
-              img={paypal}
-            />
-          </li>
-        </ul>
-        <Elements stripe={stripePromise}>
-          <PaiementForm />
-        </Elements>
+        <div className="h-1/2 w-full">
+          {clientSecret && stripePromise && (
+            <Elements stripe={stripePromise} options={options}>
+              <PaiementForm clientSecret={clientSecret} />
+            </Elements>
+          )}
+        </div>
       </main>
     </>
   );

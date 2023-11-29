@@ -1,8 +1,11 @@
 // Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Modal from "../../Components/Modal";
+
+// Yohann code ----------------
+//Import components
+import Modal from "../Components/Modal";
+// Yohann code ----------------
 
 const Selection = () => {
   const [data, setData] = useState();
@@ -224,7 +227,7 @@ const Selection = () => {
                 className="w-15 h-20 bg-[#F3F3F3]"
                 src={item.product_image.secure_url}
                 alt="product"
-                // Yohann code
+                // Yohann code -----------------------------
                 onClick={() => {
                   console.log(item._id);
                   setOpenModal(true);
@@ -246,10 +249,9 @@ const Selection = () => {
         type="submit"
         value="Valider le panier"
       />
-      {/* <Link to={"/products"}>go to products (yohann)</Link> */}
-      {/*  Yohann code  */}
+      {/* Yohann code ----------------------------- */}
       {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
-      {/* // Yohann code ----------------------------- */}
+      {/* Yohann code ----------------------------- */}
     </div>
   );
 };
