@@ -8,6 +8,10 @@ import Modal from "../Components/Modal";
 import { Link } from "react-router-dom";
 // Yohann code ----------------
 
+// Johanne code
+// Import components
+import Discover from "../components/Discover";
+
 const Selection = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +22,10 @@ const Selection = () => {
   const [cocktails, setCocktails] = useState([]);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const snacksTab = [];
+  const softsTab = [];
+  const alcoolsTab = [];
+  const cocktailsTab = [];
 
   // Yohann code -----------------------------
   const [openModal, setOpenModal] = useState(false);
@@ -144,6 +152,82 @@ const Selection = () => {
     };
     fetchData();
   }, [category]);
+
+  // Test Johanne snacksTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Snacks") {
+        if (data[m].product_category === "Snacks") {
+          const snack = snacksTab.find((e) => e._id === data[m]._id);
+          if (snack === undefined) {
+            snacksTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("snacksTab >>>", snacksTab);
+    console.log("snacksTab[0].product_name", snacksTab[0].product_name);
+  }
+  // Test Johanne snacksTab
+
+  // Test Johanne softsTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Soft") {
+        if (data[m].product_category === "Soft") {
+          const soft = softsTab.find((e) => e._id === data[m]._id);
+          if (soft === undefined) {
+            softsTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("softsTab >>>", softsTab);
+    console.log("softsTab[0].product_name", softsTab[0].product_name);
+  }
+  // Test Johanne softsTab
+
+  // Test Johanne alcoolsTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Alcools") {
+        if (data[m].product_category === "Alcools") {
+          const alcool = alcoolsTab.find((e) => e._id === data[m]._id);
+          if (alcool === undefined) {
+            alcoolsTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("alcoolsTab >>>", alcoolsTab);
+    console.log("alcoolsTab[0].product_name", alcoolsTab[0].product_name);
+  }
+  // Test Johanne alcoolsTab
+
+  // Test Johanne cocktailsTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Coktails") {
+        if (data[m].product_category === "Coktails") {
+          const cocktail = cocktailsTab.find((e) => e._id === data[m]._id);
+          if (cocktail === undefined) {
+            cocktailsTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("cocktailsTab >>>", cocktailsTab);
+    console.log("cocktailsTab[0].product_name", cocktailsTab[0].product_name);
+  }
+  // Test Johanne cocktailsTab
 
   return isLoading ? (
     <p>Loading...</p>
@@ -404,6 +488,17 @@ const Selection = () => {
       ) : (
         <p>Sélectionner une catégorie</p>
       )}
+
+      <Discover
+        category={category}
+        cart={cart}
+        snacksTab={snacksTab}
+        handleClickMinus={handleClickMinus}
+        handleClickPlus={handleClickPlus}
+        softsTab={softsTab}
+        alcoolsTab={alcoolsTab}
+        cocktailsTab={cocktailsTab}
+      />
       <input
         className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
         type="submit"
