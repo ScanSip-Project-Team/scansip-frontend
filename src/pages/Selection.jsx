@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 // Yohann code ----------------
 //Import components
-import Modal from "../componentsddas/Modal";
+import Modal from "../components/Modal";
 // Yohann code ----------------
 
 const Selection = () => {
