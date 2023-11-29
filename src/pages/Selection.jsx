@@ -16,6 +16,7 @@ const Selection = () => {
   const [alcools, setAlcools] = useState([]);
   const [cocktails, setCocktails] = useState([]);
   const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
 
   // Yohann code -----------------------------
 
@@ -95,6 +96,7 @@ const Selection = () => {
       item.quantity = 1;
       cartCopy.push(item);
       setCart(cartCopy);
+      setTotal(total + Number(item.product_price));
     }
     // s'il est déjà dans le panier j'augmente la quantité de 1
     else {
@@ -102,6 +104,7 @@ const Selection = () => {
       const cartCopy = [...cart];
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity + 1;
       setCart(cartCopy);
+      setTotal(total + Number(item.product_price));
     }
   };
 
@@ -115,6 +118,7 @@ const Selection = () => {
       const cartCopy = [...cart];
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity - 1;
       setCart(cartCopy);
+      setTotal(total - Number(item.product_price));
     } else {
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
@@ -125,6 +129,7 @@ const Selection = () => {
       cartCopy.splice(indexOfProduct, 1);
       setCart(cartCopy);
       delete item.quantity;
+      setTotal(total - Number(item.product_price));
     }
   };
 
@@ -403,8 +408,9 @@ const Selection = () => {
       <input
         className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
         type="submit"
-        value="Valider le panier"
+        value={`Valider le panier . ${total} €`}
       />
+
       {/* Yohann code ----------------------------- */}
       {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
       {/* Yohann code ----------------------------- */}
