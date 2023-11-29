@@ -1,6 +1,11 @@
 // Créer un formulaire avec des states qui seront égales à la somme totale du panier
 
+// Import Package
+import { useNavigate } from "react-router-dom";
+
 const Billing = () => {
+  const navigate = useNavigate();
+
   return (
     <section>
       <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
@@ -75,7 +80,12 @@ const Billing = () => {
           </p>
         </div>
         <div className="flex justify-center text-white ">
-          <button className="ml-5 mr-5 w-screen rounded-lg bg-black p-2">
+          <button
+            className="ml-5 mr-5 w-screen rounded-lg bg-black p-2"
+            onClick={() => {
+              navigate("/home");
+            }}
+          >
             Retourner à l'acceuil
           </button>
         </div>
