@@ -84,6 +84,50 @@ const Selection = () => {
     setCocktails(cocktailsCopy);
   };
 
+  const handleClickPlus = (item) => {
+    // je vérifie si le produit est déjà dans le panier
+    const productToFind = cart.find((e) => e._id === item._id);
+
+    // s'il n'est pas dans le panier, je lui ajoute une clé quantité et je le push dans le panier
+
+    if (productToFind === undefined) {
+      const cartCopy = [...cart];
+      item.quantity = 1;
+      cartCopy.push(item);
+      setCart(cartCopy);
+    }
+    // s'il est déjà dans le panier j'augmente la quantité de 1
+    else {
+      const indexOfProduct = cart.indexOf(productToFind);
+      const cartCopy = [...cart];
+      cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity + 1;
+      setCart(cartCopy);
+    }
+  };
+
+  const handleClickMinus = (item) => {
+    if (item.quantity !== 1) {
+      // je cherche le produit dans le panier
+      const productToFind = cart.find((e) => e._id === item._id);
+
+      const indexOfProduct = cart.indexOf(productToFind);
+      // et je diminue sa quantité de 1
+      const cartCopy = [...cart];
+      cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity - 1;
+      setCart(cartCopy);
+    } else {
+      // je cherche le produit dans le panier
+      const productToFind = cart.find((e) => e._id === item._id);
+
+      const indexOfProduct = cart.indexOf(productToFind);
+      // et je le supprime du panier
+      const cartCopy = [...cart];
+      cartCopy.splice(indexOfProduct, 1);
+      setCart(cartCopy);
+      delete item.quantity;
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -102,7 +146,7 @@ const Selection = () => {
   ) : (
     // SELECTION BANNER
     <div className="flex w-screen flex-col items-center justify-center">
-      <div className="my-6 flex w-11/12 items-center justify-center gap-2 border-2 border-black">
+      <div className="my-6 flex w-11/12 items-center justify-center gap-2 ">
         <div
           className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
           onClick={handleClickSofts}
@@ -165,34 +209,32 @@ const Selection = () => {
               <p>{item.product_name}</p> <p>{item.product_price} €</p>
             </div>
             <div>
-              <button
-                className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                onClick={() => {
-                  // je vérifie si le produit est déjà dans le panier
-                  const productToFind = cart.find((e) => e._id === item._id);
-                  console.log("productToFind >>>", productToFind);
-                  // s'il n'est pas dans le panier, je lui ajoute une clé quantité et je le push dans le panier
-
-                  if (productToFind === undefined) {
-                    const cartCopy = [...cart];
-                    item.quantity = 1;
-                    console.log("item >>>", item);
-                    cartCopy.push(item);
-                    console.log("cartCopy >>>", cartCopy);
-                    setCart(cartCopy);
-                  }
-                  // s'il est déjà dans le panier j'augmente la quantité de 1
-                  else {
-                    const indexOfProduct = cart.indexOf(productToFind);
-                    const cartCopy = [...cart];
-                    cartCopy[indexOfProduct].quantity =
-                      cart[indexOfProduct].quantity + 1;
-                    setCart(cartCopy);
-                  }
-                }}
-              >
-                +
-              </button>
+              {item.quantity ? (
+                <div className="flex items-center justify-center gap-2  p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickMinus(item)}
+                  >
+                    -
+                  </button>
+                  <p> {item.quantity}</p>
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              ) : (
+                <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))
@@ -219,6 +261,34 @@ const Selection = () => {
             <div className="w-4/5">
               <p>{item.product_name}</p> <p>{item.product_price} €</p>{" "}
             </div>
+            <div>
+              {item.quantity ? (
+                <div className="flex items-center justify-center gap-2  p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickMinus(item)}
+                  >
+                    -
+                  </button>
+                  <p> {item.quantity}</p>
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              ) : (
+                <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         ))
       ) : category === "Alcools" && alcools.length !== 0 ? (
@@ -244,6 +314,34 @@ const Selection = () => {
             <div className="w-4/5">
               <p>{item.product_name}</p> <p>{item.product_price} €</p>
             </div>
+            <div>
+              {item.quantity ? (
+                <div className="flex items-center justify-center gap-2  p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickMinus(item)}
+                  >
+                    -
+                  </button>
+                  <p> {item.quantity}</p>
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              ) : (
+                <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         ))
       ) : category === "Cocktails" && cocktails.length !== 0 ? (
@@ -268,6 +366,34 @@ const Selection = () => {
             </div>
             <div className="w-4/5">
               <p>{item.product_name}</p> <p>{item.product_price} €</p>
+            </div>
+            <div>
+              {item.quantity ? (
+                <div className="flex items-center justify-center gap-2  p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickMinus(item)}
+                  >
+                    -
+                  </button>
+                  <p> {item.quantity}</p>
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              ) : (
+                <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <button
+                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                    onClick={() => handleClickPlus(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))
