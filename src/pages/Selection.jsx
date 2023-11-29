@@ -16,8 +16,6 @@ const Selection = () => {
   const [alcools, setAlcools] = useState([]);
   const [cocktails, setCocktails] = useState([]);
 
-  // Yohann code -----------------------------
-
   const [openModal, setOpenModal] = useState(false);
   const [productID, setProductID] = useState();
 
