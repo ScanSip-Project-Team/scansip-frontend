@@ -4,7 +4,7 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-
+import Button from "./Button";
 const PaiementForm = ({ clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -56,15 +56,27 @@ const PaiementForm = ({ clientSecret }) => {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <form
+      id="payment-form"
+      onSubmit={handleSubmit}
+      className="align-center flex w-full flex-col justify-between"
+    >
       <PaymentElement id="payment-element" />
-      <button disabled={isProcessing || !stripe || !elements} id="submit">
+      <Button
+        disabled={isProcessing || !stripe || !elements}
+        func={() => console.log("test")}
+        // elementId={element._id}
+        className={
+          "btn-black w-available mx-2.5 my-5  border-y border-grey-232 px-3"
+        }
+        text={isProcessing ? "Processing ... " : "Payer pour un total de XX"}
+      />
+      {/* <button disabled={isProcessing || !stripe || !elements} id="submit">
         <span id="button-text">
           {isProcessing ? "Processing ... " : "Pay now"}
         </span>
-      </button>
+      </button> */}
       {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
     </form>
   );
 };

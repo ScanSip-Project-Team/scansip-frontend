@@ -53,6 +53,7 @@ const SumUpOrderDelivered = ({
         func={handleOrderInProgress}
         elementId={element._id}
         className={"btn-black"}
+        text={"Renvoyer en service"}
       />
     </div>
   );
