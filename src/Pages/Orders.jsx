@@ -12,9 +12,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://site--scansip-backend--jswmm7jk2mlr.code.run/orders`,
-        );
+        const response = await axios.get(`http://localhost:3000/orders`);
         console.log("response ==> ", response.data);
         setData(response.data);
         setIsLoading(false);

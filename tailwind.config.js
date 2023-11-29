@@ -2,7 +2,7 @@
 export default {
   content: [
     "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
-    "./Components", "./src/**/*.{js,ts,jsx,tsx}",
+    "./Components/Modal.jsx", "./src/**/*.{js,ts,jsx,tsx}",
     "./Pages", "./src/**/*.{js,ts,jsx,tsx}",
     "./App.jsx", "./src/**/*.{js,ts,jsx,tsx}",
   ],
