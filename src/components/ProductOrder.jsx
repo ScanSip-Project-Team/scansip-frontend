@@ -9,11 +9,13 @@ const ProductOrder = ({ product }) => {
         src={product.product.product_image.secure_url}
         alt=""
       />
-      <div className="flex flex-1 flex-col">
-        <span>{product.product.product_name}</span>
-        <span>{product.product.product_price.toFixed(2)} €</span>
+      <div className="mr-1 flex flex-1 flex-col">
+        <span className="md:text-sm">{product.product.product_name}</span>
+        <span className="md:text-sm">
+          {product.product.product_price.toFixed(2)} €
+        </span>
       </div>
-      <span className="h-10 w-10 rounded-full bg-gray-400 p-2 text-center font-semibold">
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 p-2 text-sm">
         {product.quantity_cart}
       </span>
     </div>
