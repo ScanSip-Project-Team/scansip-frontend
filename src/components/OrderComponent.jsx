@@ -3,7 +3,6 @@ import ProductOrder from "./ProductOrder";
 import SumUpOrder from "./SumUpOrder";
 
 const OrderComponent = ({
-  handleOrderStatus,
   setIsOrderInProgress,
   isOrderInProgress,
 
@@ -27,7 +26,6 @@ const OrderComponent = ({
           </div>
           <SumUpOrder
             element={element}
-            handleOrderStatus={handleOrderStatus}
             setIsOrderInProgress={setIsOrderInProgress}
             isOrderInProgress={isOrderInProgress}
           />
