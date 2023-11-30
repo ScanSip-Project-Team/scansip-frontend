@@ -48,13 +48,16 @@ const Orders = () => {
           <div className="flex h-auto flex-col pt-8 md:flex-row">
             {/* Column ORDERS IN PROGRESS */}
             <div className="w-3/3 h-auto p-3 md:w-2/4 md:border-r-2 lg:w-2/3 ">
-              <h2 className="primary-color mb-4 font-bold">
-                Commandes en cours :
-                {
-                  data.filter(
-                    (element) => element.order_status === "in progress",
-                  ).length
-                }
+              <h2 className="primary-color mb-4">
+                Vous avez{" "}
+                <span className="font-bold">
+                  {
+                    data.filter(
+                      (element) => element.order_status === "in progress",
+                    ).length
+                  }
+                </span>{" "}
+                commandes en cours
               </h2>
 
               {data.map((element, index) => {
