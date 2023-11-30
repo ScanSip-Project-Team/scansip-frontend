@@ -25,8 +25,8 @@ const Header = () => {
                 setDisplayMenu(!displayMenu);
               }}
               className={`mr-2 ${
-                location.pathname === "/my-products" ||
-                location.pathname === "/new-product"
+                location.pathname === "/admin/products" ||
+                location.pathname === "/admin/new-product"
                   ? "primary-color"
                   : ""
               }`}
@@ -41,15 +41,21 @@ const Header = () => {
             {displayMenu && (
               <ul className="absolute top-7 w-32 rounded bg-white p-2 text-sm text-black shadow-sm">
                 <Link
+                  to="/admin/products"
                   className={`mb-3 block ${
-                    location.pathname === "/my-products" ? "primary-color" : ""
+                    location.pathname === "/admin/products"
+                      ? "primary-color"
+                      : ""
                   }`}
                 >
                   Mes produits
                 </Link>
                 <Link
+                  to="/admin/new-product"
                   className={`${
-                    location.pathname === "/new-product" ? "primary-color" : ""
+                    location.pathname === "/admin/new-product"
+                      ? "primary-color"
+                      : ""
                   }`}
                 >
                   Créer produits
@@ -63,8 +69,8 @@ const Header = () => {
                 setDisplayService(!displayService);
               }}
               className={`mr-2 ${
-                location.pathname === "/orders" ||
-                location.pathname === "history"
+                location.pathname === "/admin/orders" ||
+                location.pathname === "/admin/history"
                   ? "primary-color"
                   : ""
               }`}
@@ -78,9 +84,9 @@ const Header = () => {
             {displayService && (
               <ul className="absolute top-7 w-40 rounded bg-white p-2 text-sm text-black shadow-sm">
                 <Link
-                  to="/orders"
+                  to="/admin/orders"
                   className={`mb-3 block ${
-                    location.pathname === "/orders" ? "primary-color" : ""
+                    location.pathname === "/admin/orders" ? "primary-color" : ""
                   }`}
                 >
                   Services en cours

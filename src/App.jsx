@@ -5,6 +5,9 @@ import {
   faChevronDown,
   faChevronUp,
   faUser,
+  faCircleXmark,
+  faPenToSquare,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
@@ -14,11 +17,21 @@ import Orders from "./pages/Orders";
 import Selection from "./Pages/Selection";
 import UserPaiement from "./pages/UserPaiement";
 import Billing from "./Pages/Billing";
+import Lab from "./pages/Lab";
+import AdminProducts from "./pages/AdminProducts";
+import AdminNewProduct from "./pages/AdminNewProduct";
 
 // Import Assets
 import "./App.css";
 
-library.add(faChevronDown, faChevronUp, faUser);
+library.add(
+  faChevronDown,
+  faChevronUp,
+  faUser,
+  faCircleXmark,
+  faPenToSquare,
+  faTrashCan,
+);
 function App() {
   //Yohann : J'ai déplacer deux states ici pour récuperer leurs informations sur ma page billing, si besoin d'info me contacter
   const [cart, setCart] = useState([]);
@@ -43,6 +56,13 @@ function App() {
           path="/billing"
           element={<Billing cart={cart} total={total} />}
         />
+
+        <Route path="/paiement" element={<UserPaiement />} />
+        <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/new-product" element={<AdminNewProduct />} />
+        {/* page de test SAMUEL */}
+        <Route path="/lab" element={<Lab />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
       </Routes>
