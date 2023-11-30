@@ -38,6 +38,13 @@ const Orders = () => {
     fetchData();
   }, [isOrderInProgress, refresh]);
 
+  {
+    setInterval(() => {
+      setRefresh(!refresh);
+      setCounter(counter + 1);
+      console.log("refresh! " + counter);
+    }, 30000);
+  }
   if (!token) {
     return navigate("/home");
   } else {
@@ -45,11 +52,6 @@ const Orders = () => {
       <p>Loading ...</p>
     ) : (
       <>
-        {setInterval(() => {
-          setRefresh(!refresh);
-          setCounter(counter + 1);
-          console.log("refresh! " + counter);
-        }, 30000)}
         <Header />
         <div className="container m-auto h-screen">
           <h1 className="border-b border-solid border-black p-6 text-3xl">
