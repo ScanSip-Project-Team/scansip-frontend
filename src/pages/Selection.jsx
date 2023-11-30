@@ -276,7 +276,7 @@ const Selection = () => {
       {category === "Softs" && softs.length !== 0
         ? softs.map((item) => (
             <div
-              className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+              className="flex w-11/12 items-center justify-start border border-gray-300 bg-[#F3F3F3]"
               key={item._id}
             >
               <div className="w-1/5">
@@ -329,7 +329,7 @@ const Selection = () => {
         : category === "Snacks" && snacks.length !== 0
           ? snacks.map((item) => (
               <div
-                className="  flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                className="flex w-11/12 items-center justify-start border border-gray-300 bg-[#F3F3F3]"
                 key={item._id}
               >
                 <div className="w-1/5">
@@ -382,7 +382,7 @@ const Selection = () => {
           : category === "Alcools" && alcools.length !== 0
             ? alcools.map((item) => (
                 <div
-                  className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                  className="flex w-11/12 items-center justify-start border border-gray-300 bg-[#F3F3F3]"
                   key={item._id}
                 >
                   <div className="w-1/5">
@@ -435,7 +435,7 @@ const Selection = () => {
             : category === "Cocktails" && cocktails.length !== 0
               ? cocktails.map((item) => (
                   <div
-                    className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                    className="flex w-11/12 items-center justify-start border border-gray-300 bg-[#F3F3F3]"
                     key={item._id}
                   >
                     <div className="w-1/5">
@@ -487,7 +487,7 @@ const Selection = () => {
                 ))
               : softsTab.map((item) => (
                   <div
-                    className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                    className="flex w-11/12 items-center justify-start border border-gray-300 bg-[#F3F3F3]"
                     key={item._id}
                   >
                     <div className="w-1/5">
