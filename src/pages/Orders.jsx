@@ -17,12 +17,8 @@ const Orders = () => {
   const [refresh, setRefresh] = useState(false);
   const [token, setToken] = useState("scanSip");
   const [counter, setCounter] = useState(0);
-  const navigate = useNavigate();
 
-  // setInterval(() => {
-  //   setRefresh(!refresh);
-  //   console.log("refresh!");
-  // }, 30000);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,13 +34,13 @@ const Orders = () => {
     fetchData();
   }, [isOrderInProgress, refresh]);
 
-  {
-    setInterval(() => {
-      setRefresh(!refresh);
-      setCounter(counter + 1);
-      console.log("refresh! " + counter);
-    }, 30000);
-  }
+  // {
+  //   setInterval(() => {
+  //     setRefresh(!refresh);
+  //     setCounter(counter + 1);
+  //     console.log("refresh! " + counter);
+  //   }, 30000);
+  // }
   if (!token) {
     return navigate("/home");
   } else {
