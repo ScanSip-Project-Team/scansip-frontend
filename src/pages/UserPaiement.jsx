@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useIntersectionObserver } from "@uidotdev/usehooks";
+import axios from "axios";
 
 // Import Components
 import BreadCrumb from "../components/Breadcrumb";
@@ -21,23 +21,24 @@ const UserPaiement = ({ total }) => {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
   const [prices, setPrices] = useState({});
+  const [delay, setDelay] = useState(1);
 
   const options = {
     clientSecret,
   };
 
-  //   Variable de developpement
-  const numberOfSecond = 160;
-  let estimateTime = Math.ceil(numberOfSecond / 60);
-
   useEffect(() => {
+    const fetchDelay = async () => {
+      const { data } = await axios.get("http://localhost:3000/delay");
+      setDelay(data.minutes_delay);
+    };
+    fetchDelay();
+
     fetch("http://localhost:3000/pay/config").then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
-  }, []);
 
-  useEffect(() => {
     fetch(`http://localhost:3000/pay/create-payment-intent/${order_id}`, {
       method: "POST",
       body: JSON.stringify(),
@@ -66,7 +67,7 @@ const UserPaiement = ({ total }) => {
             className=""
           />
           <p className="text-xs font-medium">
-            Temps d'attente estimé : {estimateTime.toString()} minutes
+            Temps d'attente estimé : {delay} minutes
           </p>
         </div>
         <h1 className="w-full border-y border-grey-232 py-5px text-center text-sm font-medium">
@@ -82,6 +83,7 @@ const UserPaiement = ({ total }) => {
                 clientSecret={clientSecret}
                 prices={prices}
                 total={total}
+                order_id={order_id}
               />
             </Elements>
           )}

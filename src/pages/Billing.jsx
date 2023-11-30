@@ -1,16 +1,24 @@
 // Import Package
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import axios from "axios";
 
 const Billing = ({ cart, total }) => {
   const navigate = useNavigate();
+  const [delay, setDelay] = useState(1);
 
   useEffect(() => {
     if (total === 0) {
       navigate("/home");
     }
+
+    const fetchDelay = async () => {
+      const { data } = await axios.get("http://localhost:3000/delay");
+      setDelay(data.minutes_delay);
+    };
+    fetchDelay();
   }, [total]);
 
   console.log(cart);
@@ -47,11 +55,11 @@ const Billing = ({ cart, total }) => {
 
   return (
     <section ref={pdfRef}>
-      <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
+      <div className="bg-greenScanSip relative mb-3 flex p-4 text-white">
         <div className="w-40">
           <p className="mb-3">Merci d'avoir passé commande !</p>
           <p>N° Commande :</p>
-          <p>Temps d'attente : </p>
+          <p>Temps d'attente : {delay} minutes</p>
         </div>
         <div className="absolute bottom-0 right-3 flex items-end ">
           <img
