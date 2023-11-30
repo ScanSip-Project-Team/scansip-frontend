@@ -14,9 +14,15 @@ const Orders = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [isOrderInProgress, setIsOrderInProgress] = useState(true);
-
+  const [refresh, setRefresh] = useState(false);
   const [token, setToken] = useState("scanSip");
+  const [counter, setCounter] = useState(0);
   const navigate = useNavigate();
+
+  // setInterval(() => {
+  //   setRefresh(!refresh);
+  //   console.log("refresh!");
+  // }, 30000);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +36,7 @@ const Orders = () => {
       }
     };
     fetchData();
-  }, [isOrderInProgress]);
+  }, [isOrderInProgress, refresh]);
 
   if (!token) {
     return navigate("/home");
@@ -39,6 +45,11 @@ const Orders = () => {
       <p>Loading ...</p>
     ) : (
       <>
+        {setInterval(() => {
+          setRefresh(!refresh);
+          setCounter(counter + 1);
+          console.log("refresh! " + counter);
+        }, 30000)}
         <Header />
         <div className="container m-auto h-screen">
           <h1 className="border-b border-solid border-black p-6 text-3xl">

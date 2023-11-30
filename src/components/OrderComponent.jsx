@@ -21,7 +21,7 @@ const OrderComponent = ({
         >
           <div className="flex flex-col gap-5 lg:w-2/3">
             {element.product_list.map((product) => {
-              console.log("product==>", product);
+              console.log("product from order ==>", product);
               return <ProductOrder key={product._id} product={product} />;
             })}
           </div>
