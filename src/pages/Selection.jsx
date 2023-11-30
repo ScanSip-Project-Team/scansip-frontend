@@ -49,6 +49,15 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
     setCategory("Cocktails");
   };
 
+  // const [counter, setCounter] = useState();
+
+  // setCounter(counter + 1);
+
+  // setCounter((prevCounter) => {
+
+  //   return prevCounter +1
+  // });
+
   const handleClickPlus = (item) => {
     // je vérifie si le produit est déjà dans le panier
     const productToFind = cart.find((e) => e._id === item._id);
@@ -178,54 +187,60 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
     <p>Loading...</p>
   ) : (
     // SELECTION BANNER
-    <div className=" flex w-screen flex-col items-center justify-center">
-      <div className="fixed top-0 my-6 flex w-11/12 items-center justify-center gap-2 ">
-        <a
-          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
-          onClick={handleClickSofts}
-          href="#softs"
-        >
-          <img className="h-12 w-8" src="../src/assets/soft.png" alt="soft" />
-          <p>Soft</p>
-        </a>
-        <a
-          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
-          onClick={handleClickSnacks}
-          href="#snacks"
-        >
-          <img
-            className="h-12 w-8"
-            src="../src/assets/HotDog.png"
-            alt="snacks"
-          />
-          <p>Snacks</p>
-        </a>
-        <a
-          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
-          onClick={handleClickAlcools}
-          href="#alcools"
-        >
-          <img className="h-12 w-8" src="../src/assets/biere.png" alt="beer" />
-          <p>Alcools</p>
-        </a>
-        <a
-          className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
-          onClick={handleClickCocktails}
-          href="#cocktails"
-        >
-          <img
-            className="h-12 w-8"
-            src="../src/assets/Cocktail.png"
-            alt="cocktail"
-          />
-          <p>Cocktails</p>
-        </a>
+    <div className=" flex w-screen flex-col items-center justify-center scroll-smooth  bg-white">
+      <div className="h-100 w-screnn fixed top-0 flex w-full items-center justify-center gap-2  bg-white">
+        <div className="my-6 flex w-11/12 items-center justify-center gap-2   bg-white">
+          <a
+            className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
+            onClick={handleClickSofts}
+            href="#softs"
+          >
+            <img className="h-12 w-8" src="../src/assets/soft.png" alt="soft" />
+            <p>Soft</p>
+          </a>
+          <a
+            className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
+            onClick={handleClickSnacks}
+            href="#snacks"
+          >
+            <img
+              className="h-12 w-8"
+              src="../src/assets/HotDog.png"
+              alt="snacks"
+            />
+            <p>Snacks</p>
+          </a>
+          <a
+            className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
+            onClick={handleClickAlcools}
+            href="#alcools"
+          >
+            <img
+              className="h-12 w-8"
+              src="../src/assets/biere.png"
+              alt="beer"
+            />
+            <p>Alcools</p>
+          </a>
+          <a
+            className="h-70 flex w-1/4 flex-col items-center rounded bg-[#F3F3F3] p-1.5"
+            onClick={handleClickCocktails}
+            href="#cocktails"
+          >
+            <img
+              className="h-12 w-8"
+              src="../src/assets/Cocktail.png"
+              alt="cocktail"
+            />
+            <p>Cocktails</p>
+          </a>
+        </div>
       </div>
 
-      <section className="mt-24 flex w-screen flex-col items-center">
+      <section className="mb-24 mt-28 flex w-screen flex-col items-center">
         <div id="softs" className=" w-11/12">
           <div className="flex justify-center ">
-            <div className="flex w-11/12 justify-start ">
+            <div className="flex w-full justify-start ">
               <div className="my-6 flex items-center gap-2  font-bold">
                 <p>Découvrez nos Softs !</p>
                 <img src="../src/assets/Soft.png" alt="softs" />
@@ -252,30 +267,30 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
                   // Yohann code -----------------------------
                 />
               </div>
-              <div className="w-4/5">
+              <div className="w-4/5 pl-2">
                 <p>{item.product_name}</p> <p>{item.product_price} €</p>
               </div>
               <div>
                 {item.quantity ? (
-                  <div className="flex items-center justify-center gap-2  p-1.5">
+                  <div className="flex w-24 items-center justify-center gap-2  p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickMinus(item)}
                     >
                       -
                     </button>
                     <p> {item.quantity}</p>
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
                     </button>
                   </div>
                 ) : (
-                  <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <div className=" flex w-24 items-center justify-center gap-2  p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
@@ -286,9 +301,9 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
             </div>
           ))}
         </div>
-        <div id="snacks" className="w-11/12">
+        <div id="snacks" className="w-11/12  ">
           <div className="flex justify-center ">
-            <div className="flex w-11/12 justify-start ">
+            <div className="flex w-full justify-start ">
               <div className="my-6 flex  items-center gap-2   font-bold">
                 <p>Découvrez nos Snacks !</p>
                 <img src="../src/assets/HotDog.png" alt="hotdog" />
@@ -314,30 +329,30 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
                   // Yohann code -----------------------------
                 />
               </div>
-              <div className="w-4/5">
+              <div className="w-4/5 pl-2">
                 <p>{item.product_name}</p> <p>{item.product_price} €</p>{" "}
               </div>
               <div>
                 {item.quantity ? (
-                  <div className="flex items-center justify-center gap-2  p-1.5">
+                  <div className="flex w-24 items-center justify-center gap-2  p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickMinus(item)}
                     >
                       -
                     </button>
                     <p> {item.quantity}</p>
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
                     </button>
                   </div>
                 ) : (
-                  <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <div className="flex w-24 items-center justify-center gap-2 p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
@@ -350,7 +365,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         </div>
         <div id="alcools" className="w-11/12">
           <div className="flex justify-center ">
-            <div className="flex w-11/12 justify-start ">
+            <div className="flex w-full justify-start ">
               <div className="my-6 flex items-center gap-2  font-bold">
                 <p>Découvrez nos Alcools !</p>
                 <img src="../src/assets/Biere.png" alt="alcools" />
@@ -376,30 +391,30 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
                   // Yohann code -----------------------------
                 />
               </div>
-              <div className="w-4/5">
+              <div className="w-4/5 pl-2">
                 <p>{item.product_name}</p> <p>{item.product_price} €</p>
               </div>
               <div>
                 {item.quantity ? (
-                  <div className="flex items-center justify-center gap-2  p-1.5">
+                  <div className="flex w-24 items-center justify-center gap-2  p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickMinus(item)}
                     >
                       -
                     </button>
                     <p> {item.quantity}</p>
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
                     </button>
                   </div>
                 ) : (
-                  <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <div className="flex w-24 items-center justify-center gap-2 p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
@@ -413,7 +428,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
 
         <div id="cocktails" className="w-11/12">
           <div className="flex justify-center ">
-            <div className="flex w-11/12 justify-start ">
+            <div className="flex w-full justify-start ">
               <div className="my-6 flex items-center gap-2  font-bold">
                 <p>Découvrez nos Cocktails !</p>
                 <img src="../src/assets/Cocktail.png" alt="cocktails" />
@@ -425,7 +440,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
               className="flex  items-center justify-start border border-gray-300 bg-[#F3F3F3]"
               key={item._id}
             >
-              <div className="w-1/5">
+              <div className="w-1/5 pl-2">
                 <img
                   className="w-15 h-20 bg-[#F3F3F3]"
                   src={item.product_image.secure_url}
@@ -444,25 +459,25 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
               </div>
               <div>
                 {item.quantity ? (
-                  <div className="flex items-center justify-center gap-2  p-1.5">
+                  <div className="flex w-24 items-center justify-center gap-2  p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickMinus(item)}
                     >
                       -
                     </button>
                     <p> {item.quantity}</p>
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
                     </button>
                   </div>
                 ) : (
-                  <div className="k flex items-center justify-center gap-2 p-1.5">
+                  <div className="flex w-24 items-center justify-center gap-2 p-1.5">
                     <button
-                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      className="h-8 w-8 rounded-full bg-[#E8E8E8]"
                       onClick={() => handleClickPlus(item)}
                     >
                       +
@@ -474,14 +489,18 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
           ))}
         </div>
       </section>
-      <input
-        className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
-        type="submit"
-        value={`Valider le panier . ${total} €`}
-        // Yohann code -----------------------------
-        onClick={handleNavigate}
-        // Yohann code -----------------------------
-      />
+
+      <div className="fixed bottom-0 flex w-full justify-center  bg-white">
+        <input
+          className=" my-4 w-11/12 rounded  bg-black p-1.5 text-white"
+          type="submit"
+          value={`Voir le panier . ${total} €`}
+          // Yohann code -----------------------------
+          onClick={handleNavigate}
+          // Yohann code -----------------------------
+        />
+      </div>
+
       {/* Yohann code ----------------------------- */}
       {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
       {/* Yohann code ----------------------------- */}
