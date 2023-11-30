@@ -56,12 +56,15 @@ function App() {
           path="/billing"
           element={<Billing cart={cart} total={total} />}
         />
+
         <Route path="/paiement" element={<UserPaiement />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/new-product" element={<AdminNewProduct />} />
         {/* page de test SAMUEL */}
         <Route path="/lab" element={<Lab />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
       </Routes>
     </Router>
   );
