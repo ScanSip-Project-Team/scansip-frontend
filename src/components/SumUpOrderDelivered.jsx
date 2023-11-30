@@ -32,8 +32,7 @@ const SumUpOrderDelivered = ({
             <span className="font-semibold"> {element.total_items}</span>
           </span>
           <span className="text-sm ">
-            Statut :
-            <span className="font-semibold"> {element.order_status}</span>
+            Statut :<span className="font-semibold"> Servie</span>
           </span>
         </div>
         <div className="flex flex-col gap-3">

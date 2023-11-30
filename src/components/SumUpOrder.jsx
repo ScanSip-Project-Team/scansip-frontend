@@ -29,8 +29,7 @@ const SumUpOrder = ({ element, setIsOrderInProgress, isOrderInProgress }) => {
             <span className="font-semibold"> {element.total_items}</span>
           </span>
           <span className="text-sm ">
-            Statut :
-            <span className="font-semibold"> {element.order_status}</span>
+            Statut :<span className="font-semibold"> En cours</span>
           </span>
         </div>
         <div className="flex  flex-1 flex-col gap-3">
