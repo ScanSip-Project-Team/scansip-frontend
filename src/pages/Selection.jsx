@@ -12,7 +12,7 @@ import Modal from "../Components/Modal";
 // Import components
 import Discover from "../components/Discover";
 
-const Selection = () => {
+const Selection = ({ setCart, cart, setTotal, total }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState("Softs");
@@ -20,8 +20,6 @@ const Selection = () => {
   const [snacks, setSnacks] = useState([]);
   const [alcools, setAlcools] = useState([]);
   const [cocktails, setCocktails] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
   const snacksTab = [];
   const softsTab = [];
   const alcoolsTab = [];
@@ -578,7 +576,6 @@ const Selection = () => {
         type="submit"
         value={`Valider le panier . ${total} €`}
         // Yohann code -----------------------------
-
         onClick={handleNavigate}
         // Yohann code -----------------------------
       />
