@@ -1,31 +1,37 @@
 import ProductOrder from "./ProductOrder";
+
 import SumUpOrder from "./SumUpOrder";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const OrderComponent = ({
-  element,
-  handleOrderStatus,
   setIsOrderInProgress,
   isOrderInProgress,
+
+  element,
 }) => {
   return (
-    <div className="mb-4 flex gap-5 rounded  bg-slate-100 p-4">
-      <div
-        className="flex  h-3/6 w-2/3 
-        flex-col gap-5"
-      >
-        <h3 className="font-semibold">Commande n° : {element.order_number}</h3>
-
-        {element.product_list.map((product) => {
-          return <ProductOrder key={product._id} product={product} />;
-        })}
+    <div className="mb-4 rounded  bg-slate-100 p-4">
+      <div className="flex justify-between pl-4 pr-4">
+        <h3 className="mb-2 font-semibold">
+          Commande n° : {element.order_number}
+        </h3>
       </div>
-
-      <SumUpOrder
-        element={element}
-        handleOrderStatus={handleOrderStatus}
-        setIsOrderInProgress={setIsOrderInProgress}
-        isOrderInProgress={isOrderInProgress}
-      />
+      <div className="flex h-auto flex-col  gap-5 md:flex-row">
+        <div
+          className={`mb-4 flex w-full flex-col gap-5 rounded bg-slate-100 p-4 lg:flex-row`}
+        >
+          <div className="flex flex-col gap-5 lg:w-2/3">
+            {element.product_list.map((product) => {
+              console.log("product==>", product);
+              return <ProductOrder key={product._id} product={product} />;
+            })}
+          </div>
+          <SumUpOrder
+            element={element}
+            setIsOrderInProgress={setIsOrderInProgress}
+            isOrderInProgress={isOrderInProgress}
+          />
+        </div>
+      </div>
     </div>
   );
 };

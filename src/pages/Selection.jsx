@@ -8,7 +8,11 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../Components/Modal";
 // Yohann code ----------------
 
-const Selection = ({ cart, setCart, total, setTotal }) => {
+// Johanne code
+// Import components
+import Discover from "../components/Discover";
+
+const Selection = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState("Softs");
@@ -16,8 +20,12 @@ const Selection = ({ cart, setCart, total, setTotal }) => {
   const [snacks, setSnacks] = useState([]);
   const [alcools, setAlcools] = useState([]);
   const [cocktails, setCocktails] = useState([]);
-  // const [cart, setCart] = useState([]);
-  // const [total, setTotal] = useState(0);
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+  const snacksTab = [];
+  const softsTab = [];
+  const alcoolsTab = [];
+  const cocktailsTab = [];
 
   // Yohann code -----------------------------
   const [openModal, setOpenModal] = useState(false);
@@ -170,6 +178,82 @@ const Selection = ({ cart, setCart, total, setTotal }) => {
     fetchData();
   }, [category]);
 
+  // Test Johanne snacksTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Snacks") {
+        if (data[m].product_category === "Snacks") {
+          const snack = snacksTab.find((e) => e._id === data[m]._id);
+          if (snack === undefined) {
+            snacksTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("snacksTab >>>", snacksTab);
+    console.log("snacksTab[0].product_name", snacksTab[0].product_name);
+  }
+  // Test Johanne snacksTab
+
+  // Test Johanne softsTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Soft") {
+        if (data[m].product_category === "Soft") {
+          const soft = softsTab.find((e) => e._id === data[m]._id);
+          if (soft === undefined) {
+            softsTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("softsTab >>>", softsTab);
+    console.log("softsTab[0].product_name", softsTab[0].product_name);
+  }
+  // Test Johanne softsTab
+
+  // Test Johanne alcoolsTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Alcools") {
+        if (data[m].product_category === "Alcools") {
+          const alcool = alcoolsTab.find((e) => e._id === data[m]._id);
+          if (alcool === undefined) {
+            alcoolsTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("alcoolsTab >>>", alcoolsTab);
+    console.log("alcoolsTab[0].product_name", alcoolsTab[0].product_name);
+  }
+  // Test Johanne alcoolsTab
+
+  // Test Johanne cocktailsTab
+  if (!isLoading && data) {
+    for (let m = 0; m < data.length; m++) {
+      console.log("data[m].product_category >>>", data[m].product_category);
+      if (data[m].product_category === "Coktails") {
+        if (data[m].product_category === "Coktails") {
+          const cocktail = cocktailsTab.find((e) => e._id === data[m]._id);
+          if (cocktail === undefined) {
+            cocktailsTab.push(data[m]);
+          }
+        }
+      }
+    }
+
+    console.log("cocktailsTab >>>", cocktailsTab);
+    console.log("cocktailsTab[0].product_name", cocktailsTab[0].product_name);
+  }
+  // Test Johanne cocktailsTab
+
   return isLoading ? (
     <p>Loading...</p>
   ) : (
@@ -213,221 +297,282 @@ const Selection = ({ cart, setCart, total, setTotal }) => {
           <p>Cocktails</p>
         </div>
       </div>
-      {category === "Softs" && softs.length !== 0 ? (
-        softs.map((item) => (
-          <div
-            className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
-            key={item._id}
-          >
-            <div className="w-1/5">
-              <img
-                className="w-15 h-20 bg-[#F3F3F3]"
-                src={item.product_image.secure_url}
-                alt="product"
-                // Yohann code -----------------------------
-                onClick={() => {
-                  console.log(item._id);
-                  setOpenModal(true);
-                  setProductID(item._id);
-                }}
-                // Yohann code -----------------------------
-              />
+
+      {category === "Softs" && softs.length !== 0
+        ? softs.map((item) => (
+            <div
+              className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+              key={item._id}
+            >
+              <div className="w-1/5">
+                <img
+                  className="w-15 h-20 bg-[#F3F3F3]"
+                  src={item.product_image.secure_url}
+                  alt="product"
+                  // Yohann code -----------------------------
+                  onClick={() => {
+                    console.log(item._id);
+                    setOpenModal(true);
+                    setProductID(item._id);
+                  }}
+                  // Yohann code -----------------------------
+                />
+              </div>
+              <div className="w-4/5">
+                <p>{item.product_name}</p> <p>{item.product_price} €</p>
+              </div>
+              <div>
+                {item.quantity ? (
+                  <div className="flex items-center justify-center gap-2  p-1.5">
+                    <button
+                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      onClick={() => handleClickMinus(item)}
+                    >
+                      -
+                    </button>
+                    <p> {item.quantity}</p>
+                    <button
+                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      onClick={() => handleClickPlus(item)}
+                    >
+                      +
+                    </button>
+                  </div>
+                ) : (
+                  <div className="k flex items-center justify-center gap-2 p-1.5">
+                    <button
+                      className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                      onClick={() => handleClickPlus(item)}
+                    >
+                      +
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="w-4/5">
-              <p>{item.product_name}</p> <p>{item.product_price} €</p>
-            </div>
-            <div>
-              {item.quantity ? (
-                <div className="flex items-center justify-center gap-2  p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickMinus(item)}
-                  >
-                    -
-                  </button>
-                  <p> {item.quantity}</p>
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
-                  >
-                    +
-                  </button>
+          ))
+        : category === "Snacks" && snacks.length !== 0
+          ? snacks.map((item) => (
+              <div
+                className="  flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                key={item._id}
+              >
+                <div className="w-1/5">
+                  <img
+                    className="w-15 h-20 bg-[#F3F3F3]"
+                    src={item.product_image.secure_url}
+                    alt="product"
+                    // Yohann code -----------------------------
+                    onClick={() => {
+                      console.log(item._id);
+                      setOpenModal(true);
+                      setProductID(item._id);
+                    }}
+                    // Yohann code -----------------------------
+                  />
                 </div>
-              ) : (
-                <div className="k flex items-center justify-center gap-2 p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
-                  >
-                    +
-                  </button>
+                <div className="w-4/5">
+                  <p>{item.product_name}</p> <p>{item.product_price} €</p>{" "}
                 </div>
-              )}
-            </div>
-          </div>
-        ))
-      ) : category === "Snacks" && snacks.length !== 0 ? (
-        snacks.map((item) => (
-          <div
-            className="  flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
-            key={item._id}
-          >
-            <div className="w-1/5">
-              <img
-                className="w-15 h-20 bg-[#F3F3F3]"
-                src={item.product_image.secure_url}
-                alt="product"
-                // Yohann code -----------------------------
-                onClick={() => {
-                  console.log(item._id);
-                  setOpenModal(true);
-                  setProductID(item._id);
-                }}
-                // Yohann code -----------------------------
-              />
-            </div>
-            <div className="w-4/5">
-              <p>{item.product_name}</p> <p>{item.product_price} €</p>{" "}
-            </div>
-            <div>
-              {item.quantity ? (
-                <div className="flex items-center justify-center gap-2  p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickMinus(item)}
-                  >
-                    -
-                  </button>
-                  <p> {item.quantity}</p>
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
-                  >
-                    +
-                  </button>
+                <div>
+                  {item.quantity ? (
+                    <div className="flex items-center justify-center gap-2  p-1.5">
+                      <button
+                        className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                        onClick={() => handleClickMinus(item)}
+                      >
+                        -
+                      </button>
+                      <p> {item.quantity}</p>
+                      <button
+                        className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                        onClick={() => handleClickPlus(item)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="k flex items-center justify-center gap-2 p-1.5">
+                      <button
+                        className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                        onClick={() => handleClickPlus(item)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div className="k flex items-center justify-center gap-2 p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
-                  >
-                    +
-                  </button>
+              </div>
+            ))
+          : category === "Alcools" && alcools.length !== 0
+            ? alcools.map((item) => (
+                <div
+                  className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                  key={item._id}
+                >
+                  <div className="w-1/5">
+                    <img
+                      className="w-15 h-20 bg-[#F3F3F3]"
+                      src={item.product_image.secure_url}
+                      alt="product"
+                      // Yohann code -----------------------------
+                      onClick={() => {
+                        console.log(item._id);
+                        setOpenModal(true);
+                        setProductID(item._id);
+                      }}
+                      // Yohann code -----------------------------
+                    />
+                  </div>
+                  <div className="w-4/5">
+                    <p>{item.product_name}</p> <p>{item.product_price} €</p>
+                  </div>
+                  <div>
+                    {item.quantity ? (
+                      <div className="flex items-center justify-center gap-2  p-1.5">
+                        <button
+                          className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                          onClick={() => handleClickMinus(item)}
+                        >
+                          -
+                        </button>
+                        <p> {item.quantity}</p>
+                        <button
+                          className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                          onClick={() => handleClickPlus(item)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="k flex items-center justify-center gap-2 p-1.5">
+                        <button
+                          className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                          onClick={() => handleClickPlus(item)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
-            </div>
-          </div>
-        ))
-      ) : category === "Alcools" && alcools.length !== 0 ? (
-        alcools.map((item) => (
-          <div
-            className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
-            key={item._id}
-          >
-            <div className="w-1/5">
-              <img
-                className="w-15 h-20 bg-[#F3F3F3]"
-                src={item.product_image.secure_url}
-                alt="product"
-                // Yohann code -----------------------------
-                onClick={() => {
-                  console.log(item._id);
-                  setOpenModal(true);
-                  setProductID(item._id);
-                }}
-                // Yohann code -----------------------------
-              />
-            </div>
-            <div className="w-4/5">
-              <p>{item.product_name}</p> <p>{item.product_price} €</p>
-            </div>
-            <div>
-              {item.quantity ? (
-                <div className="flex items-center justify-center gap-2  p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickMinus(item)}
+              ))
+            : category === "Cocktails" && cocktails.length !== 0
+              ? cocktails.map((item) => (
+                  <div
+                    className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                    key={item._id}
                   >
-                    -
-                  </button>
-                  <p> {item.quantity}</p>
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
+                    <div className="w-1/5">
+                      <img
+                        className="w-15 h-20 bg-[#F3F3F3]"
+                        src={item.product_image.secure_url}
+                        alt="product"
+                        // Yohann code -----------------------------
+                        onClick={() => {
+                          console.log(item._id);
+                          setOpenModal(true);
+                          setProductID(item._id);
+                        }}
+                        // Yohann code -----------------------------
+                      />
+                    </div>
+                    <div className="w-4/5">
+                      <p>{item.product_name}</p> <p>{item.product_price} €</p>
+                    </div>
+                    <div>
+                      {item.quantity ? (
+                        <div className="flex items-center justify-center gap-2  p-1.5">
+                          <button
+                            className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                            onClick={() => handleClickMinus(item)}
+                          >
+                            -
+                          </button>
+                          <p> {item.quantity}</p>
+                          <button
+                            className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                            onClick={() => handleClickPlus(item)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="k flex items-center justify-center gap-2 p-1.5">
+                          <button
+                            className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                            onClick={() => handleClickPlus(item)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              : softsTab.map((item) => (
+                  <div
+                    className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+                    key={item._id}
                   >
-                    +
-                  </button>
-                </div>
-              ) : (
-                <div className="k flex items-center justify-center gap-2 p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
-                  >
-                    +
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        ))
-      ) : category === "Cocktails" && cocktails.length !== 0 ? (
-        cocktails.map((item) => (
-          <div
-            className="flex w-full items-center justify-start border border-gray-300 bg-[#F3F3F3]"
-            key={item._id}
-          >
-            <div className="w-1/5">
-              <img
-                className="w-15 h-20 bg-[#F3F3F3]"
-                src={item.product_image.secure_url}
-                alt="product"
-                // Yohann code -----------------------------
-                onClick={() => {
-                  console.log(item._id);
-                  setOpenModal(true);
-                  setProductID(item._id);
-                }}
-                // Yohann code -----------------------------
-              />
-            </div>
-            <div className="w-4/5">
-              <p>{item.product_name}</p> <p>{item.product_price} €</p>
-            </div>
-            <div>
-              {item.quantity ? (
-                <div className="flex items-center justify-center gap-2  p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickMinus(item)}
-                  >
-                    -
-                  </button>
-                  <p> {item.quantity}</p>
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
-                  >
-                    +
-                  </button>
-                </div>
-              ) : (
-                <div className="k flex items-center justify-center gap-2 p-1.5">
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickPlus(item)}
-                  >
-                    +
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>Sélectionner une catégorie</p>
-      )}
+                    <div className="w-1/5">
+                      <img
+                        className="w-15 h-20 bg-[#F3F3F3]"
+                        src={item.product_image.secure_url}
+                        alt="product"
+                        // Yohann code -----------------------------
+                        onClick={() => {
+                          console.log(item._id);
+                          setOpenModal(true);
+                          setProductID(item._id);
+                        }}
+                        // Yohann code -----------------------------
+                      />
+                    </div>
+                    <div className="w-4/5">
+                      <p>{item.product_name}</p> <p>{item.product_price} €</p>
+                    </div>
+                    <div>
+                      {item.quantity ? (
+                        <div className="flex items-center justify-center gap-2  p-1.5">
+                          <button
+                            className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                            onClick={() => handleClickMinus(item)}
+                          >
+                            -
+                          </button>
+                          <p> {item.quantity}</p>
+                          <button
+                            className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                            onClick={() => handleClickPlus(item)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="k flex items-center justify-center gap-2 p-1.5">
+                          <button
+                            className="h-10 w-10 rounded-full bg-[#E8E8E8]"
+                            onClick={() => handleClickPlus(item)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+      <Discover
+        category={category}
+        cart={cart}
+        snacksTab={snacksTab}
+        handleClickMinus={handleClickMinus}
+        handleClickPlus={handleClickPlus}
+        softsTab={softsTab}
+        alcoolsTab={alcoolsTab}
+        cocktailsTab={cocktailsTab}
+      />
       <input
         className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
         type="submit"

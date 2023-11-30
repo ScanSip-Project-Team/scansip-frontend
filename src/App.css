@@ -9,6 +9,9 @@
   }
 }
 
+.primary-color {
+  color: var(--color-primary);
+}
 .btn-primary {
   background-color: var(--color-primary);
   padding: 5px 10px;

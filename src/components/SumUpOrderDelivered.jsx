@@ -1,10 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import Button from "./Button";
-const SumUpOrder = ({ element, setIsOrderInProgress, isOrderInProgress }) => {
-  const handleOrderDelivered = async (id) => {
+const SumUpOrderDelivered = ({
+  element,
+  setIsOrderInProgress,
+  isOrderInProgress,
+}) => {
+  const handleOrderInProgress = async (id) => {
     try {
-      const status = "delivered";
+      const status = "in progress";
       const response = await axios.put(
         `http://localhost:3000/orders/${id}/${status}`,
       );
@@ -15,27 +19,26 @@ const SumUpOrder = ({ element, setIsOrderInProgress, isOrderInProgress }) => {
     }
     console.log("CLICK to order id ==>", id);
   };
-
   return (
     <div
-      className="w-3/3 h-3/3 flex flex-col gap-6 
-        lg:w-1/3"
+      className="w-3/3 flex h-auto flex-col 
+      gap-6"
     >
-      <h3 className="font-bold">Récapitulatif :</h3>
-      <div className="flex flex-row justify-between lg:flex-col">
-        <div className="flex flex-1 flex-col gap-3">
+      <h3>Récapitulatif :</h3>
+      <div className="flex flex-row justify-between gap-2 p-3">
+        <div className="flex flex-col gap-3">
           <span className="text-sm ">
             Nombres d'article :
             <span className="font-semibold"> {element.total_items}</span>
           </span>
           <span className="text-sm ">
-            Statut :<span className="font-semibold"> En cours</span>
+            Statut :<span className="font-semibold"> Servie</span>
           </span>
         </div>
-        <div className="flex  flex-1 flex-col gap-3">
+        <div className="flex flex-col gap-3">
           <span className="text-sm ">
             Nom (carte):
-            <span className="font-semibold">Tiktac </span>
+            <span className="font-semibold"> Tiktac </span>
           </span>
           <span className="mb-4 text-sm ">
             Prix :
@@ -45,14 +48,13 @@ const SumUpOrder = ({ element, setIsOrderInProgress, isOrderInProgress }) => {
           </span>
         </div>
       </div>
-
       <Button
-        func={handleOrderDelivered}
+        func={handleOrderInProgress}
         elementId={element._id}
-        className={"btn-primary"}
-        text={"Commande servie"}
+        className={"btn-black"}
+        text={"Renvoyer en service"}
       />
     </div>
   );
 };
-export default SumUpOrder;
+export default SumUpOrderDelivered;
