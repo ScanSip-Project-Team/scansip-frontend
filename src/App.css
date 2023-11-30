@@ -34,8 +34,8 @@
 .btn-black:hover {
   background-color: #1b1b1b;
 }
-.margin-container {
-  margin: 15px 10px;
+.padding-container {
+  padding: 15px 10px;
 }
 
 .breadcrumb {

@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useIntersectionObserver } from "@uidotdev/usehooks";
 
 // Import Components
 import BreadCrumb from "../components/Breadcrumb";
@@ -10,9 +13,14 @@ import PaiementForm from "../components/PaiementForm";
 // Import Assets
 import timer from "./../assets/timer.svg";
 
-const UserPaiement = () => {
+const UserPaiement = ({ total }) => {
+  let { order_id } = useParams();
+  const navigate = useNavigate();
+
+  order_id = "656614e373933aa6ab1b3a69";
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
+  const [prices, setPrices] = useState({});
 
   const options = {
     clientSecret,
@@ -30,22 +38,24 @@ const UserPaiement = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/pay/create-payment-intent", {
+    fetch(`http://localhost:3000/pay/create-payment-intent/${order_id}`, {
       method: "POST",
-      body: JSON.stringify({}),
+      body: JSON.stringify(),
     }).then(async (result) => {
-      var { clientSecret } = await result.json();
+      var response = await result.json();
+      const { clientSecret, total_price, order_price, order_fee } = response;
       setClientSecret(clientSecret);
+      setPrices({ total_price, order_price, order_fee });
     });
   }, []);
 
   return (
     <>
-      <main className="margin-container flex flex-col items-center">
+      <main className="padding-container flex h-screen flex-col items-center">
         <nav className="self-start">
           <BreadCrumb
             text={"Retourner au panier"}
-            func={() => console.log("retour")}
+            func={() => navigate("/home")}
           />
         </nav>
 
@@ -65,10 +75,14 @@ const UserPaiement = () => {
         <p className="w-full py-2 text-xs font-medium">
           Choisissez votre moyen de paiement
         </p>
-        <div className="h-1/2 w-full">
+        <div className="h-available w-full ">
           {clientSecret && stripePromise && (
             <Elements stripe={stripePromise} options={options}>
-              <PaiementForm clientSecret={clientSecret} />
+              <PaiementForm
+                clientSecret={clientSecret}
+                prices={prices}
+                total={total}
+              />
             </Elements>
           )}
         </div>
