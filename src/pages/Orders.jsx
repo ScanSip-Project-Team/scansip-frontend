@@ -14,9 +14,15 @@ const Orders = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [isOrderInProgress, setIsOrderInProgress] = useState(true);
-
+  const [refresh, setRefresh] = useState(false);
   const [token, setToken] = useState("scanSip");
+  const [counter, setCounter] = useState(0);
   const navigate = useNavigate();
+
+  // setInterval(() => {
+  //   setRefresh(!refresh);
+  //   console.log("refresh!");
+  // }, 30000);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +36,15 @@ const Orders = () => {
       }
     };
     fetchData();
-  }, [isOrderInProgress]);
+  }, [isOrderInProgress, refresh]);
 
+  {
+    setInterval(() => {
+      setRefresh(!refresh);
+      setCounter(counter + 1);
+      console.log("refresh! " + counter);
+    }, 30000);
+  }
   if (!token) {
     return navigate("/home");
   } else {

@@ -127,6 +127,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
       cartCopy.push(item);
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
+      console.log("cart >>>", cart);
     }
     // s'il est déjà dans le panier j'augmente la quantité de 1
     else {
@@ -135,6 +136,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity + 1;
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
+      console.log("cart >>>", cart);
     }
   };
 
@@ -149,6 +151,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity - 1;
       setCart(cartCopy);
       setTotal(total - Number(item.product_price));
+      console.log("cart >>>", cart);
     } else {
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
@@ -160,6 +163,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
       setCart(cartCopy);
       delete item.quantity;
       setTotal(total - Number(item.product_price));
+      console.log("cart >>>", cart);
     }
   };
 
@@ -179,7 +183,6 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   // Test Johanne snacksTab
   if (!isLoading && data) {
     for (let m = 0; m < data.length; m++) {
-      console.log("data[m].product_category >>>", data[m].product_category);
       if (data[m].product_category === "Snacks") {
         if (data[m].product_category === "Snacks") {
           const snack = snacksTab.find((e) => e._id === data[m]._id);
@@ -189,16 +192,12 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         }
       }
     }
-
-    console.log("snacksTab >>>", snacksTab);
-    console.log("snacksTab[0].product_name", snacksTab[0].product_name);
   }
   // Test Johanne snacksTab
 
   // Test Johanne softsTab
   if (!isLoading && data) {
     for (let m = 0; m < data.length; m++) {
-      console.log("data[m].product_category >>>", data[m].product_category);
       if (data[m].product_category === "Soft") {
         if (data[m].product_category === "Soft") {
           const soft = softsTab.find((e) => e._id === data[m]._id);
@@ -208,16 +207,12 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         }
       }
     }
-
-    console.log("softsTab >>>", softsTab);
-    console.log("softsTab[0].product_name", softsTab[0].product_name);
   }
   // Test Johanne softsTab
 
   // Test Johanne alcoolsTab
   if (!isLoading && data) {
     for (let m = 0; m < data.length; m++) {
-      console.log("data[m].product_category >>>", data[m].product_category);
       if (data[m].product_category === "Alcools") {
         if (data[m].product_category === "Alcools") {
           const alcool = alcoolsTab.find((e) => e._id === data[m]._id);
@@ -227,16 +222,12 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         }
       }
     }
-
-    console.log("alcoolsTab >>>", alcoolsTab);
-    console.log("alcoolsTab[0].product_name", alcoolsTab[0].product_name);
   }
   // Test Johanne alcoolsTab
 
   // Test Johanne cocktailsTab
   if (!isLoading && data) {
     for (let m = 0; m < data.length; m++) {
-      console.log("data[m].product_category >>>", data[m].product_category);
       if (data[m].product_category === "Coktails") {
         if (data[m].product_category === "Coktails") {
           const cocktail = cocktailsTab.find((e) => e._id === data[m]._id);
@@ -246,9 +237,6 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         }
       }
     }
-
-    console.log("cocktailsTab >>>", cocktailsTab);
-    console.log("cocktailsTab[0].product_name", cocktailsTab[0].product_name);
   }
   // Test Johanne cocktailsTab
 
