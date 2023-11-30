@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Modal = ({ setOpenModal, productID }) => {
+const Modal = ({ setOpenModal, productID, tab }) => {
   const [data, setData] = useState();
 
   useEffect(() => {
