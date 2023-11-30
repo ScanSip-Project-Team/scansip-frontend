@@ -1,7 +1,11 @@
 //Import Package
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faChevronUp,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 //Import Components
@@ -14,7 +18,7 @@ import Billing from "./Pages/Billing";
 // Import Assets
 import "./App.css";
 
-library.add(faChevronDown);
+library.add(faChevronDown, faChevronUp, faUser);
 function App() {
   //Yohann : J'ai déplacer deux states ici pour récuperer leurs informations sur ma page billing, si besoin d'info me contacter
   const [cart, setCart] = useState([]);
