@@ -1,18 +1,18 @@
 // Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Yohann code ----------------
 //Import components
 import Modal from "../Components/Modal";
-import { Link } from "react-router-dom";
 // Yohann code ----------------
 
 // Johanne code
 // Import components
 import Discover from "../components/Discover";
 
-const Selection = () => {
+const Selection = ({ setCart, cart, setTotal, total }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState("Softs");
@@ -20,8 +20,6 @@ const Selection = () => {
   const [snacks, setSnacks] = useState([]);
   const [alcools, setAlcools] = useState([]);
   const [cocktails, setCocktails] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
   const snacksTab = [];
   const softsTab = [];
   const alcoolsTab = [];
@@ -30,6 +28,15 @@ const Selection = () => {
   // Yohann code -----------------------------
   const [openModal, setOpenModal] = useState(false);
   const [productID, setProductID] = useState();
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    if (total === 0) {
+      console.log("panier vide");
+    } else {
+      navigate("/billing");
+    }
+  };
   // Yohann code -----------------------------
 
   const handleClickSofts = () => {
@@ -45,6 +52,10 @@ const Selection = () => {
       }
     }
     setSofts(softsCopy);
+    // Yohann code ------------
+    // Tableau d'objets softs
+    console.log(softs);
+    // Yohann code ------------
   };
 
   const handleClickSnacks = () => {
@@ -60,6 +71,10 @@ const Selection = () => {
       }
     }
     setSnacks(snacksCopy);
+    // Yohann code ------------
+    // Tableau d'objets snacks
+    console.log(snacks);
+    // Yohann code ------------
   };
 
   const handleClickAlcools = () => {
@@ -75,6 +90,10 @@ const Selection = () => {
       }
     }
     setAlcools(alcoolsCopy);
+    // Yohann code ------------
+    // Tableau d'objets alcools
+    console.log(alcools);
+    // Yohann code ------------
   };
 
   const handleClickCocktails = () => {
@@ -90,6 +109,10 @@ const Selection = () => {
       }
     }
     setCocktails(cocktailsCopy);
+    // Yohann code ------------
+    // Tableau d'objets coktails
+    console.log(cocktails);
+    // Yohann code ------------
   };
 
   const handleClickPlus = (item) => {
@@ -552,11 +575,12 @@ const Selection = () => {
         className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
         type="submit"
         value={`Valider le panier . ${total} €`}
+        // Yohann code -----------------------------
+        onClick={handleNavigate}
+        // Yohann code -----------------------------
       />
-
       {/* Yohann code ----------------------------- */}
       {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
-      <Link to={"/billing"}>go billing</Link>
       {/* Yohann code ----------------------------- */}
     </div>
   );
