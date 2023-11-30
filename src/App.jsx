@@ -44,7 +44,7 @@ function App() {
           element={<Billing cart={cart} total={total} />}
         />
         <Route path="/orders" element={<Orders />} />
-        <Route path="/paiement" element={<UserPaiement />} />
+        <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
       </Routes>
     </Router>
   );
