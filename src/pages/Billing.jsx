@@ -80,7 +80,7 @@ const Billing = ({ cart, total }) => {
         <div className="mb-5">
           <div className="ml-5 mr-5">
             {cart.map((elem) => {
-              console.log(elem);
+              // console.log(elem);
               return (
                 <div key={elem._id} className="flex justify-between">
                   <span>
