@@ -23,6 +23,7 @@ import AdminNewProduct from "./pages/AdminNewProduct";
 
 // Import Assets
 import "./App.css";
+import AdminUpdateProduct from "./Pages/AdminUpdateProduct";
 
 library.add(
   faChevronDown,
@@ -65,6 +66,10 @@ function App() {
         <Route path="/lab" element={<Lab />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
+        <Route
+          path="/admin/update-product"
+          element={<AdminUpdateProduct />}
+        ></Route>
       </Routes>
     </Router>
   );
