@@ -115,6 +115,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
       try {
         const response = await axios.get("http://localhost:3000/products");
         setData(response.data);
+        console.log(response.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import Button from "./Button";
+import baseApiURL from "../api";
 const SumUpOrder = ({ element, setIsOrderInProgress, isOrderInProgress }) => {
   const handleOrderDelivered = async (id) => {
     try {
       const status = "delivered";
-      const response = await axios.put(
-        `http://localhost:3000/orders/${id}/${status}`,
-      );
+      const response = await axios.put(`${baseApiURL}/orders/${id}/${status}`);
 
       setIsOrderInProgress(!isOrderInProgress);
     } catch (error) {

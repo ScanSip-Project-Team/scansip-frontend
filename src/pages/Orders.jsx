@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //Import components
 import OrderComponent from "../components/OrderComponent";
 import OrderComponentDelivered from "../components/OrderComponentDelivered";
 import Header from "../components/Header";
+import baseApiURL from "../api";
 
 //Import Assets
 
@@ -20,27 +21,44 @@ const Orders = () => {
 
   const navigate = useNavigate();
 
+  //We reload the page every 30 seconds in order to fetch new orders if exist
+  let action;
+  const refreshPage = () => {
+    action = setInterval(() => {
+      setCounter((prevCount) => prevCount + 1);
+      console.log("refresh function!");
+      setRefresh(!refresh);
+    }, 30000);
+
+    return () => clearInterval(action);
+  };
+
   useEffect(() => {
+    console.log("1er useEffect avant if");
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/orders`);
+        const response = await axios.get(`${baseApiURL}/orders`);
         console.log("response ==> ", response.data);
+        console.log("refresh");
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchData();
-  }, [isOrderInProgress, refresh]);
 
-  // {
-  //   setInterval(() => {
-  //     setRefresh(!refresh);
-  //     setCounter(counter + 1);
-  //     console.log("refresh! " + counter);
-  //   }, 30000);
-  // }
+    fetchData();
+  }, [isOrderInProgress, counter]);
+
+  useEffect(() => {
+    console.log("2ème useEffect avant if");
+    //If first useEffect has been done and data fetched we run the second useEffect
+    if (!isLoading) {
+      console.log("2ème useEffect dans if ", counter);
+      refreshPage();
+    }
+  }, [isLoading]);
+
   if (!token) {
     return navigate("/home");
   } else {
@@ -51,7 +69,7 @@ const Orders = () => {
         <Header />
         <div className="container m-auto h-screen">
           <h1 className="border-b border-solid border-black p-6 text-3xl">
-            Service 🔥
+            Service 🔥 {counter}
           </h1>
 
           <div className="flex h-auto flex-col pt-8 md:flex-row">
@@ -69,7 +87,7 @@ const Orders = () => {
                 commandes en cours
               </h2>
 
-              {data.map((element, index) => {
+              {data.map((element) => {
                 if (element.order_status === "in progress") {
                   return (
                     <>
@@ -91,7 +109,7 @@ const Orders = () => {
                 {
                   data.filter((element) => element.order_status === "delivered")
                     .length
-                }{" "}
+                }
               </h2>
 
               {data.map((element) => {
