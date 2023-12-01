@@ -14,6 +14,7 @@ import Orders from "./pages/Orders";
 import Selection from "./Pages/Selection";
 import UserPaiement from "./pages/UserPaiement";
 import Billing from "./Pages/Billing";
+import CartClient from "./Pages/CartClient";
 
 // Import Assets
 import "./App.css";
@@ -45,6 +46,17 @@ function App() {
         />
         <Route path="/orders" element={<Orders />} />
         <Route path="/paiement" element={<UserPaiement />} />
+        <Route
+          path="/cart"
+          element={
+            <CartClient
+              cart={cart}
+              setCart={setCart}
+              total={total}
+              setTotal={setTotal}
+            />
+          }
+        />
       </Routes>
     </Router>
   );

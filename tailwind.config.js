@@ -15,6 +15,7 @@ export default {
         "grey-232": "#E8E8E8",
         black: "#000",
         greenScanSip: "#18C166",
+        greyAddArticlesButton: "#F3F3F3"
       },
       spacing: {
         "5px": "5px",

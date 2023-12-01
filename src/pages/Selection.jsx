@@ -1,7 +1,7 @@
 // Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Yohann code ----------------
 //Import components
@@ -31,10 +31,10 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    if (total === 0) {
-      console.log("panier vide");
+    if (!total) {
+      alert("Panier vide !");
     } else {
-      navigate("/billing");
+      navigate("/cart");
     }
   };
   // Yohann code -----------------------------
