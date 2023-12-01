@@ -13,10 +13,11 @@ import { useState } from "react";
 
 //Import Components
 import FlashScreen from "./pages/FlashScreen";
-import Orders from "./pages/Orders";
+import Orders from "./Pages/Orders";
 import Selection from "./Pages/Selection";
 import UserPaiement from "./pages/UserPaiement";
 import Billing from "./Pages/Billing";
+import CartClient from "./Pages/CartClient";
 import Lab from "./pages/Lab";
 import AdminProducts from "./pages/AdminProducts";
 import AdminNewProduct from "./pages/AdminNewProduct";
@@ -36,7 +37,6 @@ library.add(
   faTrashCan,
 );
 function App() {
-  //Yohann : J'ai déplacer deux states ici pour récuperer leurs informations sur ma page billing, si besoin d'info me contacter
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [adminToken, setAdminToken] = useState("");
@@ -56,12 +56,22 @@ function App() {
             />
           }
         />
-        <Route
-          path="/billing"
-          element={<Billing cart={cart} total={total} />}
-        />
-
+        <Route path="/billing/:id" element={<Billing />} />
         <Route path="/paiement" element={<UserPaiement />} />
+        <Route
+          path="/cart"
+          element={
+            <CartClient
+              cart={cart}
+              setCart={setCart}
+              total={total}
+              setTotal={setTotal}
+            />
+          }
+        />
+        <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/new-product" element={<AdminNewProduct />} />
         <Route
           path="/admin/signup"
           element={
@@ -71,6 +81,7 @@ function App() {
             />
           }
         />
+
         <Route
           path="/admin/signin"
           element={

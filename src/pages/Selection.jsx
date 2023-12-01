@@ -27,10 +27,10 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    if (total === 0) {
-      console.log("panier vide");
+    if (!total) {
+      alert("Panier vide !");
     } else {
-      navigate("/billing");
+      navigate("/cart");
     }
   };
   // Yohann code -----------------------------

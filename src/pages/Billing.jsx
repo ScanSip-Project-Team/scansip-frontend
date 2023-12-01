@@ -1,44 +1,66 @@
 // Import Package
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import axios from "axios";
 
-const Billing = ({ cart, total }) => {
-  const navigate = useNavigate();
+const Billing = () => {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [total, setTotal] = useState();
+
   const [delay, setDelay] = useState(1);
 
-  useEffect(() => {
-    if (total === 0) {
-      navigate("/home");
-    }
+  const navigate = useNavigate();
 
-    const fetchDelay = async () => {
-      const { data } = await axios.get("http://localhost:3000/delay");
-      setDelay(data.minutes_delay);
+  let order_id = useParams();
+
+  order_id = order_id.id;
+
+  useEffect(() => {
+    //   // const fetchDelay = async () => {
+    //   //   const { data } = await axios.get("http://localhost:3000/delay");
+    //   //   setDelay(data.minutes_delay);
+    //   // };
+    //   // fetchDelay();
+
+    const fetchData = async () => {
+      const response = await axios.get(
+        `http://localhost:3000/orders/${order_id}`,
+      );
+      // console.log(response.data);
+      setData(response.data);
+      setTotal(response.data.total_price);
+      setIsLoading(false);
+      if (total === 0) {
+        navigate("/home");
+      }
     };
-    fetchDelay();
+    fetchData();
   }, [total]);
 
-  console.log(cart);
+  console.log(data);
 
   // fonction pour le pdf
   const pdfRef = useRef();
   const downloadPDF = () => {
     const input = pdfRef.current;
-    html2canvas(input).then((canvas) => {
+    // Résolution
+    html2canvas(input, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4", true);
+      // Taille
+      const pdf = new jsPDF("p", "mm", "a6", true);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
+      // Parametres positionnement image
       const widthRatio = pdfWidth / imgWidth;
       const heightRatio = pdfHeight / imgHeight;
       const ratio = Math.min(widthRatio, heightRatio);
       const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 30;
+      const imgY = 0;
       const zoomFactor = 1.0;
       pdf.addImage(
         imgData,
@@ -53,12 +75,14 @@ const Billing = ({ cart, total }) => {
   };
   // fonction pour le pdf
 
-  return (
+  return isLoading && !total ? (
+    <p>Loading page...</p>
+  ) : (
     <section ref={pdfRef}>
-      <div className="bg-greenScanSip relative mb-3 flex p-4 text-white">
+      <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
         <div className="w-40">
           <p className="mb-3">Merci d'avoir passé commande !</p>
-          <p>N° Commande :</p>
+          <p>N° Commande : {data.order_number} </p>
           <p>Temps d'attente : {delay} minutes</p>
         </div>
         <div className="absolute bottom-0 right-3 flex items-end ">
@@ -87,30 +111,34 @@ const Billing = ({ cart, total }) => {
 
         <div className="mb-5">
           <div className="ml-5 mr-5">
-            {cart.map((elem) => {
-              console.log(elem);
-              return (
-                <div key={elem._id} className="flex justify-between">
-                  <span>
-                    {elem.product_name} x{elem.quantity}
-                  </span>
-                  <span>{elem.product_price} €</span>
-                </div>
-              );
-            })}
-            {/* <span>Nom de produit x quantité</span>
-            <span>prix + €</span> */}
+            <div className="flex flex-col">
+              {data.product_list.map((elem) => {
+                // console.log(elem);
+                return (
+                  <div key={elem.product._id} className="flex justify-between">
+                    <span>
+                      {elem.product.product_name} x{elem.quantity_cart}
+                    </span>
+                    <span>{elem.product.product_price} €</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
         <div className="mb-2 flex justify-center text-white ">
-          <button className="rounded-lg bg-black p-2" onClick={downloadPDF}>
+          <button
+            className="rounded-lg bg-black p-2"
+            onClick={downloadPDF}
+            data-html2canvas-ignore="true"
+          >
             Télécharger la facture en PDF
           </button>
         </div>
 
         <div className="mb-2 ml-3 mr-3 flex justify-center border border-l-0 border-r-0">
-          <p className="font-bold">Détail de votre facture</p>
+          <p className="font-bold ">Paiement</p>
         </div>
 
         <div className="mb-5 ml-5 mr-5 border-b">
@@ -118,12 +146,14 @@ const Billing = ({ cart, total }) => {
             <span className="font-bold">
               Un paiement de {total}€ a été éffectué avec succès&nbsp;
             </span>
-            sur votre moyen de paiement : Carte bancaire (**** **** **** 3215 )
-            Il devrait bientôt apparaître sur votre relevé bancaire
+            Ce paiement devrait bientôt apparaître sur votre relevé bancaire
           </p>
         </div>
 
-        <div className="flex justify-center text-white ">
+        <div
+          className="flex justify-center text-white "
+          data-html2canvas-ignore="true"
+        >
           <button
             className="ml-5 mr-5 w-screen rounded-lg bg-black p-2"
             onClick={() => {

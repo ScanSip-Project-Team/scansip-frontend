@@ -14,10 +14,15 @@ import PaiementForm from "../components/PaiementForm";
 import timer from "./../assets/timer.svg";
 
 const UserPaiement = ({ total }) => {
-  let { order_id } = useParams();
+  let order_id = useParams();
+
+  order_id = order_id.id;
+
+  console.log(order_id);
+
   const navigate = useNavigate();
 
-  order_id = "656614e373933aa6ab1b3a69";
+  // order_id = "656614e373933aa6ab1b3a69";
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
   const [prices, setPrices] = useState({});
@@ -56,7 +61,7 @@ const UserPaiement = ({ total }) => {
         <nav className="self-start">
           <BreadCrumb
             text={"Retourner au panier"}
-            func={() => navigate("/home")}
+            func={() => navigate("/cart")}
           />
         </nav>
 
