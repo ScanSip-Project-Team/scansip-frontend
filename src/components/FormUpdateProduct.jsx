@@ -8,7 +8,10 @@ import imgPlaceholder from "../assets/placeholder.png";
 const FormCreateProduct = () => {
   const location = useLocation();
   const { product } = location.state;
+  const public_id = product.product_image.public_id;
   console.log("product >>>>", product);
+  console.log("product._id >>>", product._id);
+  console.log("public_id >>>", public_id);
 
   const [name, setName] = useState(product.product_name);
   const [picture, setPicture] = useState();
@@ -30,7 +33,7 @@ const FormCreateProduct = () => {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-    //Validation form is dealed in the backend
+    //Update form is dealed in the backend
     setErrorMessage("");
     setErrorImage("");
     setErrorFields("");
@@ -48,9 +51,10 @@ const FormCreateProduct = () => {
       formData.append("salt", salt);
       formData.append("sugar", sugar);
       formData.append("product_image", picture);
+      formData.append("public_id", public_id);
 
-      const response = await axios.post(
-        "http://localhost:3000/admin/products/new",
+      const response = await axios.put(
+        `http://localhost:3000/admin/update/${product._id}`,
         formData,
         {
           headers: {
@@ -78,6 +82,7 @@ const FormCreateProduct = () => {
       navigate("/admin/products");
     } catch (error) {
       console.log(error.response.data.message);
+
       if (
         error.response.data.message === "Tous les champs sont obligatoires 😉"
       ) {
@@ -104,6 +109,7 @@ const FormCreateProduct = () => {
       }
     }
   };
+
   const handleOnChange = (event, setter) => {
     setter(event.target.value);
   };
@@ -356,7 +362,7 @@ const FormCreateProduct = () => {
           </div>
           <div className="flex justify-between gap-4">
             <button type="submit" className="btn-primary w-36 text-lg">
-              Valider
+              Mettre à jour
             </button>
           </div>
         </div>
