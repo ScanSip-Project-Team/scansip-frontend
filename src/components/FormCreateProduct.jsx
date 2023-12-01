@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import baseApiURL from "../api";
+
 import imgPlaceholder from "../assets/placeholder.png";
 const FormCreateProduct = () => {
   const [name, setName] = useState("");
@@ -45,7 +47,7 @@ const FormCreateProduct = () => {
       formData.append("product_image", picture);
 
       const response = await axios.post(
-        "http://localhost:3000/admin/products/new",
+        `${baseApiURL}/admin/products/new`,
         formData,
         {
           headers: {
