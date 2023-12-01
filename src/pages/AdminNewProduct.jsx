@@ -5,10 +5,10 @@ import FormCreateProduct from "../components/FormCreateProduct";
 
 import imgPlaceholder from "../assets/placeholder.png";
 
-const AdminNewProduct = () => {
+const AdminNewProduct = ({ setAdminToken }) => {
   return (
     <>
-      <Header />
+      <Header setAdminToken={setAdminToken} />
       <div className="container">
         <h1 className="border-b border-solid border-black p-6 text-3xl">
           Créer un produit

@@ -24,6 +24,8 @@ import AdminNewProduct from "./pages/AdminNewProduct";
 // Import Assets
 import "./App.css";
 import AdminUpdateProduct from "./Pages/AdminUpdateProduct";
+import AdminSignUp from "./Pages/AdminSignUp";
+import AdminSignIn from "./Pages/AdminSignIn";
 
 library.add(
   faChevronDown,
@@ -37,6 +39,7 @@ function App() {
   //Yohann : J'ai déplacer deux states ici pour récuperer leurs informations sur ma page billing, si besoin d'info me contacter
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const [adminToken, setAdminToken] = useState("");
 
   return (
     <Router>
@@ -59,9 +62,48 @@ function App() {
         />
 
         <Route path="/paiement" element={<UserPaiement />} />
-        <Route path="/admin/orders" element={<Orders />} />
-        <Route path="/admin/products" element={<AdminProducts />} />
-        <Route path="/admin/new-product" element={<AdminNewProduct />} />
+        <Route
+          path="/admin/signup"
+          element={
+            <AdminSignUp
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+        <Route
+          path="/admin/signin"
+          element={
+            <AdminSignIn
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <Orders adminToken={adminToken} setAdminToken={setAdminToken} />
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <AdminProducts
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+        <Route
+          path="/admin/new-product"
+          element={
+            <AdminNewProduct
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
         {/* page de test SAMUEL */}
         <Route path="/lab" element={<Lab />} />
         <Route path="/orders" element={<Orders />} />

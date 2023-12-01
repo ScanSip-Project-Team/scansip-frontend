@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OrderComponent from "../components/OrderComponent";
 import OrderComponentDelivered from "../components/OrderComponentDelivered";
 import Header from "../components/Header";
+import Cookies from "js-cookie";
 
 //Import Assets
 
-const Orders = () => {
+const Orders = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [isOrderInProgress, setIsOrderInProgress] = useState(true);
@@ -31,8 +32,17 @@ const Orders = () => {
         console.log(error);
       }
     };
-    fetchData();
-  }, [isOrderInProgress, refresh]);
+
+    if (!adminToken) {
+      if (Cookies.get("scanSipToken")) {
+        setAdminToken(Cookies.get("scanSipToken"));
+      } else {
+        navigate("/admin/signin");
+      }
+    } else {
+      fetchData();
+    }
+  }, [isOrderInProgress, refresh, adminToken]);
 
   // {
   //   setInterval(() => {
@@ -41,6 +51,7 @@ const Orders = () => {
   //     console.log("refresh! " + counter);
   //   }, 30000);
   // }
+
   if (!token) {
     return navigate("/home");
   } else {
@@ -48,7 +59,7 @@ const Orders = () => {
       <p>Loading ...</p>
     ) : (
       <>
-        <Header />
+        <Header setAdminToken={setAdminToken} />
         <div className="container m-auto h-screen">
           <h1 className="border-b border-solid border-black p-6 text-3xl">
             Service 🔥
