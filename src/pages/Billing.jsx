@@ -1,19 +1,46 @@
 // Import Package
-import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import axios from "axios";
 
-const Billing = ({ cart, total }) => {
+const Billing = () => {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [total, setTotal] = useState();
+
+  const [delay, setDelay] = useState(1);
+
   const navigate = useNavigate();
 
+  let order_id = useParams();
+
+  order_id = order_id.id;
+
   useEffect(() => {
-    if (total === 0) {
-      navigate("/home");
-    }
+    //   // const fetchDelay = async () => {
+    //   //   const { data } = await axios.get("http://localhost:3000/delay");
+    //   //   setDelay(data.minutes_delay);
+    //   // };
+    //   // fetchDelay();
+
+    const fetchData = async () => {
+      const response = await axios.get(
+        `http://localhost:3000/orders/${order_id}`,
+      );
+      // console.log(response.data);
+      setData(response.data);
+      setTotal(response.data.total_price);
+      setIsLoading(false);
+      if (total === 0) {
+        navigate("/home");
+      }
+    };
+    fetchData();
   }, [total]);
 
-  console.log(cart);
+  console.log(data);
 
   // fonction pour le pdf
   const pdfRef = useRef();
@@ -48,13 +75,15 @@ const Billing = ({ cart, total }) => {
   };
   // fonction pour le pdf
 
-  return (
+  return isLoading && !total ? (
+    <p>Loading page...</p>
+  ) : (
     <section ref={pdfRef}>
       <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
         <div className="w-40">
           <p className="mb-3">Merci d'avoir passé commande !</p>
-          <p>N° Commande :</p>
-          <p>Temps d'attente : </p>
+          <p>N° Commande : {data.order_number} </p>
+          <p>Temps d'attente : {delay} minutes</p>
         </div>
         <div className="absolute bottom-0 right-3 flex items-end ">
           <img
@@ -82,19 +111,19 @@ const Billing = ({ cart, total }) => {
 
         <div className="mb-5">
           <div className="ml-5 mr-5">
-            {cart.map((elem) => {
-              // console.log(elem);
-              return (
-                <div key={elem._id} className="flex justify-between">
-                  <span>
-                    {elem.product_name} x{elem.quantity}
-                  </span>
-                  <span>{elem.product_price} €</span>
-                </div>
-              );
-            })}
-            {/* <span>Nom de produit x quantité</span>
-            <span>prix + €</span> */}
+            <div className="flex flex-col">
+              {data.product_list.map((elem) => {
+                // console.log(elem);
+                return (
+                  <div key={elem.product._id} className="flex justify-between">
+                    <span>
+                      {elem.product.product_name} x{elem.quantity_cart}
+                    </span>
+                    <span>{elem.product.product_price} €</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 

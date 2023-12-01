@@ -34,6 +34,9 @@ export default {
       width: {
         available: "-webkit-fill-available",
       },
+      height: {
+        available: "-webkit-fill-available",
+      },
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],
