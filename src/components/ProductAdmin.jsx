@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "./Button";
+
+import { Link } from "react-router-dom";
+
 const ProductAdmin = ({ product }) => {
   const handleUpdatekBtn = () => {
     console.log("UPDATE!");
@@ -19,12 +22,14 @@ const ProductAdmin = ({ product }) => {
         <span>{product.product_price.toFixed(2)} €</span>
       </div>
       <div className="flex flex-col gap-2">
-        <Button
-          func={handleUpdatekBtn}
-          elementId={product._id}
-          className="rounded-full bg-black px-4 py-1 text-white"
-          text="Update"
-        />
+        <Link to="/admin/update-product" state={{ product: product }}>
+          <Button
+            func={handleUpdatekBtn}
+            elementId={product._id}
+            className="rounded-full bg-black px-4 py-1 text-white"
+            text="Update"
+          />
+        </Link>
         <Button
           func={handleDeletekBtn}
           elementId={product._id}

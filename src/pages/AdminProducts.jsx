@@ -37,7 +37,7 @@ const AdminProducts = () => {
             <h2 className="text-bold mb-3 text-xl">Mes Softs</h2>
             <div className="flex flex-col">
               {data.products
-                .filter((element) => element.product_category === "Softs")
+                .filter((element) => element.product_category === "Soft")
                 .map((product) => {
                   return <ProductAdmin key={product._id} product={product} />;
                 })}
@@ -67,7 +67,7 @@ const AdminProducts = () => {
             <h2 className="text-bold mb-3 text-xl">Mes Cocktails</h2>
             <div className="flex flex-col">
               {data.products
-                .filter((element) => element.product_category === "Cocktails")
+                .filter((element) => element.product_category === "Coktails")
                 .map((product) => {
                   return <ProductAdmin key={product._id} product={product} />;
                 })}
