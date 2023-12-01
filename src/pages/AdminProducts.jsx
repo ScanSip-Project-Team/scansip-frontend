@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import ProductAdmin from "../components/ProductAdmin";
 import baseApiURL from "../api";
+import Cookies from "js-cookie";
+import FlashScreen from "./FlashScreen";
 
-const AdminProducts = () => {
+const AdminProducts = ({ adminToken, setAdminToken }) => {
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
 
@@ -19,13 +24,23 @@ const AdminProducts = () => {
         console.log(error);
       }
     };
-    fetchData();
-  }, []);
+
+    if (!adminToken) {
+      if (Cookies.get("scanSipToken")) {
+        setAdminToken(Cookies.get("scanSipToken"));
+      } else {
+        navigate("/admin/signin");
+      }
+    } else {
+      fetchData();
+    }
+  }, [adminToken]);
+
   return isLoading ? (
-    <p>LOADING</p>
+    <FlashScreen />
   ) : (
     <>
-      <Header />
+      <Header setAdminToken={setAdminToken} />
       <div className="container">
         <h1 className="mb-6 border-b border-solid border-black p-6 text-3xl">
           Mes produits ({data.count})
@@ -37,7 +52,7 @@ const AdminProducts = () => {
             <h2 className="text-bold mb-3 text-xl">Mes Softs</h2>
             <div className="flex flex-col">
               {data.products
-                .filter((element) => element.product_category === "Softs")
+                .filter((element) => element.product_category === "Soft")
                 .map((product) => {
                   return <ProductAdmin key={product._id} product={product} />;
                 })}
@@ -67,7 +82,7 @@ const AdminProducts = () => {
             <h2 className="text-bold mb-3 text-xl">Mes Cocktails</h2>
             <div className="flex flex-col">
               {data.products
-                .filter((element) => element.product_category === "Cocktails")
+                .filter((element) => element.product_category === "Coktails")
                 .map((product) => {
                   return <ProductAdmin key={product._id} product={product} />;
                 })}
