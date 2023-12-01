@@ -15,7 +15,11 @@ export default {
         "grey-232": "#E8E8E8",
         black: "#000",
         greenScanSip: "#18C166",
-        greyAddArticlesButton: "#F3F3F3"
+        greyAddArticlesButton: "#F3F3F3",
+        darkGrey: "#363636",
+      },
+      borderRadius: {
+        5: "5px",
       },
       spacing: {
         "5px": "5px",
@@ -33,9 +37,11 @@ export default {
       },
       width: {
         available: "-webkit-fill-available",
+        300: "300px",
       },
       height: {
         available: "-webkit-fill-available",
+        7.5: "30px",
       },
     },
   },

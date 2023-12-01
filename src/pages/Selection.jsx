@@ -1,8 +1,7 @@
 // Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { Anchor } from "antd";
+import { useNavigate } from "react-router-dom";
 
 // Yohann code ----------------
 //Import components
@@ -115,6 +114,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
       try {
         const response = await axios.get("http://localhost:3000/products");
         setData(response.data);
+        console.log(response.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

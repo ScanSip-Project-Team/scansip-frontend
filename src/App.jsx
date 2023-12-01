@@ -24,6 +24,9 @@ import AdminNewProduct from "./pages/AdminNewProduct";
 
 // Import Assets
 import "./App.css";
+import AdminUpdateProduct from "./Pages/AdminUpdateProduct";
+import AdminSignUp from "./Pages/AdminSignUp";
+import AdminSignIn from "./Pages/AdminSignIn";
 
 library.add(
   faChevronDown,
@@ -36,6 +39,7 @@ library.add(
 function App() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const [adminToken, setAdminToken] = useState("");
 
   return (
     <Router>
@@ -53,7 +57,6 @@ function App() {
           }
         />
         <Route path="/billing/:id" element={<Billing />} />
-
         <Route path="/paiement" element={<UserPaiement />} />
         <Route
           path="/cart"
@@ -69,10 +72,57 @@ function App() {
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/new-product" element={<AdminNewProduct />} />
+        <Route
+          path="/admin/signup"
+          element={
+            <AdminSignUp
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+
+        <Route
+          path="/admin/signin"
+          element={
+            <AdminSignIn
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <Orders adminToken={adminToken} setAdminToken={setAdminToken} />
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <AdminProducts
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+        <Route
+          path="/admin/new-product"
+          element={
+            <AdminNewProduct
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
         {/* page de test SAMUEL */}
         <Route path="/lab" element={<Lab />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
+        <Route
+          path="/admin/update-product"
+          element={<AdminUpdateProduct />}
+        ></Route>
       </Routes>
     </Router>
   );

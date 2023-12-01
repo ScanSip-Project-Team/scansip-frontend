@@ -2,22 +2,25 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-import baseApiURL from "../api";
+import { useLocation } from "react-router-dom";
 
 import imgPlaceholder from "../assets/placeholder.png";
 const FormCreateProduct = () => {
-  const [name, setName] = useState("");
+  const location = useLocation();
+  const { product } = location.state;
+  console.log("product >>>>", product);
+
+  const [name, setName] = useState(product.product_name);
   const [picture, setPicture] = useState();
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [energy, setEnergy] = useState("");
-  const [sugar, setSugar] = useState("");
-  const [proteins, setProteins] = useState("");
-  const [salt, setSalt] = useState("");
-  const [fat, setFat] = useState("");
-  const [fibers, setFibers] = useState("");
+  const [description, setDescription] = useState(product.product_description);
+  const [price, setPrice] = useState(product.product_price);
+  const [category, setCategory] = useState(product.product_category);
+  const [energy, setEnergy] = useState(product.nutritional_values.energy);
+  const [sugar, setSugar] = useState(product.nutritional_values.sugar);
+  const [proteins, setProteins] = useState(product.nutritional_values.proteins);
+  const [salt, setSalt] = useState(product.nutritional_values.salt);
+  const [fat, setFat] = useState(product.nutritional_values.fat);
+  const [fibers, setFibers] = useState(product.nutritional_values.fibers);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorImage, setErrorImage] = useState("");
   const [errorFields, setErrorFields] = useState("");
@@ -47,7 +50,7 @@ const FormCreateProduct = () => {
       formData.append("product_image", picture);
 
       const response = await axios.post(
-        `${baseApiURL}/admin/products/new`,
+        "http://localhost:3000/admin/products/new",
         formData,
         {
           headers: {
@@ -147,7 +150,7 @@ const FormCreateProduct = () => {
               className="rounded bg-black p-3 text-center text-white"
               htmlFor="picture"
             >
-              Ajouter une photo
+              Modifier la photo du produit
             </label>
             <input
               onChange={(event) => {
@@ -176,7 +179,7 @@ const FormCreateProduct = () => {
               className="rounded border border-green-300 p-2 outline-0"
               type="text"
               id="name"
-              placeholder="Ajoutez un nom de produit"
+              //   placeholder={product.product_name}
               value={name}
             />
           </div>
@@ -316,10 +319,38 @@ const FormCreateProduct = () => {
                 id="category"
               >
                 <option value="">--Choisissez une catégorie--</option>
-                <option value="Snacks">Snacks</option>
-                <option value="Softs">Softs</option>
-                <option value="Alcools">Alcools</option>
-                <option value="Cocktails">Cocktails</option>
+
+                {product.product_category === "Snacks" ? (
+                  <option value="Snacks" selected>
+                    Snacks
+                  </option>
+                ) : (
+                  <option value="Snacks">Snacks</option>
+                )}
+
+                {product.product_category === "Soft" ? (
+                  <option value="Softs" selected>
+                    Softs
+                  </option>
+                ) : (
+                  <option value="Softs">Softs</option>
+                )}
+
+                {product.product_category === "Alcools" ? (
+                  <option value="Alcools" selected>
+                    Alcools
+                  </option>
+                ) : (
+                  <option value="Alcools">Alcools</option>
+                )}
+
+                {product.product_category === "Coktails" ? (
+                  <option value="Cocktails" selected>
+                    Cocktails
+                  </option>
+                ) : (
+                  <option value="Cocktails">Cocktails</option>
+                )}
               </select>
             </div>
           </div>
