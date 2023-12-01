@@ -25,7 +25,7 @@
 }
 .btn-black {
   background-color: #000;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   border-radius: 10px;
   font-size: 14px;
   color: white;
@@ -52,6 +52,30 @@
   /* position: absolute; */
 /* top: 120px; */
 /* }  */
+.title-category {
+  color: #000;
+  /* font-family: Poppins; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.title-product {
+  color: #000;
+  /* font-family: Roboto; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.price-product {
+  color: #000;
+  /* font-family: Roboto; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
 
 @keyframes intro {
   0% {
