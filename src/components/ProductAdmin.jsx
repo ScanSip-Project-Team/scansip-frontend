@@ -2,12 +2,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "./Button";
 
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import ModalDelete from "./ModalDelete";
 
 const ProductAdmin = ({ product }) => {
+  const [visible, setVisible] = useState(false);
+
   const handleUpdatekBtn = () => {
     console.log("UPDATE!");
   };
   const handleDeletekBtn = () => {
+    setVisible(true);
+    console.log("visible >>>", visible);
+    console.log("product._id >>>>", product._id);
+
     console.log("DELETE!");
   };
   return (
@@ -37,6 +45,8 @@ const ProductAdmin = ({ product }) => {
           text="Delete"
         />
       </div>
+
+      {visible && <ModalDelete setVisible={setVisible} id={product._id} />}
     </div>
   );
 };
