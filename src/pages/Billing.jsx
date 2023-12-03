@@ -19,11 +19,12 @@ const Billing = () => {
   order_id = order_id.id;
 
   useEffect(() => {
-    //   // const fetchDelay = async () => {
-    //   //   const { data } = await axios.get("http://localhost:3000/delay");
-    //   //   setDelay(data.minutes_delay);
-    //   // };
-    //   // fetchDelay();
+    const fetchDelay = async () => {
+      const { data } = await axios.get("http://localhost:3000/delay");
+      console.log(data.minutes_delay);
+      setDelay(data.minutes_delay);
+    };
+    fetchDelay();
 
     const fetchData = async () => {
       const response = await axios.get(
@@ -31,9 +32,10 @@ const Billing = () => {
       );
       // console.log(response.data);
       setData(response.data);
-      setTotal(response.data.total_price);
+      setTotal(`${response.data.total_price + 2}`);
       setIsLoading(false);
-      if (total === 0) {
+
+      if (total === 0 || total === 2) {
         navigate("/home");
       }
     };
@@ -41,6 +43,7 @@ const Billing = () => {
   }, [total]);
 
   console.log(data);
+  // console.log(delay);
 
   // fonction pour le pdf
   const pdfRef = useRef();
@@ -80,8 +83,8 @@ const Billing = () => {
   ) : (
     <section ref={pdfRef}>
       <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
-        <div className="w-40">
-          <p className="mb-3">Merci d'avoir passé commande !</p>
+        <div className="w-70">
+          <p className="mb-3 w-40">Merci d'avoir passé commande !</p>
           <p>N° Commande : {data.order_number} </p>
           <p>Temps d'attente : {delay} minutes</p>
         </div>
@@ -102,11 +105,11 @@ const Billing = () => {
       <div>
         <div className="mb-2 ml-5 mr-5 flex justify-between">
           <span className="font-bold">Total </span>
-          <span>{total}€</span>
+          <span>{`${total}`} €</span>
         </div>
 
-        <div className="mb-2 ml-3 mr-3 flex justify-center border border-l-0 border-r-0">
-          <p className="font-bold">Détail de votre facture</p>
+        <div className="mb-2 ml-3 mr-3 flex justify-center border-b-2 pb-2">
+          <p className=" font-bold">Détail de votre facture</p>
         </div>
 
         <div className="mb-5">
@@ -123,6 +126,10 @@ const Billing = () => {
                   </div>
                 );
               })}
+              <div className="mt-5 flex justify-between font-bold">
+                <span>Frais de service</span>
+                <span>2 €</span>
+              </div>
             </div>
           </div>
         </div>
@@ -137,16 +144,16 @@ const Billing = () => {
           </button>
         </div>
 
-        <div className="mb-2 ml-3 mr-3 flex justify-center border border-l-0 border-r-0">
+        <div className="ml-3 mr-3 flex justify-center border-b-2 pb-2">
           <p className="font-bold ">Paiement</p>
         </div>
 
-        <div className="mb-5 ml-5 mr-5 border-b">
-          <p className="mb-2 text-sm">
+        <div className="mb-5 border-b-2 ">
+          <p className="mb-2 ml-5 mr-5 text-sm ">
             <span className="font-bold">
-              Un paiement de {total}€ a été éffectué avec succès&nbsp;
+              Un paiement de {total}€ a été éffectué avec succès.&nbsp;
             </span>
-            Ce paiement devrait bientôt apparaître sur votre relevé bancaire
+            Ce paiement devrait bientôt apparaître sur votre relevé bancaire.
           </p>
         </div>
 

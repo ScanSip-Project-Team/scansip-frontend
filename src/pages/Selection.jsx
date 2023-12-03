@@ -12,6 +12,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState("Softs");
+  const [emptyCart, setEmptyCart] = useState(false);
 
   const snacksTab = [];
   const softsTab = [];
@@ -25,7 +26,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
 
   const handleNavigate = () => {
     if (!total) {
-      alert("Panier vide !");
+      setEmptyCart(true);
     } else {
       navigate("/cart");
     }
@@ -58,6 +59,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   // });
 
   const handleClickPlus = (item) => {
+    setEmptyCart(false);
     // je vérifie si le produit est déjà dans le panier
     const productToFind = cart.find((e) => e._id === item._id);
 
@@ -187,7 +189,8 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
     <p>Loading...</p>
   ) : (
     // SELECTION BANNER
-    <div className=" flex w-screen flex-col items-center justify-center scroll-smooth  bg-white">
+    <div className=" flex w-screen flex-col items-center justify-center scroll-smooth bg-white">
+      {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
       <div className="h-100 w-screnn fixed top-0 flex w-full items-center justify-center gap-2  bg-white">
         <div className="my-6 flex w-11/12 items-center justify-center gap-2   bg-white">
           <a
@@ -250,7 +253,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
 
           {softsTab.map((item) => (
             <div
-              className="flex  items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+              className=" flex  items-center justify-start border border-gray-300 bg-[#F3F3F3]"
               key={item._id}
             >
               <div className="w-1/5">
@@ -304,7 +307,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         <div id="snacks" className="w-11/12  ">
           <div className="flex justify-center ">
             <div className="flex w-full justify-start ">
-              <div className="my-6 flex  items-center gap-2   font-bold">
+              <div className="my-6 flex  items-center gap-2 font-bold">
                 <p>Découvrez nos Snacks !</p>
                 <img src="../src/assets/HotDog.png" alt="hotdog" />
               </div>
@@ -437,7 +440,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
           </div>
           {cocktailsTab.map((item) => (
             <div
-              className="flex  items-center justify-start border border-gray-300 bg-[#F3F3F3]"
+              className="relative flex items-center justify-start border border-gray-300 bg-[#F3F3F3]"
               key={item._id}
             >
               <div className="w-1/5 pl-2">
@@ -490,7 +493,8 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         </div>
       </section>
 
-      <div className="fixed bottom-0 flex w-full justify-center  bg-white">
+      <div className="fixed bottom-0 flex w-full flex-col items-center bg-white">
+        {emptyCart ? <span>Votre panier est vide !</span> : ""}
         <input
           className=" my-4 w-11/12 rounded  bg-black p-1.5 text-white"
           type="submit"
@@ -500,10 +504,6 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
           // Yohann code -----------------------------
         />
       </div>
-
-      {/* Yohann code ----------------------------- */}
-      {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
-      {/* Yohann code ----------------------------- */}
     </div>
   );
 };

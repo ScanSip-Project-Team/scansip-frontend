@@ -36,7 +36,7 @@ const Modal = ({ setOpenModal, productID, tab }) => {
   }
 
   return (
-    <div className=" absolute left-0 top-0 h-screen w-screen bg-slate-500 bg-opacity-25">
+    <div className="fixed top-0 z-20 h-screen w-screen bg-slate-500 bg-opacity-25">
       {data && (
         <div className="z-10 m-4 rounded-lg bg-white pb-5 pl-5 pr-5">
           <div className="mr-1 flex justify-end">
@@ -70,8 +70,8 @@ const Modal = ({ setOpenModal, productID, tab }) => {
                     marginLeft: elem.type === "sugar" ? "10px" : "",
                   }}
                 >
-                  <span>{elem.type}</span>
-                  <span className="pr-5">{elem.value}</span>
+                  <span className="pl-3">{elem.type}</span>
+                  <span className="pr-3 ">{elem.value}</span>
                 </div>
               </div>
             );
