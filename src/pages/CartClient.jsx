@@ -5,6 +5,7 @@ import axios from "axios";
 
 //Import Components
 import Button from "../components/Button";
+import BreadCrumb from "../components/Breadcrumb";
 
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
@@ -107,15 +108,14 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   };
 
   return (
-    <section className="flex w-screen flex-col ">
-      <div className="mb-4">
-        <Button
-          text={`Retourner à ma commande`}
-          className={" p-1.5 font-bold text-black"}
-          disabled={isDisabled}
-          func={handleNavigateToHome}
+    // <section className="flex w-screen flex-col ">
+    <main className="padding-container flex h-screen flex-col items-center">
+      <nav className="self-start">
+        <BreadCrumb
+          text={"Retourner à ma commande"}
+          func={() => navigate("/home")}
         />
-      </div>
+      </nav>
 
       <div className="mb-7 flex justify-center">
         <p className="font-bold">Mon panier</p>
@@ -172,13 +172,14 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
         <Button
           text={"Ajouter des articles"}
           className={
-            "w-11/12 rounded bg-greyAddArticlesButton p-1.5 text-black"
+            "bg-greyAddArticlesButton w-11/12 rounded p-1.5 text-black"
           }
           func={handleNavigateToHome}
           disabled={isDisabled}
         />
       </div>
-    </section>
+      {/* </section> */}
+    </main>
   );
 };
 
