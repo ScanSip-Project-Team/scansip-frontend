@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 
 import Button from "../components/Button";
-import FormCreateProduct from "../components/FormCreateProduct";
+import FormCreateProduct from "../components/Form/FormCreateProduct";
 
 import imgPlaceholder from "../assets/placeholder.png";
 

@@ -21,6 +21,7 @@ import CartClient from "./Pages/CartClient";
 import Lab from "./pages/Lab";
 import AdminProducts from "./pages/AdminProducts";
 import AdminNewProduct from "./pages/AdminNewProduct";
+import AdminHistory from "./pages/AdminHistory";
 
 // Import Assets
 import "./App.css";
@@ -69,28 +70,6 @@ function App() {
             />
           }
         />
-        <Route path="/admin/orders" element={<Orders />} />
-        <Route path="/admin/products" element={<AdminProducts />} />
-        <Route path="/admin/new-product" element={<AdminNewProduct />} />
-        <Route
-          path="/admin/signup"
-          element={
-            <AdminSignUp
-              adminToken={adminToken}
-              setAdminToken={setAdminToken}
-            />
-          }
-        />
-
-        <Route
-          path="/admin/signin"
-          element={
-            <AdminSignIn
-              adminToken={adminToken}
-              setAdminToken={setAdminToken}
-            />
-          }
-        />
         <Route
           path="/admin/orders"
           element={
@@ -115,14 +94,48 @@ function App() {
             />
           }
         />
-        {/* page de test SAMUEL */}
-        <Route path="/lab" element={<Lab />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
         <Route
           path="/admin/update-product"
-          element={<AdminUpdateProduct />}
-        ></Route>
+          element={
+            <AdminUpdateProduct
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+        <Route
+          path="/admin/history"
+          element={
+            <AdminHistory
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+        <Route
+          path="/admin/signup"
+          element={
+            <AdminSignUp
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+
+        <Route
+          path="/admin/signin"
+          element={
+            <AdminSignIn
+              adminToken={adminToken}
+              setAdminToken={setAdminToken}
+            />
+          }
+        />
+
+        {/* page de test SAMUEL */}
+        <Route path="/lab" element={<Lab />} />
+
+        <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
       </Routes>
     </Router>
   );
