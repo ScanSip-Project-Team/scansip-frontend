@@ -1,10 +1,10 @@
 import { useState } from "react";
 import ProductOrder from "./ProductOrder";
-import SumUpOrderDelivered from "./SumUpOrderDelivered";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SumUpOrderHistory from "./SumUpOrderHistory";
 
-const OrderComponentDelivered = ({
+const OrderComponentHistory = ({
   element,
 
   setIsOrderUpdated,
@@ -50,7 +50,7 @@ const OrderComponentDelivered = ({
         })}
       </div>
 
-      <SumUpOrderDelivered
+      <SumUpOrderHistory
         element={element}
         setIsOrderUpdated={setIsOrderUpdated}
         isOrderUpdated={isOrderUpdated}
@@ -58,4 +58,4 @@ const OrderComponentDelivered = ({
     </div>
   );
 };
-export default OrderComponentDelivered;
+export default OrderComponentHistory;

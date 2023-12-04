@@ -46,49 +46,87 @@
   font-weight: 600;
 }
 
-/* .animate-block {
-  transition: all 0.4s ease-in-out;
-  animation: widthBlock infinite 1s alternate-reverse linear;
-  /* position: absolute; */
-/* top: 120px; */
-/* }  */
+.title-category {
+  color: #000;
+  /* font-family: Poppins; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.title-product {
+  color: #000;
+  /* font-family: Roboto; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.price-product {
+  color: #000;
+  /* font-family: Roboto; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
 
-@keyframes intro {
-  0% {
-    background-color: var(--color-primary);
+.scan {
+  position: absolute;
+  /* transition: all 2s cubic-bezier(0.445, 0.05, 0.55, 0.95); */
+  transition: all 1s cubic-bezier(0.88, 0.02, 0.98, 0.99);
+  animation: introScan 1s 0.5s forwards;
+  bottom: 10px;
+  /* right: 0px; */
+  opacity: 0;
+}
+.sip {
+  position: absolute;
+  transition: all 2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  animation: introSip 2s 0.8s forwards;
+  opacity: 0;
+}
+@keyframes introScan {
+  from {
+    right: 250px;
+    opacity: 0;
   }
-  25% {
-    background-color: var(--color-primary);
-  }
-  50% {
-  }
-  75% {
-    background-color: white;
-  }
-  100% {
-    background-color: white;
+  to {
+    right: 0;
+    opacity: 1;
   }
 }
 
-@keyframes widthBlock {
+@keyframes introSip {
+  from {
+    top: -40px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.order-light {
+  transition: all 0.4s ease-in-out;
+  animation: lightUp 1s 2 alternate-reverse ease-in-out;
+}
+
+@keyframes lightUp {
   0% {
-    /* top: -20px; */
-    width: 2px;
-    background-color: var(--color-primary);
+    box-shadow: none;
   }
   25% {
-    /* top: 10px; */
-    background-color: var(--color-primary);
+    box-shadow: inset 0px 0px 40px 1px rgba(6, 193, 103, 0.254);
   }
   50% {
-    /* top: 50px; */
+    box-shadow: none;
   }
   75% {
-    /* top: 80px; */
-    background-color: white;
+    box-shadow: inset 0px 0px 20px 1px rgba(6, 193, 103, 0.254);
   }
   100% {
-    /* top: 120px; */
-    background-color: white;
+    box-shadow: none;
   }
 }

@@ -4,7 +4,9 @@ const Button = ({ func, elementId, className, text, disabled, type }) => {
       type={type}
       disabled={disabled}
       onClick={() => {
-        func(elementId);
+        if (func) {
+          func(elementId);
+        }
       }}
       className={`m-auto ${className}`}
     >

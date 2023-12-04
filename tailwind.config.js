@@ -43,6 +43,9 @@ export default {
         available: "-webkit-fill-available",
         7.5: "30px",
       },
+      rounded: {
+        "10px": "10px",
+      },
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],

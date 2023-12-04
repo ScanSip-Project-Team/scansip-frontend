@@ -66,10 +66,13 @@ const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
       onSubmit={handleSubmit}
       className={`align-center flex h-full w-full flex-col justify-between`}
     >
-      <PaymentElement id="payment-element" />
+      <div className="h-available flex flex-col justify-center">
+        <PaymentElement id="payment-element" />
+      </div>
+
       {/* {message && <div id="payment-message">{message}</div>} */}
       <section>
-        <div className="m border-y border-grey-232">
+        <div className=" border-y border-grey-232">
           <ul>
             <li className="w-available flex justify-between">
               <p>Sous-total</p>
@@ -87,14 +90,17 @@ const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
         </div>
 
         {message && (
-          <div id="payment-message" className="text-400 text-xs text-red-600">
+          <div
+            id="payment-message"
+            className="text-400 h-4 text-xs text-red-600 "
+          >
             {message}
           </div>
         )}
         <button
           disabled={isProcessing || !stripe || !elements}
           id="submit"
-          className="btn-black w-available mx-2.5 my-5  border-y border-grey-232 px-3"
+          className="btn-black w-available mx-2.5 my-5  border-y border-grey-232 px-3 py-2"
         >
           <span id="button-text">
             {isProcessing ? "Processing ... " : "Pay now"}

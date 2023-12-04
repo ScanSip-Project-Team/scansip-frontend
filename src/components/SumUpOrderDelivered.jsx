@@ -1,18 +1,28 @@
 import { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "./Button";
 import baseApiURL from "../api";
 const SumUpOrderDelivered = ({
   element,
-  setIsOrderInProgress,
-  isOrderInProgress,
+  setIsOrderUpdated,
+  isOrderUpdated,
 }) => {
-  const handleOrderInProgress = async (id) => {
+  const handleUpdateOrder = async (id) => {
     try {
-      const status = "in progress";
-      const response = await axios.put(`${baseApiURL}/orders/${id}/${status}`);
+      const key = "order_status";
+      const value = "in progress";
+      toast.promise(axios.put(`${baseApiURL}/orders/${id}/${key}/${value}`), {
+        loading: "...",
+        success: <b>La commande a été renvoyée en service !</b>,
+        error: (
+          <b>La commande n'a pas pu être renvoyée en service! Ressayez!.</b>
+        ),
+      });
 
-      setIsOrderInProgress(!isOrderInProgress);
+      // const response = await axios.put(`${baseApiURL}/orders/${id}/${status}`);
+
+      setIsOrderUpdated(!isOrderUpdated);
     } catch (error) {
       console.log(error);
     }
@@ -23,6 +33,9 @@ const SumUpOrderDelivered = ({
       className="w-3/3 flex h-auto flex-col 
       gap-6"
     >
+      <div>
+        <Toaster />
+      </div>
       <h3>Récapitulatif :</h3>
       <div className="flex flex-row justify-between gap-2 p-3">
         <div className="flex flex-col gap-3">
@@ -48,7 +61,7 @@ const SumUpOrderDelivered = ({
         </div>
       </div>
       <Button
-        func={handleOrderInProgress}
+        func={handleUpdateOrder}
         elementId={element._id}
         className={"btn-black"}
         text={"Renvoyer en service"}
