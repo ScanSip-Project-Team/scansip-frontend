@@ -81,7 +81,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         if (snack === undefined) {
           snacksTab.push(data[m]);
         }
-      } else if (data[m].product_category === "Soft") {
+      } else if (data[m].product_category === "Softs") {
         const soft = softsTab.find((e) => e._id === data[m]._id);
         if (soft === undefined) {
           softsTab.push(data[m]);
@@ -91,7 +91,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         if (alcool === undefined) {
           alcoolsTab.push(data[m]);
         }
-      } else if (data[m].product_category === "Coktails") {
+      } else if (data[m].product_category === "Cocktails") {
         const cocktail = cocktailsTab.find((e) => e._id === data[m]._id);
         if (cocktail === undefined) {
           cocktailsTab.push(data[m]);
