@@ -25,16 +25,16 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
       }
     };
 
-    if (!adminToken) {
-      if (Cookies.get("scanSipToken")) {
-        setAdminToken(Cookies.get("scanSipToken"));
-      } else {
-        navigate("/admin/signin");
-      }
-    } else {
-      fetchData();
-    }
-  }, [adminToken]);
+    // if (!adminToken) {
+    //   if (Cookies.get("scanSipToken")) {
+    //     setAdminToken(Cookies.get("scanSipToken"));
+    //   } else {
+    //     navigate("/admin/signin");
+    //   }
+    // } else {
+    fetchData();
+    // }
+  }, []);
 
   return isLoading ? (
     // <FlashScreen />
