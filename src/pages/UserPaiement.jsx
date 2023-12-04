@@ -9,6 +9,7 @@ import axios from "axios";
 // Import Components
 import BreadCrumb from "../components/Breadcrumb";
 import PaiementForm from "../components/PaiementForm";
+import baseApiURL from "../api";
 
 // Import Assets
 import timer from "./../assets/timer.svg";
@@ -81,17 +82,17 @@ const UserPaiement = ({ total }) => {
 
   useEffect(() => {
     const fetchDelay = async () => {
-      const { data } = await axios.get("http://localhost:3000/delay");
+      const { data } = await axios.get(`${baseApiURL}/delay`);
       setDelay(data.minutes_delay);
     };
     fetchDelay();
 
-    fetch("http://localhost:3000/pay/config").then(async (r) => {
+    fetch(`${baseApiURL}/pay/config`).then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
 
-    fetch(`http://localhost:3000/pay/create-payment-intent/${order_id}`, {
+    fetch(`${baseApiURL}/pay/create-payment-intent/${order_id}`, {
       method: "POST",
       body: JSON.stringify(),
     }).then(async (result) => {

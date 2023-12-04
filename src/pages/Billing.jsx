@@ -6,6 +6,9 @@ import jsPDF from "jspdf";
 import axios from "axios";
 import Loader from "../components/Loader";
 
+
+import baseApiURL from "../api";
+
 const Billing = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +31,7 @@ const Billing = () => {
 
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:3000/orders/${order_id}`,
+        `${baseApiURL}/orders/${order_id}`,
       );
       // console.log(response.data);
       setData(response.data);

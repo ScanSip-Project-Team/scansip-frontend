@@ -6,9 +6,12 @@ import Cookies from "js-cookie";
 
 //Import Components
 import Button from "../components/Button";
+import baseApiURL from "../api";
 
 // Import Asset
 import logo from "../assets/logo.svg";
+
+
 
 const AdminSignUp = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
@@ -29,7 +32,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
       controlInput();
       console.log(alert.input);
       if (alert.input === "") {
-        const response = await axios.post(`http://localhost:3000/admin/login`, {
+        const response = await axios.post(`${baseApiURL}/admin/login`, {
           email: email,
           password: password,
         });

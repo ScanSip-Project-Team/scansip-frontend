@@ -11,6 +11,7 @@ import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
 // Yohann code ----------------
+import baseApiURL from "../api";
 
 
 const Selection = ({ setCart, cart, setTotal, total }) => {
@@ -65,7 +66,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/products");
+        const response = await axios.get(`${baseApiURL}/products`);
         setData(response.data);
         console.log(response.data);
         setIsLoading(false);
