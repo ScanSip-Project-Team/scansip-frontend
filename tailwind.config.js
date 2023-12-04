@@ -46,6 +46,10 @@ export default {
       rounded: {
         "10px": "10px",
       },
+
+      fontFamily: {
+        serif: ["Roboto"],
+      },
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],
