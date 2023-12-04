@@ -11,8 +11,6 @@ import baseApiURL from "../api";
 // Import Asset
 import logo from "../assets/logo.svg";
 
-
-
 const AdminSignUp = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
 

@@ -6,7 +6,6 @@ import jsPDF from "jspdf";
 import axios from "axios";
 import Loader from "../components/Loader";
 
-
 import baseApiURL from "../api";
 
 const Billing = () => {
@@ -30,9 +29,7 @@ const Billing = () => {
     //   // fetchDelay();
 
     const fetchData = async () => {
-      const response = await axios.get(
-        `${baseApiURL}/orders/${order_id}`,
-      );
+      const response = await axios.get(`${baseApiURL}/orders/${order_id}`);
       // console.log(response.data);
       setData(response.data);
       setTotal(response.data.total_price);
@@ -84,7 +81,7 @@ const Billing = () => {
     <Loader />
   ) : (
     <section ref={pdfRef}>
-      <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
+      <div className="bg-greenScanSip relative mb-3 flex p-4 text-white">
         <div className="w-40">
           <p className="mb-3">Merci d'avoir passé commande !</p>
           <p>N° Commande : {data.order_number} </p>

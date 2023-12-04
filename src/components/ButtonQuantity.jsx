@@ -2,7 +2,7 @@ const ButtonQuantity = ({ text, func }) => {
   return (
     <>
       <button
-        className="h-8 w-8 rounded-full bg-[#E8E8E8]"
+        className="h-[23px]  w-[25px] rounded-[20px] bg-[#E8E8E8] text-[10px] "
         onClick={() => func()}
       >
         {text}

@@ -138,7 +138,7 @@ const Orders = ({ adminToken, setAdminToken }) => {
                     (element) => element.order_status === "in progress",
                   ).length
                 }
-              </span>{" "}
+              </span>
               commandes en cours
             </h2>
 

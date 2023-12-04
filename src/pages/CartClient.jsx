@@ -6,6 +6,7 @@ import axios from "axios";
 //Import Components
 import Button from "../components/Button";
 import BreadCrumb from "../components/Breadcrumb";
+import ListProduct from "../components/ListProduct";
 
 import baseApiURL from "../api";
 
@@ -118,63 +119,32 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
           func={() => navigate("/home")}
         />
       </nav>
-
-      <div className="mb-7 flex justify-center">
+      <div className=" h m-7 flex justify-center">
         <p className="font-bold">Mon panier</p>
       </div>
-
-      <div className="flex flex-col items-center">
-        {cart.map((elem) => {
-          return (
-            <div
-              key={elem._id}
-              className="flex w-11/12 items-center justify-start border border-gray-300 bg-[#F3F3F3]"
-            >
-              <img
-                src={elem.product_image.secure_url}
-                alt=""
-                className="h-15 w-20 bg-[#F3F3F3]"
-              />
-
-              <div className="w-2/3">
-                <p>{elem.product_name}</p>
-                <p>{elem.product_price}€</p>
-              </div>
-
-              <div className="flex items-center justify-center gap-2  p-1.5">
-                {elem.quantity > 1 ? (
-                  <button
-                    className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                    onClick={() => handleClickMinus(elem)}
-                  >
-                    -
-                  </button>
-                ) : (
-                  ""
-                )}
-                <p>{elem.quantity}</p>
-                <button
-                  className="h-10 w-10 rounded-full bg-[#E8E8E8]"
-                  onClick={() => handleClickPlus(elem)}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          );
-        })}
-
+      <div className="flex w-screen flex-col items-center">
+        <ListProduct
+          data={cart}
+          cart={cart}
+          setCart={setCart}
+          setTotal={setTotal}
+          total={total}
+          // id={"softs"}
+          // icon={"../src/assets/Soft.png"}
+          // title={"Softs"}
+        />
+      </div>
+      <div className="border-lightgrey  fixed bottom-0 mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t py-6">
         <Button
           text={`Commande pour un total de ${total} €`}
-          className={"my-6 w-11/12 rounded bg-black p-1.5 text-white"}
+          className={"btn-client w-available  mx-[10px] bg-black text-white"}
           func={createOrder}
           disabled={isDisabled}
         />
-
         <Button
           text={"Ajouter des articles"}
           className={
-            "bg-greyAddArticlesButton w-11/12 rounded p-1.5 text-black"
+            "bg-greyAddArticlesButton btn-client w-available mx-[10px] text-black"
           }
           func={handleNavigateToHome}
           disabled={isDisabled}
