@@ -58,7 +58,7 @@ function App() {
           }
         />
         <Route path="/billing/:id" element={<Billing />} />
-        <Route path="/paiement" element={<UserPaiement />} />
+        <Route path="/paiement" element={<UserPaiement total={total} />} />
         <Route
           path="/cart"
           element={

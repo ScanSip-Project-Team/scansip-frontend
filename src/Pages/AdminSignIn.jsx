@@ -15,9 +15,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [alert, setAlert] = useState({ input: "", message: "" });
-
+  console.log(alert);
   const handleChange = (e, func) => {
     func(e);
     // setTimeout(controlInput(), 3300);
@@ -25,18 +24,30 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      // console.log(username);
-      const response = await axios.post(`http://localhost:3000/admin/login`, {
-        email: email,
-        password: password,
-      });
 
-      Cookies.set("scanSipToken", response.data.token, { expires: 7 });
-      setAdminToken(response.data.token);
-      navigate("/admin/orders");
+    try {
+      controlInput();
+      console.log(alert.input);
+      if (alert.input === "") {
+        const response = await axios.post(`http://localhost:3000/admin/login`, {
+          email: email,
+          password: password,
+        });
+        if (response.status === 200) {
+          Cookies.set("scanSipToken", response.data.token, { expires: 7 });
+          setAdminToken(response.data.token);
+          navigate("/admin/orders");
+        } else {
+          const alert = { input: "", message: "Utilisateur inconnu" };
+          setAlert(alert);
+        }
+      }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+      const alert = { input: "auth", message: "Erreur d'authentification" };
+      setAlert(alert);
+      setEmail("");
+      setPassword("");
     }
   };
 
@@ -51,52 +62,23 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     }
   }, [adminToken]);
 
-  //   const controlInput = () => {
-  //     if (email.length > 7) {
-  //       console.log(
-  //         email.includes("@"),
-  //         !email.includes(" "),
-  //         email.includes(".fr") !== email.includes(".com"),
-  //       );
-  //       if (
-  //         !email.includes("@") ||
-  //         email.includes(" ") ||
-  //         email.includes(".fr") !== email.includes(".com")
-  //       ) {
-  //         return setAlert({
-  //           input: "email",
-  //           message: "Veuillez rentrer une adresse valide.",
-  //         });
-  //       } else {
-  //         console.log("Present ----->  mail ok");
-  //         setAlert({ input: "", message: "" });
-  //       }
-  //     }
+  const controlInput = () => {
+    if (!email) {
+      return setAlert({
+        input: "email",
+        message: "Veuillez rentrer une adresse.",
+      });
+    } else {
+      setAlert({ input: "", message: "" });
+    }
 
-  //     // if (!password) {
-  //     //   return;
-  //     // } else if (password && password.length < 8) {
-  //     //   console.log("Absent -----> trop court");
-  //     //   setAlert({
-  //     //     input: "password",
-  //     //     message: "Le mot de passe doit contenir plus de 8 caractères.",
-  //     //   });
-  //     //   return;
-  //     // } else if (confirmPassword && password !== confirmPassword) {
-  //     //   console.log("Absent -----> pas identique");
-  //     //   setAlert({
-  //     //     input: "confirm password",
-  //     //     message: "Les mots de passe doivent être identiques.",
-  //     //   });
-  //     //   return;
-  //     // } else {
-  //     //   console.log("Present ----->  password ok");
-  //     //   setAlert({
-  //     //     input: "",
-  //     //     message: "",
-  //     //   });
-  //     // }
-  //   };
+    if (!password) {
+      return setAlert({
+        input: "password",
+        message: "Veuillez renseigner un mot de passe",
+      });
+    }
+  };
 
   return (
     <>
@@ -108,7 +90,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="mt-5  flex w-300 flex-col gap-1.5"
+          className="w-300  mt-5 flex flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -122,13 +104,13 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               id="email"
               type="email"
               className={
-                alert.input === "email"
-                  ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                alert.input === "email" || alert.input === "auth"
+                  ? "rounded-5 h-7.5 border border-red-600 px-1"
+                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
               }
             />
           </div>
-          <div className=" flex flex-col gap-1">
+          <div className="flex flex-col gap-1">
             <label htmlFor="password" className="font-medium">
               Mot de Passe
             </label>
@@ -139,26 +121,26 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               id="password"
               type="password"
               className={
-                alert.input === "confirmPassword" || alert.input === "password"
-                  ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                alert.input === "password" || alert.input === "auth"
+                  ? "rounded-5 h-7.5 red border border-red-600 px-1"
+                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
               }
               value={password}
             />
           </div>
-          <p className="h-6 text-red-600">{alert.message}</p>
+          <p className="jus h-6 text-red-600">{alert.message}</p>
           <Button
             text={`M'inscire`}
             className="btn-primary h-7 w-full font-bold"
             type={"submit"}
           />
         </form>
-        <a
+        {/* <a
           href="#"
-          className="font-medium text-greenScanSip underline underline-offset-4"
+          className="text-greenScanSip font-medium underline underline-offset-4"
         >
-          Pas encore inscrit ? M'inscire
-        </a>
+          Pas encore inscrit ? Contacter l'administrateur
+        </a> */}
       </main>
     </>
   );
