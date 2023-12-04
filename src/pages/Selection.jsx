@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 // Yohann code ----------------
 //Import components
-import Modal from "../Components/Modal";
+import Modal from "../components/Modal";
 
 import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
