@@ -15,7 +15,7 @@ const ListProduct = (props) => {
   } = props;
   return (
     <>
-      <div id={id} className="w-11/12">
+      <div id={id} className="w-11/12 scroll-mt-28">
         <div className="flex justify-center ">
           <div className="flex w-full justify-start ">
             <div className="my-6 flex items-center gap-2">

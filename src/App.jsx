@@ -69,7 +69,12 @@ function App() {
             />
           }
         />
-        <Route path="/admin/orders" element={<Orders />} />
+        <Route
+          path="/admin/orders"
+          element={
+            <Orders adminToken={adminToken} setAdminToken={setAdminToken} />
+          }
+        />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/new-product" element={<AdminNewProduct />} />
         <Route
@@ -91,12 +96,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/admin/orders"
-          element={
-            <Orders adminToken={adminToken} setAdminToken={setAdminToken} />
-          }
-        />
+
         <Route
           path="/admin/products"
           element={

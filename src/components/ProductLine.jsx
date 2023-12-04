@@ -57,22 +57,22 @@ const ProductLine = (props) => {
   };
   return (
     <>
-      <div className="flex  items-center justify-start border border-gray-300 bg-[#F3F3F3]">
-        {/* <div className="w-1/5"> */}
-        <img
-          className="h-20 w-20 bg-[#F3F3F3]"
-          src={item.product_image.secure_url}
-          alt="product"
-          // Yohann code -----------------------------
-          onClick={() => {
-            console.log(item._id);
-            setOpenModal(true);
-            setProductID(item._id);
-          }}
-          // Yohann code -----------------------------
-        />
-        {/* </div> */}
-        <div className="w-4/5 pl-2">
+      <div className="flex  items-center justify-start border border-gray-300 bg-[#F3F3F3] pr-1 text-sm">
+        <div className="w-2/6">
+          <img
+            className="h-20 w-20   bg-[#F3F3F3]"
+            src={item.product_image.secure_url}
+            alt="product"
+            // Yohann code -----------------------------
+            onClick={() => {
+              console.log(item._id);
+              setOpenModal(true);
+              setProductID(item._id);
+            }}
+            // Yohann code -----------------------------
+          />
+        </div>
+        <div className="w-4/6  pl-2">
           <p className="title-product ">{item.product_name}</p>{" "}
           <p className="price-product">{item.product_price} €</p>
         </div>
