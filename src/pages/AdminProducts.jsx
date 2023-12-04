@@ -42,7 +42,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
   ) : (
     <>
       <Header setAdminToken={setAdminToken} />
-      <div className="p-8">
+      <div className="relative p-8">
         <h1 className="mb-6 border-b border-solid border-black p-6 text-3xl">
           Mes produits ({data.count})
         </h1>
