@@ -1,43 +1,36 @@
 //PAGE FOR TESTS
 /////////////////////////
 /////////////////////////
-import { useState, useEffect } from "react";
+
+// import toast, { Toaster } from "react-hot-toast";
 // import axios from "axios";
 const Lab = () => {
-  const [counter, setCounter] = useState(0);
+  const tab = [1, 3, 33, 11, 100];
+  const tabObj = [
+    { name: "tOm", age: 10 },
+    { name: "Lu", age: 100 },
+    { name: "La", age: 33 },
+    { name: "Lik", age: 3 },
+    { name: "Sam", age: 11 },
+  ];
 
-  // let action;
-  // const refreshPage = () => {
-  //   action = setInterval(() => {
-  //     setCounter((prevCount) => prevCount + 1);
-  //     console.log("refresh!");
-  //   }, 1000);
-  // };
-
-  // useEffect(() => {
-  //   refreshPage();
-
-  //   return () => clearInterval(action);
-  // }, [counter]);
-
+  const compare = (a, b) => {
+    return a.age - b.age;
+  };
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-3 bg-black">
-      <button
-        className="text-white"
-        onClick={() => {
-          // createOrder();
-        }}
-      >
-        Order
-      </button>
-      <div>
-        <p className="text-5xl text-white">Test Counter : {counter}</p>
-      </div>
+      {tabObj.sort(compare).map((el) => {
+        return (
+          <p className="mb-11 text-white" key={el}>
+            {el.age}
+          </p>
+        );
+      })}
       <div className="relative flex flex-col gap-2">
-        <span className="text-5xl font-bold text-white">Scan</span>
+        <span className="scan text-5xl font-bold text-white">Scan</span>
         {/* <div className="animate-block h-2 w-28 border-t-4 border-solid border-green-500 bg-green-500"></div> */}
         <div className="animate-block h-1 w-28"></div>
-        <span className="primary-color text-5xl font-bold">Sip</span>
+        <span className="primary-color sip text-5xl font-bold">Sip</span>
       </div>
     </div>
   );

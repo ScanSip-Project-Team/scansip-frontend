@@ -37,11 +37,12 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
   }, [adminToken]);
 
   return isLoading ? (
-    <FlashScreen />
+    // <FlashScreen />
+    <p>LOADING ...</p>
   ) : (
     <>
       <Header setAdminToken={setAdminToken} />
-      <div className="container">
+      <div className="p-8">
         <h1 className="mb-6 border-b border-solid border-black p-6 text-3xl">
           Mes produits ({data.count})
         </h1>
@@ -52,7 +53,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
             <h2 className="text-bold mb-3 text-xl">Mes Softs</h2>
             <div className="flex flex-col">
               {data.products
-                .filter((element) => element.product_category === "Soft")
+                .filter((element) => element.product_category === "Softs")
                 .map((product) => {
                   return <ProductAdmin key={product._id} product={product} />;
                 })}
@@ -82,7 +83,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
             <h2 className="text-bold mb-3 text-xl">Mes Cocktails</h2>
             <div className="flex flex-col">
               {data.products
-                .filter((element) => element.product_category === "Coktails")
+                .filter((element) => element.product_category === "Cocktails")
                 .map((product) => {
                   return <ProductAdmin key={product._id} product={product} />;
                 })}

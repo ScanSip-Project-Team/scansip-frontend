@@ -1,15 +1,15 @@
 import Header from "../components/Header";
 
 import Button from "../components/Button";
-import FormCreateProduct from "../components/FormCreateProduct";
-import FormUpdateProduct from "../components/FormUpdateProduct";
+// import FormCreateProduct from "../components/FormCreateProduct";
+import FormUpdateProduct from "../components/Form/FormUpdateProduct";
 
 import imgPlaceholder from "../assets/placeholder.png";
 
-const AdminUpdateProduct = () => {
+const AdminUpdateProduct = ({ setAdminToken }) => {
   return (
     <>
-      <Header />
+      <Header setAdminToken={setAdminToken} />
       <div className="container">
         <h1 className="border-b border-solid border-black p-6 text-3xl">
           Mettre à jour un produit

@@ -1,15 +1,14 @@
 import ProductOrder from "./ProductOrder";
-
 import SumUpOrder from "./SumUpOrder";
 
 const OrderComponent = ({
-  setIsOrderInProgress,
-  isOrderInProgress,
+  setIsOrderUpdated,
+  isOrderUpdated,
 
   element,
 }) => {
   return (
-    <div className="mb-4 rounded  bg-slate-100 p-4">
+    <div className="mb-4  rounded bg-slate-100 p-4">
       <div className="flex justify-between pl-4 pr-4">
         <h3 className="mb-2 font-semibold">
           Commande n° : {element.order_number}
@@ -27,8 +26,8 @@ const OrderComponent = ({
           </div>
           <SumUpOrder
             element={element}
-            setIsOrderInProgress={setIsOrderInProgress}
-            isOrderInProgress={isOrderInProgress}
+            setIsOrderUpdated={setIsOrderUpdated}
+            isOrderUpdated={isOrderUpdated}
           />
         </div>
       </div>
