@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 const Billing = () => {
   const [data, setData] = useState();
@@ -76,7 +77,8 @@ const Billing = () => {
   // fonction pour le pdf
 
   return isLoading && !total ? (
-    <p>Loading page...</p>
+    // <p>Loading page...</p>
+    <Loader />
   ) : (
     <section ref={pdfRef}>
       <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">

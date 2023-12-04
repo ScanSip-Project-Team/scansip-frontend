@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import baseApiURL from "../api";
 
 import Header from "../components/Header";
+import Loader from "../components/Loader";
 
 import OrderComponentHistory from "../components/OrderComponentHistory";
 
@@ -88,7 +89,7 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     }
   }, [isLoading]);
   return isLoading ? (
-    <p>Loading ...</p>
+    <Loader />
   ) : (
     <>
       <Header setAdminToken={setAdminToken} />
