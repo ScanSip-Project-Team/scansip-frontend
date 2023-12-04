@@ -7,6 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import CentsToEuro from "../function/CentsToEuro";
+import Button from "./Button";
 
 const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
       <div className="h-available flex flex-col justify-center">
         <PaymentElement id="payment-element" />
       </div>
-      <section>
+      <section className="flex flex-col gap-2.5">
         <div className=" border-y border-grey-232">
           <ul>
             <li className="w-available flex justify-between">
@@ -83,15 +84,18 @@ const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
             Erreur : {message}
           </div>
         )}
-        <button
-          disabled={isProcessing || !stripe || !elements}
-          id="submit"
-          className="btn-black w-available bot-0 sticky  mx-2.5 my-5 border-y border-grey-232 px-3 py-2"
-        >
-          <span id="button-text">
-            {isProcessing ? "Processing ... " : "Pay now"}
-          </span>
-        </button>
+        <div className="w-available my-[10px] mb-[10px] flex flex-col items-center">
+          <Button
+            text={
+              isProcessing
+                ? "En cours ... "
+                : `Payer pour un total de ${CentsToEuro(prices.total_price)} €`
+            }
+            className="btn-client mx-[5px] w-full bg-black text-white "
+            type={"submit"}
+            disabled={isProcessing || !stripe || !elements}
+          />
+        </div>
       </section>
     </form>
   );
