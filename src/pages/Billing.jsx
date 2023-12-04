@@ -21,7 +21,7 @@ const Billing = () => {
   useEffect(() => {
     const fetchDelay = async () => {
       const { data } = await axios.get("http://localhost:3000/delay");
-      console.log(data.minutes_delay);
+      // console.log(data.minutes_delay);
       setDelay(data.minutes_delay);
     };
     fetchDelay();
@@ -43,7 +43,7 @@ const Billing = () => {
   }, [total]);
 
   console.log(data);
-  // console.log(delay);
+  console.log(delay);
 
   // fonction pour le pdf
   const pdfRef = useRef();
@@ -86,7 +86,10 @@ const Billing = () => {
         <div className="w-70">
           <p className="mb-3 w-40">Merci d'avoir passé commande !</p>
           <p>N° Commande : {data.order_number} </p>
-          <p>Temps d'attente : {delay} minutes</p>
+          <p>
+            Temps d'attente :&nbsp;
+            {`${delay > 1 ? delay + " minutes" : delay + " minute"} `}
+          </p>
         </div>
         <div className="absolute bottom-0 right-3 flex items-end ">
           <img
