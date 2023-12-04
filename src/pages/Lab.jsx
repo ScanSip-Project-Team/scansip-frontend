@@ -19,13 +19,6 @@ const Lab = () => {
   };
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-3 bg-black">
-      {tabObj.sort(compare).map((el) => {
-        return (
-          <p className="mb-11 text-white" key={el}>
-            {el.age}
-          </p>
-        );
-      })}
       <div className="relative flex flex-col gap-2">
         <span className="scan text-5xl font-bold text-white">Scan</span>
         {/* <div className="animate-block h-2 w-28 border-t-4 border-solid border-green-500 bg-green-500"></div> */}

@@ -5,7 +5,8 @@ import Header from "../components/Header";
 import ProductAdmin from "../components/ProductAdmin";
 import baseApiURL from "../api";
 import Cookies from "js-cookie";
-import FlashScreen from "./FlashScreen";
+
+import Loader from "../components/Loader";
 
 const AdminProducts = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
@@ -37,8 +38,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
   }, []);
 
   return isLoading ? (
-    // <FlashScreen />
-    <p>LOADING ...</p>
+    <Loader />
   ) : (
     <>
       <Header setAdminToken={setAdminToken} />
