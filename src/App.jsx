@@ -70,6 +70,7 @@ function App() {
             />
           }
         />
+
         <Route
           path="/admin/orders"
           element={
@@ -94,6 +95,7 @@ function App() {
             />
           }
         />
+
         <Route
           path="/admin/update-product"
           element={
@@ -103,6 +105,7 @@ function App() {
             />
           }
         />
+
         <Route
           path="/admin/history"
           element={

@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 // Yohann code ----------------
 //Import components
 import Modal from "../Components/Modal";
-import FlashScreen from "./FlashScreen";
+
+import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
 // Yohann code ----------------
@@ -103,7 +104,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   }
 
   return isLoading ? (
-    <FlashScreen />
+    <Loader />
   ) : (
     // SELECTION BANNER
     <div className=" flex w-screen flex-col items-center justify-center scroll-smooth  bg-white">

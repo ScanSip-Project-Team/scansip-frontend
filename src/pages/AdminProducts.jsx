@@ -5,7 +5,8 @@ import Header from "../components/Header";
 import ProductAdmin from "../components/ProductAdmin";
 import baseApiURL from "../api";
 import Cookies from "js-cookie";
-import FlashScreen from "./FlashScreen";
+
+import Loader from "../components/Loader";
 
 const AdminProducts = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
@@ -25,20 +26,19 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
       }
     };
 
-    if (!adminToken) {
-      if (Cookies.get("scanSipToken")) {
-        setAdminToken(Cookies.get("scanSipToken"));
-      } else {
-        navigate("/admin/signin");
-      }
-    } else {
-      fetchData();
-    }
-  }, [adminToken]);
+    // if (!adminToken) {
+    //   if (Cookies.get("scanSipToken")) {
+    //     setAdminToken(Cookies.get("scanSipToken"));
+    //   } else {
+    //     navigate("/admin/signin");
+    //   }
+    // } else {
+    fetchData();
+    // }
+  }, []);
 
   return isLoading ? (
-    // <FlashScreen />
-    <p>LOADING ...</p>
+    <Loader />
   ) : (
     <>
       <Header setAdminToken={setAdminToken} />

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Cookies from "js-cookie";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //Import components
@@ -9,7 +10,7 @@ import OrderComponent from "../components/OrderComponent";
 import OrderComponentDelivered from "../components/OrderComponentDelivered";
 import Header from "../components/Header";
 import baseApiURL from "../api";
-import Cookies from "js-cookie";
+import Loader from "../components/Loader";
 
 //Import Assets
 
@@ -112,7 +113,7 @@ const Orders = ({ adminToken, setAdminToken }) => {
   }, [isLoading]);
 
   return isLoading ? (
-    <p>Loading ...</p>
+    <Loader />
   ) : (
     <>
       <Header setAdminToken={setAdminToken} />
