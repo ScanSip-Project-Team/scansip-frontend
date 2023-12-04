@@ -1,6 +1,7 @@
 // Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
+import baseApiURL from "../api";
 
 const Modal = ({ setOpenModal, productID, tab }) => {
   const [data, setData] = useState();
@@ -9,7 +10,7 @@ const Modal = ({ setOpenModal, productID, tab }) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `https://site--scansip-backend--jswmm7jk2mlr.code.run/product-description/${productID}`,
+          `${baseApiURL}/product-description/${productID}`,
         );
         setData(response.data);
       };

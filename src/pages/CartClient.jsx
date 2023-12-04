@@ -7,6 +7,8 @@ import axios from "axios";
 import Button from "../components/Button";
 import BreadCrumb from "../components/Breadcrumb";
 
+import baseApiURL from "../api";
+
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
   const [cartBeforePayment, setCartBeforePayment] = useState();
@@ -34,7 +36,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       setIsDisable(true);
       console.log(orderToSend);
       const response = await axios.post(
-        "https://site--scansip-backend--jswmm7jk2mlr.code.run/order/new",
+        `${baseApiURL}/order/new`,
         {
           product_list: orderToSend,
         },

@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 
 //Import Components
 import Button from "../components/Button";
+import baseApiURL from "../api";
 
 // Import Asset
 import logo from "../assets/logo.svg";
@@ -27,7 +28,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     event.preventDefault();
     try {
       // console.log(username);
-      const { data } = await axios.post(`https://site--scansip-backend--jswmm7jk2mlr.code.run/admin/signup`, {
+      const { data } = await axios.post(`${baseApiURL}/admin/signup`, {
         email: email,
         password: password,
       });
