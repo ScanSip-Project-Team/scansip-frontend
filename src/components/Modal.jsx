@@ -9,7 +9,7 @@ const Modal = ({ setOpenModal, productID, tab }) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `http://localhost:3000/product-description/${productID}`,
+          `https://site--scansip-backend--jswmm7jk2mlr.code.run/product-description/${productID}`,
         );
         setData(response.data);
       };

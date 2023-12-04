@@ -28,7 +28,7 @@ const Billing = () => {
 
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:3000/orders/${order_id}`,
+        `https://site--scansip-backend--jswmm7jk2mlr.code.run/orders/${order_id}`,
       );
       // console.log(response.data);
       setData(response.data);

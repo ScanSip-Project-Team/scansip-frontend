@@ -81,17 +81,17 @@ const UserPaiement = ({ total }) => {
 
   useEffect(() => {
     const fetchDelay = async () => {
-      const { data } = await axios.get("http://localhost:3000/delay");
+      const { data } = await axios.get("https://site--scansip-backend--jswmm7jk2mlr.code.run/delay");
       setDelay(data.minutes_delay);
     };
     fetchDelay();
 
-    fetch("http://localhost:3000/pay/config").then(async (r) => {
+    fetch("https://site--scansip-backend--jswmm7jk2mlr.code.run/pay/config").then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
 
-    fetch(`http://localhost:3000/pay/create-payment-intent/${order_id}`, {
+    fetch(`https://site--scansip-backend--jswmm7jk2mlr.code.run/pay/create-payment-intent/${order_id}`, {
       method: "POST",
       body: JSON.stringify(),
     }).then(async (result) => {

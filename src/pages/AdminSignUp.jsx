@@ -27,7 +27,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     event.preventDefault();
     try {
       // console.log(username);
-      const { data } = await axios.post(`http://localhost:3000/admin/signup`, {
+      const { data } = await axios.post(`https://site--scansip-backend--jswmm7jk2mlr.code.run/admin/signup`, {
         email: email,
         password: password,
       });

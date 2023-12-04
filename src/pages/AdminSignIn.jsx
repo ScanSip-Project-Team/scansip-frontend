@@ -29,7 +29,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
       controlInput();
       console.log(alert.input);
       if (alert.input === "") {
-        const response = await axios.post(`http://localhost:3000/admin/login`, {
+        const response = await axios.post(`https://site--scansip-backend--jswmm7jk2mlr.code.run/admin/login`, {
           email: email,
           password: password,
         });

@@ -65,7 +65,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/products");
+        const response = await axios.get("https://site--scansip-backend--jswmm7jk2mlr.code.run/products");
         setData(response.data);
         console.log(response.data);
         setIsLoading(false);

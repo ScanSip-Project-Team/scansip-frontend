@@ -34,7 +34,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       setIsDisable(true);
       console.log(orderToSend);
       const response = await axios.post(
-        "http://localhost:3000/order/new",
+        "https://site--scansip-backend--jswmm7jk2mlr.code.run/order/new",
         {
           product_list: orderToSend,
         },

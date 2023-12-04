@@ -8,7 +8,7 @@ const ModalDelete = ({ visible, setVisible, id }) => {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/admin/delete/${id}`,
+        `https://site--scansip-backend--jswmm7jk2mlr.code.run/admin/delete/${id}`,
       );
 
       toast.success("Le produit a été supprimé");
