@@ -12,6 +12,8 @@ import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
 // Yohann code ----------------
 
+// Johanne ---------
+
 const Selection = ({ setCart, cart, setTotal, total }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
