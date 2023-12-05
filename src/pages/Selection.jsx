@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 // Yohann code ----------------
 //Import components
@@ -10,6 +11,7 @@ import Button from "../components/Button";
 import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
+
 // Yohann code ----------------
 import baseApiURL from "../api";
 
@@ -26,11 +28,14 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   // Yohann code -----------------------------
   const [openModal, setOpenModal] = useState(false);
   const [productID, setProductID] = useState();
+  const [emptyCart, setEmptyCart] = useState(false);
+
   const navigate = useNavigate();
+  Cookies.remove("idOrder");
 
   const handleNavigate = () => {
     if (!total) {
-      alert("Panier vide !");
+      setEmptyCart(true);
     } else {
       navigate("/cart");
     }
@@ -192,7 +197,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
       <div className="border-lightgrey fixed  bottom-0 mx-[10px] w-screen border-t py-6">
         <Button
           text={`Voir le panier • ${total} €`}
-          className={"btn-client w-available  mx-[10px] bg-black text-white"}
+          className={"btn-client mx-[10px]  w-available bg-black text-white"}
           func={handleNavigate}
         />
       </div>
