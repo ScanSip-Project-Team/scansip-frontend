@@ -91,7 +91,7 @@ const UserPaiement = ({ total }) => {
   useEffect(() => {
     const fetchDelay = async () => {
       const { data } = await axios.get(`${baseApiURL}/delay`);
-      setDelay(data.minutes_delay);
+      setDelay(Math.ceil(data.minutes_delay));
     };
     fetchDelay();
 

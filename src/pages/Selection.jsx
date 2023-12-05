@@ -223,10 +223,10 @@ const Selection = ({
           title={"Cocktails "}
         />
       </section>
-      <div className="border-lightgrey fixed  bottom-0 mx-[10px] w-screen border-t py-6">
+      <div className="border-lightgrey fixed  bottom-0 mx-[10px] w-screen border-t bg-white py-6">
         <Button
           text={`Voir le panier • ${total} €`}
-          className={"btn-client mx-[10px]  w-available bg-black text-white"}
+          className={"btn-client w-available  mx-[10px] bg-black text-white"}
           func={handleNavigate}
         />
       </div>
@@ -238,6 +238,7 @@ const Selection = ({
           productID={productID}
           total={total}
           handleNavigate={handleNavigate}
+          openModal={openModal}
         />
       )}
       {/* Yohann code ----------------------------- */}

@@ -1,12 +1,11 @@
+//Import Packages
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+//Import Components
 import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
-
-import Button from "../components/Button";
 import FormCreateProduct from "../components/Form/FormCreateProduct";
-
-import imgPlaceholder from "../assets/placeholder.png";
 import Loader from "../components/Loader";
 
 const AdminNewProduct = ({ adminToken, setAdminToken }) => {
@@ -20,6 +19,7 @@ const AdminNewProduct = ({ adminToken, setAdminToken }) => {
     } else {
       navigate("/admin/signin");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return isLoading ? (
     <Loader />

@@ -1,3 +1,4 @@
+//Import Packages
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
@@ -5,9 +6,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import baseApiURL from "../api";
 
+//Import Components
 import Header from "../components/HeaderNav/Header";
 import Loader from "../components/Loader";
-
 import OrderComponentHistory from "../components/OrderComponentHistory";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 
@@ -79,6 +80,7 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
 
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter, adminToken]);
 
   useEffect(() => {
@@ -88,7 +90,9 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
       console.log("2ème useEffect dans if ", counter);
       refreshPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
+
   return isLoading ? (
     <Loader />
   ) : (

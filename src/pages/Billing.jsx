@@ -17,6 +17,8 @@ const Billing = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState();
+
+  // eslint-disable-next-line no-unused-vars
   const [delay, setDelay] = useState(1);
 
   const navigate = useNavigate();
@@ -25,9 +27,9 @@ const Billing = () => {
 
   useEffect(() => {
     const fetchDelay = async () => {
-      const { data } = await axios.get("http://localhost:3000/delay");
+      const { data } = await axios.get(`${baseApiURL}/delay`);
       // console.log(data.minutes_delay);
-      setDelay(data.minutes_delay);
+      setDelay(Math.ceil(data.minutes_delay));
     };
     fetchDelay();
 
@@ -43,11 +45,8 @@ const Billing = () => {
       }
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);
-
-  console.log(data);
-  // const tokenOrder = Cookies.set("idCookie", data._id);
-  // console.log(delay);
 
   // fonction pour le pdf
   const pdfRef = useRef();
@@ -83,11 +82,10 @@ const Billing = () => {
   // fonction pour le pdf
 
   return isLoading && !total ? (
-    // <p>Loading page...</p>
     <Loader />
   ) : (
     <section ref={pdfRef}>
-      <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
+      <div className="bg-greenScanSip relative mb-3 flex p-4 text-white">
         <div className="w-40">
           <p className="mb-3">Merci d'avoir passé commande !</p>
           <p>N° Commande : {data.order_number} </p>
@@ -126,7 +124,6 @@ const Billing = () => {
           <div className="ml-5 mr-5">
             <div className="flex flex-col">
               {data.product_list.map((elem) => {
-                // console.log(elem);
                 return (
                   <div key={elem.product._id} className="flex justify-between">
                     <span>

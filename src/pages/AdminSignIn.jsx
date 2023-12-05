@@ -17,10 +17,9 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState({ input: "", message: "" });
-  console.log(alert);
+
   const handleChange = (e, func) => {
     func(e);
-    // setTimeout(controlInput(), 3300);
   };
 
   const handleSubmit = async (event) => {
@@ -28,9 +27,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
 
     try {
       controlInput();
-      console.log(alert.input);
       if (alert.input === "") {
-        const response = await axios.post(`${baseApiURL}/admin/login`, {
+        const response = await axios.post(`${baseApiURL}/admin/signin`, {
           email: email,
           password: password,
         });
@@ -61,6 +59,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     } else {
       navigate("/admin/orders");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminToken]);
 
   const controlInput = () => {
@@ -136,12 +135,12 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
             type={"submit"}
           />
         </form>
-        {/* <a
-          href="#"
+        <p
+          onClick={() => navigate("/admin/signup")}
           className="text-greenScanSip font-medium underline underline-offset-4"
         >
-          Pas encore inscrit ? Contacter l'administrateur
-        </a> */}
+          Pas encore inscrit ? M'inscrire
+        </p>
       </main>
     </>
   );

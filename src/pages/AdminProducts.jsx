@@ -1,11 +1,13 @@
+//Import Packages
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
+
+//Import Components
 import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 import ProductAdmin from "../components/ProductAdmin";
-import Cookies from "js-cookie";
-
 import Loader from "../components/Loader";
 
 const AdminProducts = ({ adminToken, setAdminToken }) => {
