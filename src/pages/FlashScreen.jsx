@@ -12,7 +12,7 @@ const FlashScreen = () => {
     setTimeout(function () {
       navigate("/home");
     }, 3000);
-  }, []);
+  }, [navigate]);
 
   return (
     // <main className="flex h-screen w-screen items-center justify-center">

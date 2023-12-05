@@ -6,6 +6,10 @@ import Cookies from "js-cookie";
 
 //Import Components
 import Button from "../components/Button";
+import BreadCrumb from "../components/Breadcrumb";
+import ListProduct from "../components/ListProduct";
+
+import baseApiURL from "../api";
 
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
@@ -136,17 +140,15 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   };
 
   return (
-    <section className="flex w-screen flex-col ">
-      <div className="mb-4">
-        <Button
-          text={`Retourner à ma commande`}
-          className={" p-1.5 font-bold text-black"}
-          disabled={isDisabled}
-          func={handleNavigateToHome}
+    // <section className="flex w-screen flex-col ">
+    <main className="padding-container flex h-screen flex-col items-center">
+      <nav className="self-start">
+        <BreadCrumb
+          text={"Retourner à ma commande"}
+          func={() => navigate("/home")}
         />
-      </div>
-
-      <div className="mb-7 flex justify-center">
+      </nav>
+      <div className=" h m-7 flex justify-center">
         <p className="font-bold">Mon panier</p>
       </div>
 
@@ -191,38 +193,44 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
           );
         })}
 
-        <button
-          className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
-          onClick={() => {
-            if (Cookies.get("orderToModify")) {
-              modifyOrder();
-              console.log("existe");
-            } else {
-              createOrder();
-              console.log("existe pas");
-            }
-          }}
-        >
-          Commander pour un total de {total} €
-        </button>
-
-        {/* <Button
+        <Button
           text={`Commander pour un total de ${total} €`}
           className={"my-6 w-11/12 rounded bg-black p-1.5 text-white"}
+          func={Cookies.get("orderToModify") ? modifyOrder : createOrder}
+          disabled={isDisabled}
+        />
+
+        {/* <div className="flex w-screen flex-col items-center">
+        <ListProduct
+          data={cart}
+          cart={cart}
+          setCart={setCart}
+          setTotal={setTotal}
+          total={total}
+          // id={"softs"}
+          // icon={"../src/assets/Soft.png"}
+          // title={"Softs"}
+        />
+      </div>
+      <div className="border-lightgrey  fixed bottom-0 mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t py-6">
+        <Button
+          text={`Commande pour un total de ${total} €`}
+          className={"btn-client w-available  mx-[10px] bg-black text-white"}
           func={createOrder}
           disabled={isDisabled}
         /> */}
-
+        {/* >>>>>>> main */}
         <Button
           text={"Ajouter des articles"}
           className={
-            "w-11/12 rounded bg-greyAddArticlesButton p-1.5 text-black"
+            "btn-client mx-[10px] w-available bg-greyAddArticlesButton text-black"
           }
           func={handleNavigateToHome}
           disabled={isDisabled}
         />
       </div>
-    </section>
+      {/* </section> */}
+    </main>
   );
 };
 

@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 
 //Import Components
 import Button from "../components/Button";
+import baseApiURL from "../api";
 
 // Import Asset
 import logo from "../assets/logo.svg";
@@ -27,14 +28,14 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     event.preventDefault();
     try {
       // console.log(username);
-      const response = await axios.post(`http://localhost:3000/admin/login`, {
+      const { data } = await axios.post(`${baseApiURL}/admin/signup`, {
         email: email,
         password: password,
       });
 
-      Cookies.set("scanSipToken", response.data.token, { expires: 7 });
-      setAdminToken(response.data.token);
-      navigate("/admin/orders");
+      Cookies.set("scanSipToken", data.token, { expires: 7 });
+      setAdminToken(data.token);
+      // navigate("/admin/orders");
     } catch (error) {
       console.log(error.message);
     }
@@ -44,7 +45,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     if (!adminToken) {
       if (Cookies.get("scanSipToken")) {
         setAdminToken(Cookies.get("scanSipToken"));
-        navigate("/admin/orders");
+      } else {
+        navigate("/admin/signin");
       }
     } else {
       navigate("/admin/orders");
@@ -108,7 +110,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="mt-5  flex w-300 flex-col gap-1.5"
+          className="w-300  mt-5 flex flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -124,7 +126,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "email"
                   ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
               }
             />
           </div>
@@ -141,9 +143,27 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "confirmPassword" || alert.input === "password"
                   ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
               }
               value={password}
+            />
+          </div>
+          <div className=" flex flex-col gap-1">
+            <label htmlFor="confirmPassword" className="font-medium">
+              Confirmer votre mot de passe
+            </label>
+            <input
+              onChange={(e) => {
+                handleChange(e.target.value, setConfirmPassword);
+              }}
+              value={confirmPassword}
+              id="confirmPassword"
+              type="password"
+              className={
+                alert.input === "confirmPassword"
+                  ? "border-red-600rounded-5 h-7.5 border px-1"
+                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
+              }
             />
           </div>
           <p className="h-6 text-red-600">{alert.message}</p>
@@ -155,9 +175,9 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         </form>
         <a
           href="#"
-          className="font-medium text-greenScanSip underline underline-offset-4"
+          className="text-greenScanSip font-medium underline underline-offset-4"
         >
-          Pas encore inscrit ? M'inscire
+          Déja inscrit ? Me connecter
         </a>
       </main>
     </>

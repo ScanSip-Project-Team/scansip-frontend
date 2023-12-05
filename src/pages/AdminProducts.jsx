@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import ProductAdmin from "../components/ProductAdmin";
-import baseApiURL from "../api";
 import Cookies from "js-cookie";
 
 import Loader from "../components/Loader";
@@ -17,7 +16,9 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseApiURL}/admin/products`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_URL_BACKEND}admin/products`,
+        );
         setData(response.data);
         setIsLoading(false);
         console.log(response.data);
@@ -42,7 +43,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
   ) : (
     <>
       <Header setAdminToken={setAdminToken} />
-      <div className="p-8">
+      <div className="relative p-8">
         <h1 className="mb-6 border-b border-solid border-black p-6 text-3xl">
           Mes produits ({data.count})
         </h1>

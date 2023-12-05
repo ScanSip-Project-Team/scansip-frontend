@@ -7,6 +7,8 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import Cookies from "js-cookie";
 
+import baseApiURL from "../api";
+
 const Billing = () => {
   Cookies.remove("orderToModify");
   const [data, setData] = useState();
@@ -27,9 +29,7 @@ const Billing = () => {
     fetchDelay();
 
     const fetchData = async () => {
-      const response = await axios.get(
-        `http://localhost:3000/orders/${order_id}`,
-      );
+      const response = await axios.get(`${baseApiURL}/orders/${order_id}`);
       // console.log(response.data);
       setData(response.data);
       setTotal(`${response.data.total_price + 2}`);
@@ -85,8 +85,8 @@ const Billing = () => {
   ) : (
     <section ref={pdfRef}>
       <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
-        <div className="w-70">
-          <p className="mb-3 w-40">Merci d'avoir passé commande !</p>
+        <div className="w-40">
+          <p className="mb-3">Merci d'avoir passé commande !</p>
           <p>N° Commande : {data.order_number} </p>
           <p>
             Temps d'attente :&nbsp;

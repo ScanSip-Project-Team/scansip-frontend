@@ -13,11 +13,11 @@ import { useState } from "react";
 
 //Import Components
 import FlashScreen from "./pages/FlashScreen";
-import Orders from "./Pages/Orders";
-import Selection from "./Pages/Selection";
+import Orders from "./pages/Orders";
+import Selection from "./pages/Selection";
 import UserPaiement from "./pages/UserPaiement";
-import Billing from "./Pages/Billing";
-import CartClient from "./Pages/CartClient";
+import Billing from "./pages/Billing";
+import CartClient from "./pages/CartClient";
 import Lab from "./pages/Lab";
 import AdminProducts from "./pages/AdminProducts";
 import AdminNewProduct from "./pages/AdminNewProduct";
@@ -25,9 +25,9 @@ import AdminHistory from "./pages/AdminHistory";
 
 // Import Assets
 import "./App.css";
-import AdminUpdateProduct from "./Pages/AdminUpdateProduct";
-import AdminSignUp from "./Pages/AdminSignUp";
-import AdminSignIn from "./Pages/AdminSignIn";
+import AdminUpdateProduct from "./pages/AdminUpdateProduct";
+import AdminSignUp from "./pages/AdminSignUp";
+import AdminSignIn from "./pages/AdminSignIn";
 
 library.add(
   faChevronDown,
@@ -58,7 +58,8 @@ function App() {
           }
         />
         <Route path="/billing/:id" element={<Billing />} />
-        <Route path="/paiement" element={<UserPaiement />} />
+        <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
+
         <Route
           path="/cart"
           element={
@@ -137,8 +138,6 @@ function App() {
 
         {/* page de test SAMUEL */}
         <Route path="/lab" element={<Lab />} />
-
-        <Route path="/paiement/:id" element={<UserPaiement total={total} />} />
       </Routes>
     </Router>
   );
