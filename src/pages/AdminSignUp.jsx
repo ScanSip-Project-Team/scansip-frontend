@@ -111,7 +111,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="w-300  mt-5 flex flex-col gap-1.5"
+          className="mt-5  flex w-300 flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -127,7 +127,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "email"
                   ? "h-7.5 rounded-5 border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
             />
           </div>
@@ -144,7 +144,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "same-password" || alert.input === "password"
                   ? "h-7.5 rounded-5 border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
               value={password}
             />
@@ -164,19 +164,19 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
                 alert.input === "confirm-password" ||
                 alert.input === "same-password"
                   ? "h-7.5 rounded-5 border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
             />
           </div>
           <p className="h-6 text-red-600">{alert.message}</p>
           <Button
-            text={`M'inscire`}
+            text={`M'inscrire`}
             className="btn-primary h-7 w-full font-bold"
             type={"submit"}
           />
         </form>
         <p
-          className="text-greenScanSip font-medium underline underline-offset-4"
+          className="font-medium text-greenScanSip underline underline-offset-4"
           onClick={() => navigate("/admin/signin")}
         >
           Déja inscrit ? Me connecter
