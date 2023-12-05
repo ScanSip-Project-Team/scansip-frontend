@@ -42,7 +42,6 @@ const ProductLine = (props) => {
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity - 1;
       setCart(cartCopy);
       setTotal(total - Number(item.product_price));
-<<<<<<< HEAD
 
       //save cartCopy in a sessionStorage
       sessionStorage.setItem("cartProductsStorage", JSON.stringify(cartCopy));
@@ -61,8 +60,6 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
-=======
->>>>>>> main
     } else {
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
@@ -75,7 +72,6 @@ const ProductLine = (props) => {
 
       delete item.quantity;
       setTotal(total - Number(item.product_price));
-<<<<<<< HEAD
 
       //update sessionStorage
       //save new version of cartCopy in a sessionStorage
@@ -98,8 +94,6 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
-=======
->>>>>>> main
     }
   };
 
@@ -116,7 +110,6 @@ const ProductLine = (props) => {
       cartCopy.push(item);
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
-<<<<<<< HEAD
 
       //save cartCopy in a sessionStorage
       sessionStorage.setItem("cartProductsStorage", JSON.stringify(cartCopy));
@@ -135,8 +128,6 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
-=======
->>>>>>> main
     }
     // s'il est déjà dans le panier j'augmente la quantité de 1
     else {
@@ -147,7 +138,6 @@ const ProductLine = (props) => {
 
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
-<<<<<<< HEAD
       //update sessionStorage
       //save new version of cartCopy in a sessionStorage
       sessionStorage.setItem("cartProductsStorage", JSON.stringify(cartCopy));
@@ -167,21 +157,15 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
-=======
->>>>>>> main
     }
   };
 
   return (
     <>
-      <div className="border-lightgrey  flex h-[63px] items-center justify-start border-b p-[5px] pr-1 text-sm">
-        <div className="flex h-full w-2/6 justify-center">
+      <div className="border-lightgrey  flex h-[100px] items-center justify-start border-b p-[5px] pr-1 text-sm">
+        <div className="flex h-full w-2/6 items-center justify-center">
           <img
-<<<<<<< HEAD
-            className="h-20 w-20 rounded-sm bg-[#F3F3F3] object-cover"
-=======
-            className="h-full  rounded-[5px] bg-[#F3F3F3] object-cover"
->>>>>>> main
+            className="h-20 w-20 rounded-sm bg-[#F3F3F3] object-cover "
             src={item.product_image.secure_url}
             alt="product"
             onClick={() => {
