@@ -9,10 +9,6 @@ const ListProduct = (props) => {
     setCart,
     setTotal,
     total,
-    cartProductsStorage,
-    setCartProductsStorage,
-    cartTotalStorage,
-    setCartTotalStorage,
     id,
     icon,
     title,
@@ -40,10 +36,6 @@ const ListProduct = (props) => {
             setCart={setCart}
             setTotal={setTotal}
             total={total}
-            cartProductsStorage={cartProductsStorage}
-            setCartProductsStorage={setCartProductsStorage}
-            cartTotalStorage={cartTotalStorage}
-            setCartTotalStorage={setCartTotalStorage}
           />
         ))}
       </div>
