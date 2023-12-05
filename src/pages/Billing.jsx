@@ -85,9 +85,9 @@ const Billing = () => {
     <Loader />
   ) : (
     <section ref={pdfRef}>
-      <div className="bg-greenScanSip relative mb-3 flex p-4 text-white">
-        <div className="w-40">
-          <p className="mb-3">Merci d'avoir passé commande !</p>
+      <div className="relative mb-3 flex bg-greenScanSip p-4 text-white">
+        <div className="w-60">
+          <p className="mb-3 w-40">Merci d'avoir passé commande !</p>
           <p>N° Commande : {data.order_number} </p>
           <p>
             Temps d'attente :&nbsp;
@@ -124,6 +124,7 @@ const Billing = () => {
           <div className="ml-5 mr-5">
             <div className="flex flex-col">
               {data.product_list.map((elem) => {
+                console.log(elem);
                 return (
                   <div key={elem.product._id} className="flex justify-between">
                     <span>

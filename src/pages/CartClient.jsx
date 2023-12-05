@@ -63,13 +63,18 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
 
   const modifyOrder = async () => {
     const orderIdToModify = Cookies.get("orderToModify");
+    console.log(orderIdToModify);
     console.log(orderToSend);
     const response = await axios.put(
-      `${baseApiURL}/order/update/${total}/total_price`,
+      `${baseApiURL}/order-update`,
       {
         id: orderIdToModify,
-        key: "product_list",
-        value: orderToSend,
+        key_product_list: "product_list",
+        value_product_list: orderToSend,
+        key_total_price: "total_price",
+        value_total_price: total,
+        key_total_items: "total_items",
+        value_total_items: orderToSend.length,
       },
       {
         headers: {
@@ -77,7 +82,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
         },
       },
     );
-
+    console.log(response.data);
     const orderId = response.data._id;
     navigate(`/paiement/${orderId}`);
   };
@@ -107,14 +112,14 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       <div className="border-lightgrey  fixed bottom-0 mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t bg-white py-6">
         <Button
           text={`Commande pour un total de ${total} €`}
-          className={"btn-client w-available  mx-[10px] bg-black text-white"}
+          className={"btn-client mx-[10px]  w-available bg-black text-white"}
           func={Cookies.get("orderToModify") ? modifyOrder : createOrder}
           disabled={isDisabled}
         />
         <Button
           text={"Ajouter des articles"}
           className={
-            "btn-client w-available bg-greyAddArticlesButton mx-[10px] text-black"
+            "btn-client mx-[10px] w-available bg-greyAddArticlesButton text-black"
           }
           func={handleNavigateToHome}
           disabled={isDisabled}
