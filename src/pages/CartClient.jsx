@@ -38,7 +38,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       setIsDisable(true);
       console.log(orderToSend);
       const response = await axios.post(
-        `${baseApiURL}/order/new`,
+        `${baseApiURL}/orders/new`,
         {
           product_list: orderToSend,
         },
@@ -62,24 +62,31 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   // Modification d'une commande
 
   const modifyOrder = async () => {
-    const orderIdToModify = Cookies.get("orderToModify");
-    console.log(orderToSend);
-    const response = await axios.put(
-      `${baseApiURL}/order/update/${total}/total_price`,
-      {
-        id: orderIdToModify,
-        key: "product_list",
-        value: orderToSend,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const orderIdToModify = Cookies.get("orderToModify");
+      console.log(orderToSend);
+      const response = await axios.put(
+        `${baseApiURL}/orders/update`,
+        {
+          id: orderIdToModify,
+          key: "product_list",
+          value: orderToSend,
+          keyparams: "total_price",
+          valueparams: total,
         },
-      },
-    );
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      console.log("response.data >>>", response.data);
 
-    const orderId = response.data._id;
-    navigate(`/paiement/${orderId}`);
+      const orderId = response.data._id;
+      navigate(`/paiement/${orderId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -107,14 +114,14 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       <div className="border-lightgrey  fixed bottom-0 mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t bg-white py-6">
         <Button
           text={`Commande pour un total de ${total} €`}
-          className={"btn-client w-available  mx-[10px] bg-black text-white"}
+          className={"btn-client mx-[10px]  w-available bg-black text-white"}
           func={Cookies.get("orderToModify") ? modifyOrder : createOrder}
           disabled={isDisabled}
         />
         <Button
           text={"Ajouter des articles"}
           className={
-            "btn-client w-available bg-greyAddArticlesButton mx-[10px] text-black"
+            "btn-client mx-[10px] w-available bg-greyAddArticlesButton text-black"
           }
           func={handleNavigateToHome}
           disabled={isDisabled}
