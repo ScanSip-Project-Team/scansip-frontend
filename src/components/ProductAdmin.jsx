@@ -21,7 +21,7 @@ const ProductAdmin = ({ product }) => {
   return (
     <div className="flex w-80 justify-between gap-3 border-b py-2">
       <img
-        className="w-20 object-cover"
+        className="w-20 rounded-md object-cover"
         src={product.product_image.secure_url}
         alt=""
       />

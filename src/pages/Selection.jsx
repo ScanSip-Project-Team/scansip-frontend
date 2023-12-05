@@ -10,9 +10,25 @@ import Modal from "../Components/Modal";
 import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
+
+//Import assets
+import alcoolsPicto from "../assets/alcools-picto.png";
+import cocktailsPicto from "../assets/cocktails-picto.png";
+import softsPicto from "../assets/softs-picto.png";
+import snacksPicto from "../assets/snacks-picto.png";
+
 // Yohann code ----------------
 
-const Selection = ({ setCart, cart, setTotal, total }) => {
+const Selection = ({
+  setCart,
+  cart,
+  setTotal,
+  total,
+  cartProductsStorage,
+  setCartProductsStorage,
+  cartTotalStorage,
+  setCartTotalStorage,
+}) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState("Softs");
@@ -110,25 +126,25 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         <div className="my-6 flex w-11/12 items-center justify-center gap-2   bg-white">
           <CardCategory
             func={handleClickSofts}
-            icon={"../src/assets/soft.png"}
+            icon={softsPicto}
             id={"softs"}
             title={"Softs"}
           />
           <CardCategory
             func={handleClickSnacks}
-            icon={"../src/assets/HotDog.png"}
+            icon={snacksPicto}
             id={"snacks"}
             title={"Snacks"}
           />
           <CardCategory
             func={handleClickAlcools}
-            icon={"../src/assets/biere.png"}
+            icon={alcoolsPicto}
             id={"alcools"}
             title={"Alcools"}
           />
           <CardCategory
             func={handleClickCocktails}
-            icon={"../src/assets/Cocktail.png"}
+            icon={cocktailsPicto}
             id={"cocktails"}
             title={"Cocktails"}
           />
@@ -144,8 +160,12 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
           setCart={setCart}
           setTotal={setTotal}
           total={total}
+          cartProductsStorage={cartProductsStorage}
+          setCartProductsStorage={setCartProductsStorage}
+          cartTotalStorage={cartTotalStorage}
+          setCartTotalStorage={setCartTotalStorage}
           id={"softs"}
-          icon={"../src/assets/Soft.png"}
+          icon={softsPicto}
           title={"Softs"}
         />
 
@@ -157,8 +177,12 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
           setCart={setCart}
           setTotal={setTotal}
           total={total}
+          cartProductsStorage={cartProductsStorage}
+          setCartProductsStorage={setCartProductsStorage}
+          cartTotalStorage={cartTotalStorage}
+          setCartTotalStorage={setCartTotalStorage}
           id={"snacks"}
-          icon={"../src/assets/HotDog.png"}
+          icon={snacksPicto}
           title={"Snacks"}
         />
 
@@ -170,8 +194,12 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
           setCart={setCart}
           setTotal={setTotal}
           total={total}
+          cartProductsStorage={cartProductsStorage}
+          setCartProductsStorage={setCartProductsStorage}
+          cartTotalStorage={cartTotalStorage}
+          setCartTotalStorage={setCartTotalStorage}
           id={"alcools"}
-          icon={"../src/assets/Biere.png"}
+          icon={alcoolsPicto}
           title={"Alcools"}
         />
 
@@ -183,8 +211,12 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
           setCart={setCart}
           setTotal={setTotal}
           total={total}
+          cartProductsStorage={cartProductsStorage}
+          setCartProductsStorage={setCartProductsStorage}
+          cartTotalStorage={cartTotalStorage}
+          setCartTotalStorage={setCartTotalStorage}
           id={"cocktails"}
-          icon={"../src/assets/Cocktail.png"}
+          icon={cocktailsPicto}
           title={"Cocktails "}
         />
       </section>

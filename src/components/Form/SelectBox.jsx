@@ -7,7 +7,7 @@ const SelectBox = ({
   error,
 }) => {
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="w-3/3 flex flex-1 flex-col">
       <label className="mb-2" htmlFor="category">
         Catégorie
       </label>

@@ -6,7 +6,7 @@ const CardCategory = ({ func, icon, id, title }) => {
         onClick={func}
         href={`#${id}`}
       >
-        <img className="h-12 w-8" src={icon} alt={id} />
+        <img className="h-12 w-8 object-contain" src={icon} alt={id} />
         <p>{title}</p>
       </a>
     </>

@@ -6,7 +6,16 @@ import axios from "axios";
 //Import Components
 import Button from "../components/Button";
 
-const CartClient = ({ setCart, cart, setTotal, total }) => {
+const CartClient = ({
+  setCart,
+  cart,
+  setTotal,
+  total,
+  cartProductsStorage,
+  setCartProductsStorage,
+  cartTotalStorage,
+  setCartTotalStorage,
+}) => {
   const [isDisabled, setIsDisable] = useState(false);
   const [cartBeforePayment, setCartBeforePayment] = useState();
 

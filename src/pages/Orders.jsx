@@ -8,9 +8,10 @@ import Cookies from "js-cookie";
 //Import components
 import OrderComponent from "../components/OrderComponent";
 import OrderComponentDelivered from "../components/OrderComponentDelivered";
-import Header from "../components/Header";
+import Header from "../components/HeaderNav/Header";
 import baseApiURL from "../api";
 import Loader from "../components/Loader";
+import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 
 //Import Assets
 
@@ -116,7 +117,8 @@ const Orders = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
-      <Header setAdminToken={setAdminToken} />
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
 
       <div className="container m-auto h-screen">
         <div>
@@ -166,14 +168,17 @@ const Orders = ({ adminToken, setAdminToken }) => {
                 data.filter((element) => element.order_status === "delivered")
                   .length
               }
-              <span
-                onClick={() => {
-                  handleOdersIsEnabled();
-                }}
-                className="primary-color text-sm"
-              >
-                vider la liste
-              </span>
+              {data.filter((element) => element.order_status === "delivered")
+                .length > 0 && (
+                <span
+                  onClick={() => {
+                    handleOdersIsEnabled();
+                  }}
+                  className="primary-color text-sm"
+                >
+                  vider la liste
+                </span>
+              )}
             </h2>
 
             {data

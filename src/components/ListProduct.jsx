@@ -9,6 +9,10 @@ const ListProduct = (props) => {
     setCart,
     setTotal,
     total,
+    cartProductsStorage,
+    setCartProductsStorage,
+    cartTotalStorage,
+    setCartTotalStorage,
     id,
     icon,
     title,
@@ -20,7 +24,7 @@ const ListProduct = (props) => {
           <div className="flex w-full justify-start ">
             <div className="my-6 flex items-center gap-2">
               <h1 className="title-category">Découvrez nos {title} !</h1>
-              <img src={icon} alt={id} />
+              <img className="w-12 object-contain" src={icon} alt={id} />
             </div>
           </div>
         </div>
@@ -34,6 +38,10 @@ const ListProduct = (props) => {
             setCart={setCart}
             setTotal={setTotal}
             total={total}
+            cartProductsStorage={cartProductsStorage}
+            setCartProductsStorage={setCartProductsStorage}
+            cartTotalStorage={cartTotalStorage}
+            setCartTotalStorage={setCartTotalStorage}
           />
         ))}
       </div>

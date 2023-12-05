@@ -9,6 +9,8 @@ import Button from "../components/Button";
 
 // Import Asset
 import logo from "../assets/logo.svg";
+import Header from "../components/HeaderNav/Header";
+import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 
 const AdminSignUp = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
@@ -100,6 +102,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
 
   return (
     <>
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
       <main className="flex h-screen w-screen flex-col items-center justify-center gap-4">
         <img
           src={logo}

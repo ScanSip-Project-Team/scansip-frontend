@@ -9,6 +9,8 @@ import Button from "../components/Button";
 
 // Import Asset
 import logo from "../assets/logo.svg";
+import Header from "../components/HeaderNav/Header";
+import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 
 const AdminSignUp = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
@@ -101,6 +103,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
 
   return (
     <>
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
       <main className="flex h-screen w-screen flex-col items-center justify-center gap-4">
         <img
           src={logo}
@@ -109,7 +113,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="w-300  mt-5 flex flex-col gap-1.5"
+          className="mt-5  flex w-300 flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -125,7 +129,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "email"
                   ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
             />
           </div>
@@ -142,7 +146,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "confirmPassword" || alert.input === "password"
                   ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
               value={password}
             />
@@ -161,7 +165,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "confirmPassword"
                   ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
             />
           </div>
@@ -174,7 +178,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         </form>
         <a
           href="#"
-          className="text-greenScanSip font-medium underline underline-offset-4"
+          className="font-medium text-greenScanSip underline underline-offset-4"
         >
           Déja inscrit ? Me connecter
         </a>
