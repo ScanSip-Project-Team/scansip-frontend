@@ -5,10 +5,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import baseApiURL from "../api";
 
-import Header from "../components/Header";
+import Header from "../components/HeaderNav/Header";
 import Loader from "../components/Loader";
 
 import OrderComponentHistory from "../components/OrderComponentHistory";
+import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 
 const AdminHistory = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -92,7 +93,8 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
-      <Header setAdminToken={setAdminToken} />
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
 
       <div className="container m-auto h-screen">
         <div>

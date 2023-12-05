@@ -11,7 +11,16 @@ import ListProduct from "../components/ListProduct";
 
 import baseApiURL from "../api";
 
-const CartClient = ({ setCart, cart, setTotal, total }) => {
+const CartClient = ({
+  setCart,
+  cart,
+  setTotal,
+  total,
+  cartProductsStorage,
+  setCartProductsStorage,
+  cartTotalStorage,
+  setCartTotalStorage,
+}) => {
   const [isDisabled, setIsDisable] = useState(false);
 
   // console.log(total);

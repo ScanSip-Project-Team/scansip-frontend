@@ -9,6 +9,9 @@ import Cookies from "js-cookie";
 
 import baseApiURL from "../api";
 
+import billPicto from "../assets/bill-picto.png";
+import snacksPicto from "../assets/snacks-picto.png";
+
 const Billing = () => {
   Cookies.remove("orderToModify");
   const [data, setData] = useState();
@@ -95,14 +98,16 @@ const Billing = () => {
         </div>
         <div className="absolute bottom-0 right-3 flex items-end ">
           <img
-            src="/src/assets/black-soft.png"
+            // src="/src/assets/black-soft.png"
+            src={billPicto}
             alt="Soft black drink"
-            className="h-10 w-7"
+            className="h-10 w-14 object-cover"
           />
           <img
-            src="/src/assets/Biere.png"
+            // src="/src/assets/Biere.png"
+            src={snacksPicto}
             alt="Beer"
-            className="h-15 relative right-3 w-10"
+            className="h-15 relative right-3 w-12"
           />
         </div>
       </div>

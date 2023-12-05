@@ -5,7 +5,7 @@ const ProductOrder = ({ product }) => {
       className="flex items-center rounded bg-white p-3"
     >
       <img
-        className="w-16 pr-2"
+        className="w-16 rounded-sm pr-2"
         src={product.product.product_image.secure_url}
         alt=""
       />

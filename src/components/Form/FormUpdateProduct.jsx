@@ -9,10 +9,11 @@ import CustomInput from "./CustomInput";
 import Textarea from "./Textarea";
 import SelectBox from "./SelectBox";
 import ImageUpload from "./ImageUpload";
+import Loader from "../Loader";
 
-const FormCreateProduct = () => {
-  const location = useLocation();
-  const { product } = location.state;
+const FormCreateProduct = ({ product }) => {
+  // const location = useLocation();
+  // const { product } = location.state;
   const public_id = product.product_image.public_id;
   console.log("product >>>>", product);
   console.log("product._id >>>", product._id);
@@ -29,25 +30,20 @@ const FormCreateProduct = () => {
   const [salt, setSalt] = useState(product.nutritional_values.salt);
   const [fat, setFat] = useState(product.nutritional_values.fat);
   const [fibers, setFibers] = useState(product.nutritional_values.fibers);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [productImage, setProductImage] = useState(
     product.product_image.secure_url,
   );
   const [error, setError] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState("");
-  // const [errorImage, setErrorImage] = useState("");
-  // const [errorFields, setErrorFields] = useState("");
-  // const [errorInteger, setErrorInteger] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     //Update form is dealed in the backend
-    // setErrorMessage("");
-    // setErrorImage("");
-    // setErrorFields("");
-    // setErrorInteger("");
+
     setError(false);
     try {
       const formData = new FormData();
@@ -85,11 +81,10 @@ const FormCreateProduct = () => {
       setSalt("");
       setFat("");
       setFibers("");
-      // setErrorMessage("");
-      // setErrorImage("");
-      // setErrorFields("");
+
       console.log(response.data);
 
+      setIsLoading(false);
       navigate("/admin/products");
     } catch (error) {
       setError(true);
@@ -103,7 +98,9 @@ const FormCreateProduct = () => {
     setError(false);
     setter(event.target.value);
   };
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <div>
         <Toaster />
@@ -113,7 +110,7 @@ const FormCreateProduct = () => {
           handleSubmitForm(event);
         }}
       >
-        <div className="flex gap-6">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
           <ImageUpload
             setPicture={setPicture}
             picture={picture}
@@ -123,7 +120,7 @@ const FormCreateProduct = () => {
             error={error}
           />
 
-          <div className="flex-3 w-2/3">
+          <div className="flex-3 w-full sm:w-2/3">
             <CustomInput
               handleOnChange={handleOnChange}
               setStateValue={setName}
@@ -151,8 +148,8 @@ const FormCreateProduct = () => {
 
             <div className="mb-8 flex w-full flex-col">
               <span className="mb-4">Valeurs nutritionnelles :</span>
-              <div className="flex w-full flex-col gap-3 text-sm">
-                <div className="flex justify-between">
+              <div className="flex w-full flex-row gap-3 text-sm sm:flex-col">
+                <div className="flex flex-1 flex-col justify-between sm:flex-row">
                   <CustomInput
                     handleOnChange={handleOnChange}
                     setStateValue={setEnergy}
@@ -161,8 +158,8 @@ const FormCreateProduct = () => {
                     id="energy"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full "
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -174,8 +171,8 @@ const FormCreateProduct = () => {
                     id="fat"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full "
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -187,12 +184,12 @@ const FormCreateProduct = () => {
                     id="sugar"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full "
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-1 flex-col justify-between sm:flex sm:flex-row">
                   <CustomInput
                     handleOnChange={handleOnChange}
                     setStateValue={setFibers}
@@ -201,8 +198,8 @@ const FormCreateProduct = () => {
                     id="fibers"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full "
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -214,8 +211,8 @@ const FormCreateProduct = () => {
                     id="proteins"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full "
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -227,14 +224,14 @@ const FormCreateProduct = () => {
                     id="salt"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full "
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
                 </div>
               </div>
             </div>
-            <div className="mb-6 flex flex-1 gap-6">
+            <div className="mb-6 flex-1 flex-col items-center justify-center gap-6 sm:flex sm:flex-row">
               <CustomInput
                 handleOnChange={handleOnChange}
                 setStateValue={setPrice}
@@ -244,7 +241,7 @@ const FormCreateProduct = () => {
                 type="text"
                 placeholder=""
                 classInput="w-24"
-                classParentDiv=""
+                classParentDiv="mb-6 sm:mb-1"
                 error={error}
               />
 

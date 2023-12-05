@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Header from "../components/Header";
+import Header from "../components/HeaderNav/Header";
+import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 import ProductAdmin from "../components/ProductAdmin";
 import Cookies from "js-cookie";
 
@@ -27,29 +28,30 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
       }
     };
 
-    // if (!adminToken) {
-    //   if (Cookies.get("scanSipToken")) {
-    //     setAdminToken(Cookies.get("scanSipToken"));
-    //   } else {
-    //     navigate("/admin/signin");
-    //   }
-    // } else {
-    fetchData();
-    // }
+    if (!adminToken) {
+      if (Cookies.get("scanSipToken")) {
+        setAdminToken(Cookies.get("scanSipToken"));
+      } else {
+        navigate("/admin/signin");
+      }
+    } else {
+      fetchData();
+    }
   }, []);
 
   return isLoading ? (
     <Loader />
   ) : (
     <>
-      <Header setAdminToken={setAdminToken} />
-      <div className="relative p-8">
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
+      <div className="p-8">
         <h1 className="mb-6 border-b border-solid border-black p-6 text-3xl">
           Mes produits ({data.count})
         </h1>
 
         {/* Big Carousel Section */}
-        <div className="flex flex-nowrap gap-4 overflow-scroll">
+        <div className="flex flex-nowrap gap-1 overflow-scroll sm:gap-4">
           <div className="shrink-0 border-r-2 p-2">
             <h2 className="text-bold mb-3 text-xl">Mes Softs</h2>
             <div className="flex flex-col">

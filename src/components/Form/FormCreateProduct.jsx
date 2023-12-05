@@ -10,6 +10,7 @@ import SelectBox from "./SelectBox";
 import ImageUpload from "./ImageUpload";
 
 import baseApiURL from "../../api";
+import Loader from "../Loader";
 
 const FormCreateProduct = () => {
   const [name, setName] = useState("");
@@ -24,12 +25,14 @@ const FormCreateProduct = () => {
   const [fat, setFat] = useState("");
   const [fibers, setFibers] = useState("");
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     //Validation form is dealed in the backend
     // setErrorMessage("");
     setError(false);
@@ -71,7 +74,7 @@ const FormCreateProduct = () => {
       // setErrorMessage("");
 
       console.log(response.data);
-
+      setIsLoading(false);
       navigate("/admin/products");
     } catch (error) {
       setError(true);
@@ -83,7 +86,9 @@ const FormCreateProduct = () => {
     setError(false);
     setter(event.target.value);
   };
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <div>
         <Toaster />
@@ -93,7 +98,7 @@ const FormCreateProduct = () => {
           handleSubmitForm(event);
         }}
       >
-        <div className="flex gap-6">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
           <ImageUpload
             setPicture={setPicture}
             picture={picture}
@@ -101,7 +106,7 @@ const FormCreateProduct = () => {
             error={error}
           />
 
-          <div className="flex-3 w-2/3">
+          <div className="flex-3 w-full sm:w-2/3">
             <CustomInput
               handleOnChange={handleOnChange}
               setStateValue={setName}
@@ -129,8 +134,8 @@ const FormCreateProduct = () => {
 
             <div className="mb-8 flex w-full flex-col">
               <span className="mb-4">Valeurs nutritionnelles :</span>
-              <div className="flex w-full flex-col gap-3 text-sm">
-                <div className="flex justify-between">
+              <div className="flex w-full flex-row gap-3 text-sm sm:flex-col">
+                <div className="flex flex-1 flex-col justify-between sm:flex-row">
                   <CustomInput
                     handleOnChange={handleOnChange}
                     setStateValue={setEnergy}
@@ -139,8 +144,8 @@ const FormCreateProduct = () => {
                     id="energy"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full "
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -152,8 +157,8 @@ const FormCreateProduct = () => {
                     id="fat"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full"
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -165,12 +170,12 @@ const FormCreateProduct = () => {
                     id="sugar"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full"
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-1 flex-col justify-between sm:flex sm:flex-row">
                   <CustomInput
                     handleOnChange={handleOnChange}
                     setStateValue={setFibers}
@@ -179,8 +184,8 @@ const FormCreateProduct = () => {
                     id="fibers"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full"
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -192,8 +197,8 @@ const FormCreateProduct = () => {
                     id="proteins"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full"
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
 
@@ -205,15 +210,15 @@ const FormCreateProduct = () => {
                     id="salt"
                     type="text"
                     placeholder=""
-                    classParentDiv="w-36"
-                    classInput="w-16 "
+                    classParentDiv="sm:w-36 w-full"
+                    classInput="sm:w-16 w-28 "
                     error={error}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="mb-6 flex flex-1 gap-6">
+            <div className="mb-6 flex-1 flex-col items-center justify-center gap-6 sm:flex sm:flex-row">
               <CustomInput
                 handleOnChange={handleOnChange}
                 setStateValue={setPrice}
@@ -223,7 +228,7 @@ const FormCreateProduct = () => {
                 type="text"
                 placeholder=""
                 classInput="w-24"
-                classParentDiv=""
+                classParentDiv="mb-6 sm:mb-1"
                 error={error}
               />
 
@@ -236,7 +241,7 @@ const FormCreateProduct = () => {
                 error={error}
               />
             </div>
-            <div className="flex justify-between gap-4">
+            <div className="flex justify-center gap-4">
               <button type="submit" className="btn-primary w-36 text-lg">
                 Valider
               </button>

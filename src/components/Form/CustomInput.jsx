@@ -11,7 +11,9 @@ const CustomInput = ({
   error,
 }) => {
   return (
-    <div className={`flex flex-col ${classParentDiv}`}>
+    <div
+      className={`flex flex-col ${classParentDiv} items-center sm:items-start`}
+    >
       <label className="mb-2" htmlFor={id}>
         {label}
       </label>
@@ -19,7 +21,7 @@ const CustomInput = ({
         onChange={(event) => {
           handleOnChange(event, setStateValue);
         }}
-        className={`rounded border p-2 outline-0  ${
+        className={`w-full rounded border p-2  outline-0 ${
           error && !stateValue ? "border-red-300" : "border-green-300"
         } ${classInput}`}
         type={type}

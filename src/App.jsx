@@ -1,6 +1,7 @@
 //Import Package
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import Cookies from "js-cookie";
 import {
   faChevronDown,
   faChevronUp,
@@ -8,6 +9,7 @@ import {
   faCircleXmark,
   faPenToSquare,
   faTrashCan,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
@@ -22,6 +24,8 @@ import Lab from "./pages/Lab";
 import AdminProducts from "./pages/AdminProducts";
 import AdminNewProduct from "./pages/AdminNewProduct";
 import AdminHistory from "./pages/AdminHistory";
+// import Header from "./components/HeaderNav/Header";
+// import HeaderMobile from "./components/HeaderNav/HeaderMobile";
 
 // Import Assets
 import "./App.css";
@@ -36,12 +40,26 @@ library.add(
   faCircleXmark,
   faPenToSquare,
   faTrashCan,
+  faBars,
 );
 function App() {
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [adminToken, setAdminToken] = useState("");
-
+  const [cart, setCart] = useState(
+    JSON.parse(sessionStorage.getItem("cartProductsStorage")) || [],
+  );
+  const [cartProductsStorage, setCartProductsStorage] = useState(
+    sessionStorage.getItem("cartProductsStorage") || null,
+  );
+  const [cartTotalStorage, setCartTotalStorage] = useState(
+    sessionStorage.getItem("cartTotalStorage") || 0,
+  );
+  const [total, setTotal] = useState(
+    Number(sessionStorage.getItem("cartTotalStorage")) || 0,
+  );
+  const [adminToken, setAdminToken] = useState(
+    Cookies.get("scanSipToken") || null,
+  );
+  console.log("width", window.innerWidth);
+  console.log("cart before return >>>", cart);
   return (
     <Router>
       <Routes>
@@ -54,6 +72,10 @@ function App() {
               setCart={setCart}
               total={total}
               setTotal={setTotal}
+              cartProductsStorage={cartProductsStorage}
+              setCartProductsStorage={setCartProductsStorage}
+              cartTotalStorage={cartTotalStorage}
+              setCartTotalStorage={setCartTotalStorage}
             />
           }
         />
@@ -68,6 +90,10 @@ function App() {
               setCart={setCart}
               total={total}
               setTotal={setTotal}
+              cartProductsStorage={cartProductsStorage}
+              setCartProductsStorage={setCartProductsStorage}
+              cartTotalStorage={cartTotalStorage}
+              setCartTotalStorage={setCartTotalStorage}
             />
           }
         />

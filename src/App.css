@@ -9,7 +9,9 @@
     --color-borderGrey: rgba(0, 0, 0, 0.05);
   }
 }
-
+html {
+  scroll-behavior: smooth;
+}
 .primary-color {
   color: var(--color-primary);
 }
@@ -170,5 +172,51 @@
   }
   100% {
     box-shadow: none;
+  }
+}
+
+.mobile-nav {
+  transition: all 0.4s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  animation: displayNav 0.4s forwards;
+  opacity: 0;
+  width: 0;
+}
+.hide-mobile-nav {
+  transition: all 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  animation: hideNav 0.5s forwards;
+  opacity: 1;
+  width: 100%;
+}
+@keyframes displayNav {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}
+@keyframes hideNav {
+  from {
+    opacity: 1;
+    width: 100%;
+  }
+  to {
+    opacity: 0;
+    width: 0;
+  }
+}
+.animate-items {
+  transition: all 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  animation: animateItems 0.8s 0.3s forwards;
+  opacity: 0;
+}
+@keyframes animateItems {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

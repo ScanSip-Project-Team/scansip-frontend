@@ -9,7 +9,7 @@ const ImageUpload = ({
   error,
 }) => {
   return (
-    <div className="relative w-1/3 flex-1">
+    <div className="relative flex w-1/3 flex-1 flex-col items-center sm:items-start">
       {!picture && !productImage ? (
         <img
           className={`m-auto mb-6 w-64 rounded-lg border ${
@@ -48,7 +48,7 @@ const ImageUpload = ({
         </>
       )}
 
-      <div className="upload-module m-auto flex w-52 flex-col items-center justify-center gap-3">
+      <div className="upload-module flex w-52 flex-col items-center justify-center gap-3">
         <label
           className="rounded bg-black p-3 text-center text-white"
           htmlFor="picture"
