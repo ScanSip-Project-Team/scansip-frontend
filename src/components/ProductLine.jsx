@@ -93,14 +93,14 @@ const ProductLine = (props) => {
         </div>
         <div>
           {item.quantity ? (
-            <div className="flex h-[23px] w-24 items-center justify-center rounded-[20px] bg-[#E8E8E8] p-1.5 text-[10px]">
+            <div className="flex h-[28px]  items-center justify-center rounded-[20px] bg-[#E8E8E8] p-1.5 text-xs">
               <ButtonQuantity text={"-"} func={() => handleClickMinus(item)} />
               <p> {item.quantity}</p>
 
               <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
             </div>
           ) : (
-            <div className="flex h-[23px] w-24 items-center justify-center p-1.5 text-[10px]">
+            <div className="mr-4 flex  h-[28px] items-center justify-center rounded-[20px]  p-1.5 text-xs">
               <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
             </div>
           )}

@@ -91,18 +91,22 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
 
   return (
     // <section className="flex w-screen flex-col ">
-    <main className="padding-container flex h-screen flex-col items-center">
-      <nav className="self-start">
-        <BreadCrumb
-          text={"Retourner à ma commande"}
-          func={() => navigate("/home")}
-        />
-      </nav>
-      <div className=" h m-7 flex justify-center">
-        <p className="font-bold">Mon panier</p>
+    <main className="flex h-screen flex-col items-center">
+      <div className="h-100 border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2 border-b bg-white ">
+        <div className="my-6 flex w-11/12 flex-col items-center justify-center gap-2 bg-white">
+          <nav className="self-start">
+            <BreadCrumb
+              text={"Retourner à ma commande"}
+              func={() => navigate("/home")}
+            />
+          </nav>
+          <div className=" m-2 flex justify-center">
+            <p className="font-bold">Mon panier</p>
+          </div>
+        </div>
       </div>
 
-      <div className="flex w-screen flex-col items-center">
+      <div className="mb-24 mt-28 flex w-screen flex-col items-center pb-[140px]">
         <ListProduct
           data={cart}
           cart={cart}
