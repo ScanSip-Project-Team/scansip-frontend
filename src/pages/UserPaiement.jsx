@@ -9,42 +9,98 @@ import axios from "axios";
 // Import Components
 import BreadCrumb from "../components/Breadcrumb";
 import PaiementForm from "../components/PaiementForm";
+import baseApiURL from "../api";
 
 // Import Assets
 import timer from "./../assets/timer.svg";
+import Cookies from "js-cookie";
 
 const UserPaiement = ({ total }) => {
+  const navigate = useNavigate();
   let order_id = useParams();
+
+  const verifyOrderInCookie = Cookies.get("idOrder");
+
+  if (verifyOrderInCookie) {
+    navigate("/home");
+  }
 
   order_id = order_id.id;
 
-  console.log(order_id);
+  // console.log(order_id);
 
-  const navigate = useNavigate();
-
-  // order_id = "656614e373933aa6ab1b3a69";
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
   const [prices, setPrices] = useState({});
   const [delay, setDelay] = useState(1);
 
+  const appearance = {
+    theme: "flat",
+    variables: {
+      fontFamily: ' "Gill Sans", sans-serif',
+      fontLineHeight: "1.5",
+      borderRadius: "10px",
+      colorBackground: "#F6F8FA",
+      accessibleColorOnColorPrimary: "#262626",
+    },
+    rules: {
+      // ".BillingAddressForm": {
+      //   display: "none",
+      // },
+      ".Block": {
+        backgroundColor: "var(--colorBackground)",
+        boxShadow: "none",
+        padding: "12px",
+      },
+      ".Input": {
+        padding: "12px",
+        border: "solid 2px black",
+      },
+      ".Input:disabled, .Input--invalid:disabled": {
+        color: "lightgray",
+      },
+      ".Input:focus, .Input--invalid:focus": {
+        boxShadow: "0px 1px 1px grey, 0px 3px 7px grey",
+      },
+      ".Tab": {
+        padding: "10px 12px 8px 12px",
+        border: "solid 1px black",
+      },
+      ".Tab:hover": {
+        border: "none",
+        boxShadow:
+          "0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)",
+      },
+      ".Tab--selected, .Tab--selected:focus, .Tab--selected:hover": {
+        border: "none",
+        backgroundColor: "#fff",
+        boxShadow:
+          "0 0 0 1.5px var(--colorPrimaryText), 0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)",
+      },
+      ".Label": {
+        fontWeight: "500",
+      },
+    },
+  };
+
   const options = {
     clientSecret,
+    appearance,
   };
 
   useEffect(() => {
     const fetchDelay = async () => {
-      const { data } = await axios.get("http://localhost:3000/delay");
+      const { data } = await axios.get(`${baseApiURL}/delay`);
       setDelay(data.minutes_delay);
     };
     fetchDelay();
 
-    fetch("http://localhost:3000/pay/config").then(async (r) => {
+    fetch(`${baseApiURL}/pay/config`).then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
 
-    fetch(`http://localhost:3000/pay/create-payment-intent/${order_id}`, {
+    fetch(`${baseApiURL}/pay/create-payment-intent/${order_id}`, {
       method: "POST",
       body: JSON.stringify(),
     }).then(async (result) => {
@@ -53,7 +109,7 @@ const UserPaiement = ({ total }) => {
       setClientSecret(clientSecret);
       setPrices({ total_price, order_price, order_fee });
     });
-  }, []);
+  }, [order_id]);
 
   return (
     <>
@@ -71,8 +127,9 @@ const UserPaiement = ({ total }) => {
             alt="icone d'une horloge noir et blanche"
             className=""
           />
-          <p className="text-xs font-medium">
-            Temps d'attente estimé : {delay} minutes
+          <p>
+            Temps d'attente :&nbsp;
+            {`${delay > 1 ? delay + " minutes" : delay + " minute"} `}
           </p>
         </div>
         <h1 className="w-full border-y border-grey-232 py-5px text-center text-sm font-medium">
@@ -89,6 +146,7 @@ const UserPaiement = ({ total }) => {
                 prices={prices}
                 total={total}
                 order_id={order_id}
+                appearance={appearance}
               />
             </Elements>
           )}

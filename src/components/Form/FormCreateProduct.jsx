@@ -51,7 +51,7 @@ const FormCreateProduct = () => {
       formData.append("product_image", picture);
 
       const response = await axios.post(
-        `${baseApiURL}/admin/products/new`,
+        `${import.meta.env.VITE_URL_BACKEND}admin/products/new`,
         formData,
         {
           headers: {

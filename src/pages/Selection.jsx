@@ -2,22 +2,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 // Yohann code ----------------
 //Import components
-import Modal from "../Components/Modal";
-
+import Modal from "../components/Modal";
+import Button from "../components/Button";
 import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
 
-//Import assets
-import alcoolsPicto from "../assets/alcools-picto.png";
-import cocktailsPicto from "../assets/cocktails-picto.png";
-import softsPicto from "../assets/softs-picto.png";
-import snacksPicto from "../assets/snacks-picto.png";
-
 // Yohann code ----------------
+import baseApiURL from "../api";
 
 const Selection = ({
   setCart,
@@ -41,11 +37,14 @@ const Selection = ({
   // Yohann code -----------------------------
   const [openModal, setOpenModal] = useState(false);
   const [productID, setProductID] = useState();
+  const [emptyCart, setEmptyCart] = useState(false);
+
   const navigate = useNavigate();
+  Cookies.remove("idOrder");
 
   const handleNavigate = () => {
     if (!total) {
-      alert("Panier vide !");
+      setEmptyCart(true);
     } else {
       navigate("/cart");
     }
@@ -80,7 +79,7 @@ const Selection = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/products");
+        const response = await axios.get(`${baseApiURL}/products`);
         setData(response.data);
         console.log(response.data);
         setIsLoading(false);
@@ -121,9 +120,9 @@ const Selection = ({
     <Loader />
   ) : (
     // SELECTION BANNER
-    <div className=" flex w-screen flex-col items-center justify-center scroll-smooth  bg-white">
-      <div className="h-100 w-screnn fixed top-0 flex w-full items-center justify-center gap-2  bg-white">
-        <div className="my-6 flex w-11/12 items-center justify-center gap-2   bg-white">
+    <div className=" flex w-screen flex-col items-center justify-center  scroll-smooth  bg-white">
+      <div className="h-100 border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2 border-b bg-white shadow-md">
+        <div className="my-6 flex w-11/12 items-center justify-center gap-2 bg-white">
           <CardCategory
             func={handleClickSofts}
             icon={softsPicto}
@@ -220,20 +219,23 @@ const Selection = ({
           title={"Cocktails "}
         />
       </section>
-
-      <div className="fixed bottom-0 flex w-full justify-center  bg-white">
-        <input
-          className=" my-4 w-11/12 rounded  bg-black p-1.5 text-white"
-          type="submit"
-          value={`Voir le panier • ${total} €`}
-          // Yohann code -----------------------------
-          onClick={handleNavigate}
-          // Yohann code -----------------------------
+      <div className="border-lightgrey fixed  bottom-0 mx-[10px] w-screen border-t py-6">
+        <Button
+          text={`Voir le panier • ${total} €`}
+          className={"btn-client mx-[10px]  w-available bg-black text-white"}
+          func={handleNavigate}
         />
       </div>
 
       {/* Yohann code ----------------------------- */}
-      {openModal && <Modal setOpenModal={setOpenModal} productID={productID} />}
+      {openModal && (
+        <Modal
+          setOpenModal={setOpenModal}
+          productID={productID}
+          total={total}
+          handleNavigate={handleNavigate}
+        />
+      )}
       {/* Yohann code ----------------------------- */}
     </div>
   );

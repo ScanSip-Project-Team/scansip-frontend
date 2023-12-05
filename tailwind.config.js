@@ -17,6 +17,7 @@ export default {
         greenScanSip: "#18C166",
         greyAddArticlesButton: "#F3F3F3",
         darkGrey: "#363636",
+        ligthGrey: "rgba(0, 0, 0, 0.05);",
       },
       borderRadius: {
         5: "5px",
@@ -45,6 +46,10 @@ export default {
       },
       rounded: {
         "10px": "10px",
+      },
+
+      fontFamily: {
+        serif: ["Roboto"],
       },
     },
   },

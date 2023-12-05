@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/HeaderNav/Header";
+import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 import ProductAdmin from "../components/ProductAdmin";
-import baseApiURL from "../api";
 import Cookies from "js-cookie";
 
 import Loader from "../components/Loader";
-import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 
 const AdminProducts = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
@@ -18,7 +17,9 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseApiURL}/admin/products`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_URL_BACKEND}admin/products`,
+        );
         setData(response.data);
         setIsLoading(false);
         console.log(response.data);

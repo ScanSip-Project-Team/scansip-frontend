@@ -5,39 +5,40 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import axios from "axios";
 import Loader from "../components/Loader";
+import Cookies from "js-cookie";
+
+import baseApiURL from "../api";
 
 import billPicto from "../assets/bill-picto.png";
 import snacksPicto from "../assets/snacks-picto.png";
 
 const Billing = () => {
+  Cookies.remove("orderToModify");
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState();
-
   const [delay, setDelay] = useState(1);
 
   const navigate = useNavigate();
-
   let order_id = useParams();
-
   order_id = order_id.id;
 
   useEffect(() => {
-    //   // const fetchDelay = async () => {
-    //   //   const { data } = await axios.get("http://localhost:3000/delay");
-    //   //   setDelay(data.minutes_delay);
-    //   // };
-    //   // fetchDelay();
+    const fetchDelay = async () => {
+      const { data } = await axios.get("http://localhost:3000/delay");
+      // console.log(data.minutes_delay);
+      setDelay(data.minutes_delay);
+    };
+    fetchDelay();
 
     const fetchData = async () => {
-      const response = await axios.get(
-        `http://localhost:3000/orders/${order_id}`,
-      );
+      const response = await axios.get(`${baseApiURL}/orders/${order_id}`);
       // console.log(response.data);
       setData(response.data);
-      setTotal(response.data.total_price);
+      setTotal(`${response.data.total_price + 2}`);
       setIsLoading(false);
-      if (total === 0) {
+      const tokenOrder = Cookies.set("idOrder", response.data._id);
+      if (total === 0 || total === 2) {
         navigate("/home");
       }
     };
@@ -45,6 +46,8 @@ const Billing = () => {
   }, [total]);
 
   console.log(data);
+  // const tokenOrder = Cookies.set("idCookie", data._id);
+  // console.log(delay);
 
   // fonction pour le pdf
   const pdfRef = useRef();
@@ -88,7 +91,10 @@ const Billing = () => {
         <div className="w-40">
           <p className="mb-3">Merci d'avoir passé commande !</p>
           <p>N° Commande : {data.order_number} </p>
-          <p>Temps d'attente : {delay} minutes</p>
+          <p>
+            Temps d'attente :&nbsp;
+            {`${delay > 1 ? delay + " minutes" : delay + " minute"} `}
+          </p>
         </div>
         <div className="absolute bottom-0 right-3 flex items-end ">
           <img
@@ -109,11 +115,11 @@ const Billing = () => {
       <div>
         <div className="mb-2 ml-5 mr-5 flex justify-between">
           <span className="font-bold">Total </span>
-          <span>{total}€</span>
+          <span>{`${total}`} €</span>
         </div>
 
-        <div className="mb-2 ml-3 mr-3 flex justify-center border border-l-0 border-r-0">
-          <p className="font-bold">Détail de votre facture</p>
+        <div className="mb-2 ml-3 mr-3 flex justify-center border-b-2 pb-2">
+          <p className=" font-bold">Détail de votre facture</p>
         </div>
 
         <div className="mb-5">
@@ -130,6 +136,10 @@ const Billing = () => {
                   </div>
                 );
               })}
+              <div className="mt-5 flex justify-between font-bold">
+                <span>Frais de service</span>
+                <span>2 €</span>
+              </div>
             </div>
           </div>
         </div>
@@ -144,16 +154,16 @@ const Billing = () => {
           </button>
         </div>
 
-        <div className="mb-2 ml-3 mr-3 flex justify-center border border-l-0 border-r-0">
+        <div className="ml-3 mr-3 flex justify-center border-b-2 pb-2">
           <p className="font-bold ">Paiement</p>
         </div>
 
-        <div className="mb-5 ml-5 mr-5 border-b">
-          <p className="mb-2 text-sm">
+        <div className="mb-5 border-b-2 ">
+          <p className="mb-2 ml-5 mr-5 text-sm ">
             <span className="font-bold">
-              Un paiement de {total}€ a été éffectué avec succès&nbsp;
+              Un paiement de {total}€ a été éffectué avec succès.&nbsp;
             </span>
-            Ce paiement devrait bientôt apparaître sur votre relevé bancaire
+            Ce paiement devrait bientôt apparaître sur votre relevé bancaire.
           </p>
         </div>
 

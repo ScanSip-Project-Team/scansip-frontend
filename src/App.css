@@ -6,6 +6,7 @@
   :root {
     --color-primary: #06c167;
     --color-secondary: #19ae66;
+    --color-borderGrey: rgba(0, 0, 0, 0.05);
   }
 }
 html {
@@ -25,12 +26,18 @@ html {
 .btn-primary:hover {
   background-color: var(--color-secondary);
 }
+
 .btn-black {
   background-color: #000;
-  padding: 5px 10px;
   border-radius: 10px;
   font-size: 14px;
   color: white;
+  transition: all 0.4s ease-in-out;
+}
+.btn-client {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
   transition: all 0.4s ease-in-out;
 }
 .btn-black:hover {
@@ -67,9 +74,9 @@ html {
 .price-product {
   color: #000;
   /* font-family: Roboto; */
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: normal;
 }
 

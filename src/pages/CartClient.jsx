@@ -2,9 +2,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 //Import Components
 import Button from "../components/Button";
+import BreadCrumb from "../components/Breadcrumb";
+import ListProduct from "../components/ListProduct";
+
+import baseApiURL from "../api";
 
 const CartClient = ({
   setCart,
@@ -17,8 +22,8 @@ const CartClient = ({
   setCartTotalStorage,
 }) => {
   const [isDisabled, setIsDisable] = useState(false);
-  const [cartBeforePayment, setCartBeforePayment] = useState();
 
+  // console.log(total);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,37 +34,6 @@ const CartClient = ({
 
   const handleNavigateToHome = () => {
     navigate("/home");
-  };
-
-  const orderToSend = [];
-  cart.forEach((e) => {
-    orderToSend.push({ product: { _id: e._id }, quantity_cart: e.quantity });
-  });
-
-  // Création d'une commande
-  const createOrder = async () => {
-    try {
-      setIsDisable(true);
-      console.log(orderToSend);
-      const response = await axios.post(
-        "http://localhost:3000/order/new",
-        {
-          product_list: orderToSend,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-      console.log(response.data);
-
-      const orderId = response.data._id;
-
-      navigate(`/paiement/${orderId}`);
-    } catch (error) {
-      console.log(error.message);
-    }
   };
 
   // Gestion du counter du cart
@@ -115,18 +89,75 @@ const CartClient = ({
     }
   };
 
-  return (
-    <section className="flex w-screen flex-col ">
-      <div className="mb-4">
-        <Button
-          text={`Retourner à ma commande`}
-          className={" p-1.5 font-bold text-black"}
-          disabled={isDisabled}
-          func={handleNavigateToHome}
-        />
-      </div>
+  const orderToSend = [];
+  cart.forEach((e) => {
+    orderToSend.push({ product: { _id: e._id }, quantity_cart: e.quantity });
+  });
 
-      <div className="mb-7 flex justify-center">
+  // Création d'une commande
+  const createOrder = async () => {
+    try {
+      setIsDisable(true);
+
+      console.log(orderToSend);
+      const response = await axios.post(
+        "http://localhost:3000/order/new",
+        {
+          product_list: orderToSend,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      console.log(response.data);
+
+      Cookies.set("orderToModify", response.data._id);
+
+      const orderId = response.data._id;
+      navigate(`/paiement/${orderId}`);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  // Modification d'une commande
+
+  const modifyOrder = async () => {
+    const orderIdToModify = Cookies.get("orderToModify");
+    // console.log(orderIdToModify);
+    console.log(orderToSend);
+    const response = await axios.put(
+      `http://localhost:3000/orders/update/${total}/total_price`,
+      {
+        id: orderIdToModify,
+        key: "product_list",
+        value: orderToSend,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    const orderId = response.data._id;
+    navigate(`/paiement/${orderId}`);
+
+    console.log(response.data);
+  };
+
+  return (
+    // <section className="flex w-screen flex-col ">
+    <main className="padding-container flex h-screen flex-col items-center">
+      <nav className="self-start">
+        <BreadCrumb
+          text={"Retourner à ma commande"}
+          func={() => navigate("/home")}
+        />
+      </nav>
+      <div className=" h m-7 flex justify-center">
         <p className="font-bold">Mon panier</p>
       </div>
 
@@ -172,22 +203,43 @@ const CartClient = ({
         })}
 
         <Button
-          text={`Commande pour un total de ${total} €`}
+          text={`Commander pour un total de ${total} €`}
           className={"my-6 w-11/12 rounded bg-black p-1.5 text-white"}
-          func={createOrder}
+          func={Cookies.get("orderToModify") ? modifyOrder : createOrder}
           disabled={isDisabled}
         />
 
+        {/* <div className="flex w-screen flex-col items-center">
+        <ListProduct
+          data={cart}
+          cart={cart}
+          setCart={setCart}
+          setTotal={setTotal}
+          total={total}
+          // id={"softs"}
+          // icon={"../src/assets/Soft.png"}
+          // title={"Softs"}
+        />
+      </div>
+      <div className="border-lightgrey  fixed bottom-0 mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t py-6">
+        <Button
+          text={`Commande pour un total de ${total} €`}
+          className={"btn-client w-available  mx-[10px] bg-black text-white"}
+          func={createOrder}
+          disabled={isDisabled}
+        /> */}
+        {/* >>>>>>> main */}
         <Button
           text={"Ajouter des articles"}
           className={
-            "w-11/12 rounded bg-greyAddArticlesButton p-1.5 text-black"
+            "btn-client mx-[10px] w-available bg-greyAddArticlesButton text-black"
           }
           func={handleNavigateToHome}
           disabled={isDisabled}
         />
       </div>
-    </section>
+      {/* </section> */}
+    </main>
   );
 };
 

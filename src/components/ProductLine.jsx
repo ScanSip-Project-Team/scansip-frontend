@@ -42,6 +42,7 @@ const ProductLine = (props) => {
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity - 1;
       setCart(cartCopy);
       setTotal(total - Number(item.product_price));
+<<<<<<< HEAD
 
       //save cartCopy in a sessionStorage
       sessionStorage.setItem("cartProductsStorage", JSON.stringify(cartCopy));
@@ -60,6 +61,8 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
+=======
+>>>>>>> main
     } else {
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
@@ -72,6 +75,7 @@ const ProductLine = (props) => {
 
       delete item.quantity;
       setTotal(total - Number(item.product_price));
+<<<<<<< HEAD
 
       //update sessionStorage
       //save new version of cartCopy in a sessionStorage
@@ -94,6 +98,8 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
+=======
+>>>>>>> main
     }
   };
 
@@ -110,6 +116,7 @@ const ProductLine = (props) => {
       cartCopy.push(item);
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
+<<<<<<< HEAD
 
       //save cartCopy in a sessionStorage
       sessionStorage.setItem("cartProductsStorage", JSON.stringify(cartCopy));
@@ -128,6 +135,8 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
+=======
+>>>>>>> main
     }
     // s'il est déjà dans le panier j'augmente la quantité de 1
     else {
@@ -138,6 +147,7 @@ const ProductLine = (props) => {
 
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
+<<<<<<< HEAD
       //update sessionStorage
       //save new version of cartCopy in a sessionStorage
       sessionStorage.setItem("cartProductsStorage", JSON.stringify(cartCopy));
@@ -157,33 +167,42 @@ const ProductLine = (props) => {
       setCartTotalStorage(sessionStorage.getItem("cartTotalStorage"));
 
       console.log("cart >>>", cart);
+=======
+>>>>>>> main
     }
   };
 
   return (
     <>
-      <div className="flex  items-center justify-start border border-gray-300 bg-[#F3F3F3] pr-1 text-sm">
-        <div className="w-2/6">
+      <div className="border-lightgrey  flex h-[63px] items-center justify-start border-b p-[5px] pr-1 text-sm">
+        <div className="flex h-full w-2/6 justify-center">
           <img
+<<<<<<< HEAD
             className="h-20 w-20 rounded-sm bg-[#F3F3F3] object-cover"
+=======
+            className="h-full  rounded-[5px] bg-[#F3F3F3] object-cover"
+>>>>>>> main
             src={item.product_image.secure_url}
             alt="product"
-            // Yohann code -----------------------------
             onClick={() => {
-              console.log(item._id);
-              setOpenModal(true);
-              setProductID(item._id);
+              if (setProductID && setProductID) {
+                setOpenModal(true);
+                setProductID(item._id);
+              }
             }}
-            // Yohann code -----------------------------
           />
         </div>
         <div className="w-4/6  pl-2">
-          <p className="title-product ">{item.product_name}</p>{" "}
-          <p className="price-product">{item.product_price} €</p>
+          <p className="title-product text-sm font-medium">
+            {item.product_name}
+          </p>
+          <p className="price-product text-xs font-normal ">
+            {item.product_price.toFixed(2)} €
+          </p>
         </div>
         <div>
           {item.quantity ? (
-            <div className="flex w-24 items-center justify-center gap-2  rounded-full bg-[#E8E8E8] p-1.5">
+            <div className="flex h-[23px] w-16 items-center justify-center rounded-[20px] bg-[#E8E8E8] p-1.5 text-[10px]">
               <ButtonQuantity text={"-"} func={() => handleClickMinus(item)} />
               <p> {item.quantity}</p>
 
@@ -197,7 +216,7 @@ const ProductLine = (props) => {
               <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
             </div>
           ) : (
-            <div className="flex w-24 items-center justify-center gap-2 p-1.5">
+            <div className="flex w-16 items-center justify-center p-1.5">
               <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
             </div>
           )}
