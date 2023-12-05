@@ -138,16 +138,15 @@ const Orders = ({ adminToken, setAdminToken }) => {
               Vous avez{" "}
               <span className="font-bold">
                 {
-                  data.filter(
-                    (element) => element.order_status === "in progress",
-                  ).length
+                  data.filter((element) => element.order_status === "paid")
+                    .length
                 }
               </span>{" "}
-              commandes en cours
+              commandes payées en cours
             </h2>
 
             {data.map((element) => {
-              if (element.order_status === "in progress") {
+              if (element.order_status === "paid") {
                 return (
                   <>
                     <OrderComponent
