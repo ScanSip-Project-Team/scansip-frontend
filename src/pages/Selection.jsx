@@ -12,6 +12,10 @@ import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
 
+import softsPicto from "../assets/softs-picto.png";
+import snacksPicto from "../assets/snacks-picto.png";
+import alcoolsPicto from "../assets/alcools-picto.png";
+import cocktailsPicto from "../assets/cocktails-picto.png";
 // Yohann code ----------------
 import baseApiURL from "../api";
 
