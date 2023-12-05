@@ -28,7 +28,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     try {
       controlInput();
       if (alert.input === "") {
-        const response = await axios.post(`${baseApiURL}/admin/signin`, {
+        const response = await axios.post(`${baseApiURL}/admin/login`, {
           email: email,
           password: password,
         });
@@ -90,7 +90,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="w-300  mt-5 flex flex-col gap-1.5"
+          className="mt-5  flex w-300 flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -105,8 +105,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               type="email"
               className={
                 alert.input === "email" || alert.input === "auth"
-                  ? "rounded-5 h-7.5 border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
+                  ? "h-7.5 rounded-5 border border-red-600 px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
             />
           </div>
@@ -122,8 +122,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               type="password"
               className={
                 alert.input === "password" || alert.input === "auth"
-                  ? "rounded-5 h-7.5 red border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
+                  ? "red h-7.5 rounded-5 border border-red-600 px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
               value={password}
             />
@@ -137,7 +137,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         </form>
         <p
           onClick={() => navigate("/admin/signup")}
-          className="text-greenScanSip font-medium underline underline-offset-4"
+          className="font-medium text-greenScanSip underline underline-offset-4"
         >
           Pas encore inscrit ? M'inscrire
         </p>

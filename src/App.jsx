@@ -43,18 +43,9 @@ library.add(
   faBars,
 );
 function App() {
-  const [cart, setCart] = useState(
-    JSON.parse(sessionStorage.getItem("cartProductsStorage")) || [],
-  );
-  const [cartProductsStorage, setCartProductsStorage] = useState(
-    sessionStorage.getItem("cartProductsStorage") || null,
-  );
-  const [cartTotalStorage, setCartTotalStorage] = useState(
-    sessionStorage.getItem("cartTotalStorage") || 0,
-  );
-  const [total, setTotal] = useState(
-    Number(sessionStorage.getItem("cartTotalStorage")) || 0,
-  );
+  const [cart, setCart] = useState([]);
+
+  const [total, setTotal] = useState(0);
   const [adminToken, setAdminToken] = useState(
     Cookies.get("scanSipToken") || null,
   );
@@ -72,10 +63,6 @@ function App() {
               setCart={setCart}
               total={total}
               setTotal={setTotal}
-              cartProductsStorage={cartProductsStorage}
-              setCartProductsStorage={setCartProductsStorage}
-              cartTotalStorage={cartTotalStorage}
-              setCartTotalStorage={setCartTotalStorage}
             />
           }
         />
@@ -90,10 +77,6 @@ function App() {
               setCart={setCart}
               total={total}
               setTotal={setTotal}
-              cartProductsStorage={cartProductsStorage}
-              setCartProductsStorage={setCartProductsStorage}
-              cartTotalStorage={cartTotalStorage}
-              setCartTotalStorage={setCartTotalStorage}
             />
           }
         />

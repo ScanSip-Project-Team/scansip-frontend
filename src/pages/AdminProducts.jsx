@@ -9,19 +9,17 @@ import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 import ProductAdmin from "../components/ProductAdmin";
 import Loader from "../components/Loader";
-
+import baseApiURL from "../api";
 const AdminProducts = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
-
+  console.log("data=>", data);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_URL_BACKEND}admin/products`,
-        );
+        const response = await axios.get(`${baseApiURL}/admin/products`);
         setData(response.data);
         setIsLoading(false);
         console.log(response.data);

@@ -39,7 +39,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         if (data.status === 200) {
           Cookies.set("scanSipToken", data.token, { expires: 7 });
           setAdminToken(data.token);
-          // navigate("/admin/orders");
+          navigate("/admin/orders");
         }
       }
     } catch (error) {
@@ -106,7 +106,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="w-300  mt-5 flex flex-col gap-1.5"
+          className="mt-5  flex w-300 flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -121,8 +121,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               type="email"
               className={
                 alert.input === "email"
-                  ? "rounded-5 h-7.5 border border-red-600 px-1"
-                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
+                  ? "h-7.5 rounded-5 border border-red-600 px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
             />
           </div>
@@ -138,8 +138,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               type="password"
               className={
                 alert.input === "same-password" || alert.input === "password"
-                  ? "rounded-5 h-7.5 border border-red-600 px-1"
-                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
+                  ? "h-7.5 rounded-5 border border-red-600 px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
               value={password}
             />
@@ -158,8 +158,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "confirm-password" ||
                 alert.input === "same-password"
-                  ? "rounded-5 h-7.5 border border-red-600 px-1"
-                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
+                  ? "h-7.5 rounded-5 border border-red-600 px-1"
+                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
               }
             />
           </div>
@@ -170,7 +170,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
             type={"submit"}
           />
         </form>
-        <p className="text-greenScanSip font-medium underline underline-offset-4">
+        <p className="font-medium text-greenScanSip underline underline-offset-4">
           Déja inscrit ? Me connecter
         </p>
       </main>

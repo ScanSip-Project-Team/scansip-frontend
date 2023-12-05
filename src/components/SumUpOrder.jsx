@@ -47,10 +47,10 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
           </span>
         </div>
         <div className="flex  flex-1 flex-col gap-3">
-          <span className="text-sm ">
+          {/* <span className="text-sm ">
             Nom (carte):
             <span className="font-semibold">Tiktac </span>
-          </span>
+          </span> */}
           <span className="mb-4 text-sm ">
             Prix :
             <span className="font-semibold">
