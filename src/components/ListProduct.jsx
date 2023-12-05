@@ -15,9 +15,12 @@ const ListProduct = (props) => {
   } = props;
   return (
     <>
-      <div id={id} className="w-full scroll-mt-28 px-[5px]">
+      <div
+        id={id}
+        className="border-greenScanSip border-t-1 w-full scroll-mt-28 border-t px-[5px]"
+      >
         <div className="flex justify-center ">
-          <div className="flex w-full justify-start ">
+          <div className="border-lightgrey flex w-full justify-start border-b  ">
             {title && (
               <div className="mx-[5px] my-6 flex items-center gap-2">
                 <h1 className="title-category">Découvrez nos {title} !</h1>
