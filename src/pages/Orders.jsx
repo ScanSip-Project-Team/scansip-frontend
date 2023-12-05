@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Cookies from "js-cookie";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-//Import components
+//Import Components
 import OrderComponent from "../components/OrderComponent";
 import OrderComponentDelivered from "../components/OrderComponentDelivered";
 import Header from "../components/HeaderNav/Header";
@@ -102,6 +102,7 @@ const Orders = ({ adminToken, setAdminToken }) => {
     } else {
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOrderUpdated, counter, adminToken]);
 
   useEffect(() => {
@@ -111,6 +112,7 @@ const Orders = ({ adminToken, setAdminToken }) => {
       console.log("2ème useEffect dans if ", counter);
       refreshPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return isLoading ? (

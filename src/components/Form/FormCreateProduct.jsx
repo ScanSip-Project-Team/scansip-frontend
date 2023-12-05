@@ -1,15 +1,15 @@
+// Import Packages
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import baseApiURL from "../../api";
 
+// Import Components
 import CustomInput from "./CustomInput";
 import Textarea from "./Textarea";
 import SelectBox from "./SelectBox";
 import ImageUpload from "./ImageUpload";
-
-import baseApiURL from "../../api";
 import Loader from "../Loader";
 
 const FormCreateProduct = () => {
@@ -51,7 +51,7 @@ const FormCreateProduct = () => {
       formData.append("product_image", picture);
 
       const response = await axios.post(
-        `${import.meta.env.VITE_URL_BACKEND}admin/products/new`,
+        `${baseApiURL}admin/products/new`,
         formData,
         {
           headers: {

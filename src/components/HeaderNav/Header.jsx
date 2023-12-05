@@ -10,10 +10,10 @@ import logo from "../../assets/logo.svg";
 
 const Header = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
-  const [displayMenu, setDisplayMenu] = useState(false);
-  const [displayService, setDisplayService] = useState(false);
+  // const [displayMenu, setDisplayMenu] = useState(false);
+  // const [displayService, setDisplayService] = useState(false);
   const [displayLogout, setDisplayLogout] = useState(false);
-  const [isDropDown, setIsDropDown] = useState(false);
+  // const [isDropDown, setIsDropDown] = useState(false);
   const location = useLocation();
   console.log(location);
 
@@ -25,8 +25,9 @@ const Header = ({ adminToken, setAdminToken }) => {
   return (
     <header className="mb-10 hidden items-center justify-between bg-black px-4 sm:flex">
       <div className="flex w-96 items-center">
-        <img className="mr-2 w-20" src={logo} alt="" />
+        <img className="mr-2 w-20" src={logo} alt="logo ScanSip" />
         {adminToken && <Nav />}
+        
       </div>
       {adminToken && (
         <div className="relative">

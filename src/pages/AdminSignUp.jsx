@@ -29,15 +29,19 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // console.log(username);
-      const { data } = await axios.post(`${baseApiURL}/admin/signup`, {
-        email: email,
-        password: password,
-      });
-
-      Cookies.set("scanSipToken", data.token, { expires: 7 });
-      setAdminToken(data.token);
-      // navigate("/admin/orders");
+      controlInput();
+      if (alert.input === "") {
+        const { data } = await axios.post(`${baseApiURL}/admin/signup`, {
+          email: email,
+          password: password,
+        });
+        console.log(data);
+        if (data.status === 200) {
+          Cookies.set("scanSipToken", data.token, { expires: 7 });
+          setAdminToken(data.token);
+          // navigate("/admin/orders");
+        }
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -47,60 +51,48 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
     if (!adminToken) {
       if (Cookies.get("scanSipToken")) {
         setAdminToken(Cookies.get("scanSipToken"));
-      } else {
-        navigate("/admin/signin");
       }
     } else {
       navigate("/admin/orders");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminToken]);
 
-  //   const controlInput = () => {
-  //     if (email.length > 7) {
-  //       console.log(
-  //         email.includes("@"),
-  //         !email.includes(" "),
-  //         email.includes(".fr") !== email.includes(".com"),
-  //       );
-  //       if (
-  //         !email.includes("@") ||
-  //         email.includes(" ") ||
-  //         email.includes(".fr") !== email.includes(".com")
-  //       ) {
-  //         return setAlert({
-  //           input: "email",
-  //           message: "Veuillez rentrer une adresse valide.",
-  //         });
-  //       } else {
-  //         console.log("Present ----->  mail ok");
-  //         setAlert({ input: "", message: "" });
-  //       }
-  //     }
+  const controlInput = () => {
+    if (!email) {
+      return setAlert({
+        input: "email",
+        message: "Veuillez rentrer une adresse.",
+      });
+    } else {
+      setAlert({ input: "", message: "" });
+    }
 
-  //     // if (!password) {
-  //     //   return;
-  //     // } else if (password && password.length < 8) {
-  //     //   console.log("Absent -----> trop court");
-  //     //   setAlert({
-  //     //     input: "password",
-  //     //     message: "Le mot de passe doit contenir plus de 8 caractères.",
-  //     //   });
-  //     //   return;
-  //     // } else if (confirmPassword && password !== confirmPassword) {
-  //     //   console.log("Absent -----> pas identique");
-  //     //   setAlert({
-  //     //     input: "confirm password",
-  //     //     message: "Les mots de passe doivent être identiques.",
-  //     //   });
-  //     //   return;
-  //     // } else {
-  //     //   console.log("Present ----->  password ok");
-  //     //   setAlert({
-  //     //     input: "",
-  //     //     message: "",
-  //     //   });
-  //     // }
-  //   };
+    if (!password) {
+      return setAlert({
+        input: "password",
+        message: "Veuillez renseigner un mot de passe",
+      });
+    }
+    if (!confirmPassword) {
+      return setAlert({
+        input: "confirm-password",
+        message: "Veuillez confirmer le mot de passe",
+      });
+    }
+    if (password !== confirmPassword) {
+      return setAlert({
+        input: "same-password",
+        message: "Veuillez renseigner les mêmes mots de passe",
+      });
+    }
+    if (password.length < 6) {
+      return setAlert({
+        input: "same-password",
+        message: "Mot de passe trop court",
+      });
+    }
+  };
 
   return (
     <>
@@ -114,7 +106,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="mt-5  flex w-300 flex-col gap-1.5"
+          className="w-300  mt-5 flex flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -129,8 +121,8 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               type="email"
               className={
                 alert.input === "email"
-                  ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                  ? "rounded-5 h-7.5 border border-red-600 px-1"
+                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
               }
             />
           </div>
@@ -145,9 +137,9 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               id="password"
               type="password"
               className={
-                alert.input === "confirmPassword" || alert.input === "password"
-                  ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                alert.input === "same-password" || alert.input === "password"
+                  ? "rounded-5 h-7.5 border border-red-600 px-1"
+                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
               }
               value={password}
             />
@@ -164,9 +156,10 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               id="confirmPassword"
               type="password"
               className={
-                alert.input === "confirmPassword"
-                  ? "border-red-600rounded-5 h-7.5 border px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                alert.input === "confirm-password" ||
+                alert.input === "same-password"
+                  ? "rounded-5 h-7.5 border border-red-600 px-1"
+                  : "rounded-5 h-7.5 border-darkGrey  border px-1"
               }
             />
           </div>
@@ -177,12 +170,9 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
             type={"submit"}
           />
         </form>
-        <a
-          href="#"
-          className="font-medium text-greenScanSip underline underline-offset-4"
-        >
+        <p className="text-greenScanSip font-medium underline underline-offset-4">
           Déja inscrit ? Me connecter
-        </a>
+        </p>
       </main>
     </>
   );
