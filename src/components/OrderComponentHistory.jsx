@@ -12,6 +12,15 @@ const OrderComponentHistory = ({
 }) => {
   const [isDropDown, setIsDropDown] = useState(false);
 
+  let status = "";
+  if (element.order_status === "in progress") {
+    status = "en cours";
+  } else if (element.order_status === "paid") {
+    status = "payée";
+  } else if (element.order_status === "delivered") {
+    status = "servie";
+  }
+
   const handleDropDown = (id) => {
     setIsDropDown(!isDropDown);
   };
@@ -30,7 +39,21 @@ const OrderComponentHistory = ({
             }}
             className="mb-2 flex justify-between font-semibold"
           >
-            Commande n° : {element.order_number}
+            <span>
+              Commande n° : {element.order_number}{" "}
+              <span
+                className={`${
+                  element.order_status === "paid" ||
+                  element.order_status === "in progress"
+                    ? "primary-color"
+                    : element.order_status === "delivered"
+                      ? "text-gray-500"
+                      : "text-red-500"
+                }`}
+              >
+                ({status})
+              </span>
+            </span>
             {!isDropDown ? (
               <FontAwesomeIcon
                 className={`cursor-pointer `}
