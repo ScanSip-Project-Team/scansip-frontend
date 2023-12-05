@@ -26,7 +26,8 @@ const Header = ({ adminToken, setAdminToken }) => {
     <header className="mb-10 hidden items-center justify-between bg-black px-4 sm:flex">
       <div className="flex w-96 items-center">
         <img className="mr-2 w-20" src={logo} alt="logo ScanSip" />
-        <Nav />
+        {adminToken && <Nav />}
+        
       </div>
       {adminToken && (
         <div className="relative">
