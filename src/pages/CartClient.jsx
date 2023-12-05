@@ -2,14 +2,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 //Import Components
 import Button from "../components/Button";
 
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
-  const [cartBeforePayment, setCartBeforePayment] = useState();
 
+  // console.log(total);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,37 +21,6 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
 
   const handleNavigateToHome = () => {
     navigate("/home");
-  };
-
-  const orderToSend = [];
-  cart.forEach((e) => {
-    orderToSend.push({ product: { _id: e._id }, quantity_cart: e.quantity });
-  });
-
-  // Création d'une commande
-  const createOrder = async () => {
-    try {
-      setIsDisable(true);
-      console.log(orderToSend);
-      const response = await axios.post(
-        "http://localhost:3000/order/new",
-        {
-          product_list: orderToSend,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-      console.log(response.data);
-
-      const orderId = response.data._id;
-
-      navigate(`/paiement/${orderId}`);
-    } catch (error) {
-      console.log(error.message);
-    }
   };
 
   // Gestion du counter du cart
@@ -104,6 +74,65 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       setTotal(total - Number(elem.product_price));
       console.log("cart >>>", cart);
     }
+  };
+
+  const orderToSend = [];
+  cart.forEach((e) => {
+    orderToSend.push({ product: { _id: e._id }, quantity_cart: e.quantity });
+  });
+
+  // Création d'une commande
+  const createOrder = async () => {
+    try {
+      setIsDisable(true);
+
+      console.log(orderToSend);
+      const response = await axios.post(
+        "http://localhost:3000/order/new",
+        {
+          product_list: orderToSend,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      console.log(response.data);
+
+      Cookies.set("orderToModify", response.data._id);
+
+      const orderId = response.data._id;
+      navigate(`/paiement/${orderId}`);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  // Modification d'une commande
+
+  const modifyOrder = async () => {
+    const orderIdToModify = Cookies.get("orderToModify");
+    // console.log(orderIdToModify);
+    console.log(orderToSend);
+    const response = await axios.put(
+      `http://localhost:3000/orders/update/${total}/total_price`,
+      {
+        id: orderIdToModify,
+        key: "product_list",
+        value: orderToSend,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    const orderId = response.data._id;
+    navigate(`/paiement/${orderId}`);
+
+    console.log(response.data);
   };
 
   return (
@@ -162,12 +191,27 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
           );
         })}
 
-        <Button
-          text={`Commande pour un total de ${total} €`}
+        <button
+          className="my-6 w-11/12 rounded bg-black p-1.5 text-white"
+          onClick={() => {
+            if (Cookies.get("orderToModify")) {
+              modifyOrder();
+              console.log("existe");
+            } else {
+              createOrder();
+              console.log("existe pas");
+            }
+          }}
+        >
+          Commander pour un total de {total} €
+        </button>
+
+        {/* <Button
+          text={`Commander pour un total de ${total} €`}
           className={"my-6 w-11/12 rounded bg-black p-1.5 text-white"}
           func={createOrder}
           disabled={isDisabled}
-        />
+        /> */}
 
         <Button
           text={"Ajouter des articles"}

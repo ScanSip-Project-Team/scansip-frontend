@@ -1,8 +1,11 @@
 // Import Package
 import axios from "axios";
 import { useEffect, useState } from "react";
+// To disable scroll on modal pop
+import { useLockBodyScroll } from "@uidotdev/usehooks";
 
 const Modal = ({ setOpenModal, productID, tab }) => {
+  useLockBodyScroll();
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -36,9 +39,9 @@ const Modal = ({ setOpenModal, productID, tab }) => {
   }
 
   return (
-    <div className="fixed top-0 z-20 h-screen w-screen bg-slate-500 bg-opacity-25">
+    <div className="fixed top-0 z-20 h-screen w-screen  bg-slate-500 bg-opacity-25">
       {data && (
-        <div className="z-10 m-4 rounded-lg bg-white pb-5 pl-5 pr-5">
+        <div className="absolute top-10 z-10 m-4 rounded-lg bg-white pb-5 pl-5 pr-5">
           <div className="mr-1 flex justify-end">
             <p onClick={handleCloseModal}>X</p>
           </div>

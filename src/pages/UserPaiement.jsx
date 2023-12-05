@@ -12,15 +12,21 @@ import PaiementForm from "../components/PaiementForm";
 
 // Import Assets
 import timer from "./../assets/timer.svg";
+import Cookies from "js-cookie";
 
 const UserPaiement = ({ total }) => {
+  const navigate = useNavigate();
   let order_id = useParams();
+
+  const verifyOrderInCookie = Cookies.get("idOrder");
+
+  if (verifyOrderInCookie) {
+    navigate("/home");
+  }
 
   order_id = order_id.id;
 
-  console.log(order_id);
-
-  const navigate = useNavigate();
+  // console.log(order_id);
 
   // order_id = "656614e373933aa6ab1b3a69";
   const [stripePromise, setStripePromise] = useState(null);
@@ -71,8 +77,9 @@ const UserPaiement = ({ total }) => {
             alt="icone d'une horloge noir et blanche"
             className=""
           />
-          <p className="text-xs font-medium">
-            Temps d'attente estimé : {delay} minutes
+          <p>
+            Temps d'attente :&nbsp;
+            {`${delay > 1 ? delay + " minutes" : delay + " minute"} `}
           </p>
         </div>
         <h1 className="w-full border-y border-grey-232 py-5px text-center text-sm font-medium">

@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 // Yohann code ----------------
 //Import components
@@ -10,6 +11,7 @@ import Modal from "../Components/Modal";
 import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
+
 // Yohann code ----------------
 
 const Selection = ({ setCart, cart, setTotal, total }) => {
@@ -28,6 +30,7 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
   const [emptyCart, setEmptyCart] = useState(false);
 
   const navigate = useNavigate();
+  Cookies.remove("idOrder");
 
   const handleNavigate = () => {
     if (!total) {
@@ -191,8 +194,14 @@ const Selection = ({ setCart, cart, setTotal, total }) => {
         />
       </section>
 
-      <div className="fixed bottom-0 flex w-full justify-center  bg-white">
-        {emptyCart ? <span>Votre panier est vide !</span> : ""}
+      <div className="fixed bottom-0 flex w-full flex-col items-center bg-white">
+        {emptyCart ? (
+          <div className="flex justify-center">
+            <span>Votre panier est vide !</span>{" "}
+          </div>
+        ) : (
+          ""
+        )}
 
         <input
           className=" my-4 w-11/12 rounded  bg-black p-1.5 text-white"

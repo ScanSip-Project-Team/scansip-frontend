@@ -5,18 +5,17 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import axios from "axios";
 import Loader from "../components/Loader";
+import Cookies from "js-cookie";
 
 const Billing = () => {
+  Cookies.remove("orderToModify");
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState();
-
   const [delay, setDelay] = useState(1);
 
   const navigate = useNavigate();
-
   let order_id = useParams();
-
   order_id = order_id.id;
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const Billing = () => {
       setData(response.data);
       setTotal(`${response.data.total_price + 2}`);
       setIsLoading(false);
-
+      const tokenOrder = Cookies.set("idOrder", response.data._id);
       if (total === 0 || total === 2) {
         navigate("/home");
       }
@@ -44,7 +43,8 @@ const Billing = () => {
   }, [total]);
 
   console.log(data);
-  console.log(delay);
+  // const tokenOrder = Cookies.set("idCookie", data._id);
+  // console.log(delay);
 
   // fonction pour le pdf
   const pdfRef = useRef();
