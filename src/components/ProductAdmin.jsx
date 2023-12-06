@@ -19,7 +19,7 @@ const ProductAdmin = ({ product }) => {
     console.log("DELETE!");
   };
   return (
-    <div className="flex w-80 justify-between gap-3 border-b  py-2">
+    <div className="flex w-80 justify-between gap-3 border  border-b  py-2">
       <img
         className="w-20 rounded-md object-cover"
         src={product.product_image.secure_url}
