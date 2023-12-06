@@ -28,22 +28,32 @@ const Billing = () => {
   useEffect(() => {
     const fetchDelay = async () => {
       const { data } = await axios.get(`${baseApiURL}/delay`);
-      // console.log(data.minutes_delay);
       setDelay(Math.ceil(data.minutes_delay));
     };
     fetchDelay();
 
+    const handleUpdateOrder = async () => {
+      try {
+        const key = "order_status";
+        const value = "paid";
+        axios.put(`${baseApiURL}/orders/${order_id}/${key}/${value}`);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const fetchData = async () => {
       const response = await axios.get(`${baseApiURL}/orders/${order_id}`);
       // console.log(response.data);
       setData(response.data);
       setTotal(`${response.data.total_price + 2}`);
       setIsLoading(false);
+
       const tokenOrder = Cookies.set("idOrder", response.data._id);
       if (total === 0 || total === 2) {
         navigate("/home");
       }
     };
+    handleUpdateOrder();
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);

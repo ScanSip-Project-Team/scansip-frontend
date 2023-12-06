@@ -26,12 +26,12 @@ import AdminNewProduct from "./pages/AdminNewProduct";
 import AdminHistory from "./pages/AdminHistory";
 // import Header from "./components/HeaderNav/Header";
 // import HeaderMobile from "./components/HeaderNav/HeaderMobile";
-
-// Import Assets
-import "./App.css";
 import AdminUpdateProduct from "./pages/AdminUpdateProduct";
 import AdminSignUp from "./pages/AdminSignUp";
 import AdminSignIn from "./pages/AdminSignIn";
+
+// Import Assets
+import "./App.css";
 
 library.add(
   faChevronDown,

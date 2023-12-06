@@ -38,7 +38,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       setIsDisable(true);
       console.log(orderToSend);
       const response = await axios.post(
-        `${baseApiURL}/order/new`,
+        `${baseApiURL}/orders/new`,
         {
           product_list: orderToSend,
         },
@@ -62,45 +62,53 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   // Modification d'une commande
 
   const modifyOrder = async () => {
-    const orderIdToModify = Cookies.get("orderToModify");
-    console.log(orderIdToModify);
-    console.log(orderToSend);
-    const response = await axios.put(
-      `${baseApiURL}/order-update`,
-      {
-        id: orderIdToModify,
-        key_product_list: "product_list",
-        value_product_list: orderToSend,
-        key_total_price: "total_price",
-        value_total_price: total,
-        key_total_items: "total_items",
-        value_total_items: orderToSend.length,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const orderIdToModify = Cookies.get("orderToModify");
+      console.log(orderToSend);
+      const response = await axios.put(
+        `${baseApiURL}/orders/update`,
+        {
+          id: orderIdToModify,
+          key_product_list: "product_list",
+          value_product_list: orderToSend,
+          key_total_price: "total_price",
+          value_total_price: total,
+          key_total_items: "total_items",
+          value_total_items: orderToSend.length,
         },
-      },
-    );
-    console.log(response.data);
-    const orderId = response.data._id;
-    navigate(`/paiement/${orderId}`);
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      console.log("response.data >>>", response.data);
+
+      const orderId = response.data._id;
+      navigate(`/paiement/${orderId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     // <section className="flex w-screen flex-col ">
-    <main className="padding-container flex h-screen flex-col items-center">
-      <nav className="self-start">
-        <BreadCrumb
-          text={"Retourner à ma commande"}
-          func={() => navigate("/home")}
-        />
-      </nav>
-      <div className=" h m-7 flex justify-center">
-        <p className="font-bold">Mon panier</p>
+    <main className="flex h-screen flex-col items-center">
+      <div className="h-100 border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2 border-b bg-white ">
+        <div className="my-6 flex w-11/12 flex-col items-center justify-center gap-2 bg-white">
+          <nav className="self-start">
+            <BreadCrumb
+              text={"Retourner à ma commande"}
+              func={() => navigate("/home")}
+            />
+          </nav>
+          <div className=" m-2 flex justify-center">
+            <p className="font-bold">Mon panier</p>
+          </div>
+        </div>
       </div>
 
-      <div className="flex w-screen flex-col items-center">
+      <div className="mb-24 mt-28 flex w-screen flex-col items-center pb-[140px]">
         <ListProduct
           data={cart}
           cart={cart}

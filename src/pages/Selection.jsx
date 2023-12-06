@@ -124,7 +124,7 @@ const Selection = ({
     <Loader />
   ) : (
     // SELECTION BANNER
-    <div className=" flex w-screen flex-col items-center justify-center  scroll-smooth  bg-white">
+    <div className="flex w-screen flex-col items-center justify-center  scroll-smooth  bg-white">
       <div className="h-100 border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2 border-b bg-white shadow-md">
         <div className="my-6 flex w-11/12 items-center justify-center gap-2 bg-white">
           <CardCategory
