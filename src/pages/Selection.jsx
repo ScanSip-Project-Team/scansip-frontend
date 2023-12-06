@@ -92,7 +92,7 @@ const Selection = ({
       }
     };
     fetchData();
-  }, [category, cart]);
+  }, [category]);
 
   if (!isLoading && data) {
     for (let m = 0; m < data.length; m++) {
@@ -215,7 +215,6 @@ const Selection = ({
         />
       </div>
 
-      {/* Yohann code ----------------------------- */}
       {openModal && (
         <Modal
           setOpenModal={setOpenModal}
@@ -225,7 +224,6 @@ const Selection = ({
           openModal={openModal}
         />
       )}
-      {/* Yohann code ----------------------------- */}
     </div>
   );
 };

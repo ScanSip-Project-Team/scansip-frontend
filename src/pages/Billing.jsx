@@ -140,7 +140,9 @@ const Billing = () => {
                     <span>
                       {elem.product.product_name} x{elem.quantity_cart}
                     </span>
-                    <span>{elem.product.product_price} €</span>
+                    <span>
+                      {`${elem.product.product_price * elem.quantity_cart}`} €
+                    </span>
                   </div>
                 );
               })}

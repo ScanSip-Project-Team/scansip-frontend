@@ -56,7 +56,7 @@ const Modal = ({
 
   return (
     <>
-      <div className="absolute top-[0px]  z-10 h-[2000px] w-screen bg-slate-500 bg-opacity-25"></div>
+      <div className="absolute top-[0px]  z-10 h-[2000px] w-screen  bg-slate-500 bg-opacity-25"></div>
       <div className="fixed top-0 z-20  h-screen">
         <div className={`flex h-full w-full flex-col  text-white `}>
           <div className="flex h-available  items-center justify-center text-black">
@@ -86,7 +86,9 @@ const Modal = ({
                 </div>
                 <p className="mb-2 font-bold">INGREDIENTS :</p>
                 <div className="ml-2 flex w-11/12	">
-                  <p className="mb-2">{data.product_description}</p>
+                  <p className="mb-2 max-h-32 overflow-scroll">
+                    {data.product_description}
+                  </p>
                 </div>
                 <p className="font-bold">TABLEAU NUTRITIONNEL : </p>
                 {nutritionalValues.map((elem) => {

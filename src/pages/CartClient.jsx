@@ -13,6 +13,8 @@ import ListProduct from "../components/ListProduct";
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
 
+  console.log("cartClient page ==>", cart);
+
   // console.log(total);
   const navigate = useNavigate();
 
