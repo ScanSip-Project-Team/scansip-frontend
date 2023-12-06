@@ -113,15 +113,15 @@ const UserPaiement = ({ total }) => {
 
   return (
     <>
-      <main className="padding-container flex h-screen flex-col items-center">
-        <nav className="self-start">
+      <main className=" h-svh padding-container flex flex-col items-center">
+        <nav className="h-fit self-start">
           <BreadCrumb
             text={"Retourner au panier"}
             func={() => navigate("/cart")}
           />
         </nav>
 
-        <div className="flex items-center justify-center gap-2.5 py-10">
+        <div className="flex h-fit items-center justify-center gap-2.5 py-8">
           <img
             src={timer}
             alt="icone d'une horloge noir et blanche"
@@ -132,13 +132,13 @@ const UserPaiement = ({ total }) => {
             {`${delay > 1 ? delay + " minutes" : delay + " minute"} `}
           </p>
         </div>
-        <h1 className="w-full border-y border-grey-232 py-5px text-center text-sm font-medium">
+        <h1 className="h-fit w-full border-y border-grey-232 py-5px text-center text-sm font-medium">
           Paiement
         </h1>
-        <p className="w-full py-2 text-xs font-medium">
+        <p className="h-fit w-full py-2 text-xs font-medium">
           Choisissez votre moyen de paiement
         </p>
-        <div className="h-available w-full ">
+        <div className="h-available w-full">
           {clientSecret && stripePromise && (
             <Elements stripe={stripePromise} options={options}>
               <PaiementForm
