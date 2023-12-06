@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+// import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import baseApiURL from "../../api";
@@ -11,7 +11,7 @@ import SelectBox from "./SelectBox";
 import ImageUpload from "./ImageUpload";
 import Loader from "../Loader";
 
-const FormCreateProduct = ({ product }) => {
+const FormCreateProduct = ({ product, toast }) => {
   // const location = useLocation();
   // const { product } = location.state;
   const public_id = product.product_image.public_id;
@@ -32,19 +32,19 @@ const FormCreateProduct = ({ product }) => {
   const [fibers, setFibers] = useState(product.nutritional_values.fibers);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [productImage, setProductImage] = useState(
-    product.product_image.secure_url,
-  );
+  const [currentImage, setCurrentImage] = useState(product.product_image);
   const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
+  console.log("chargement component =>", isLoading);
   const handleSubmitForm = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     //Update form is dealed in the backend
 
     setError(false);
+
     try {
       const formData = new FormData();
       formData.append("product_name", name);
@@ -57,8 +57,12 @@ const FormCreateProduct = ({ product }) => {
       formData.append("proteins", proteins);
       formData.append("salt", salt);
       formData.append("sugar", sugar);
-      formData.append("product_image", picture);
       formData.append("public_id", public_id);
+      if (picture) {
+        formData.append("product_image", picture);
+      } else if (!picture && currentImage) {
+        formData.append("product_image", public_id);
+      }
 
       const response = await axios.put(
         `${baseApiURL}/admin/update/${product._id}`,
@@ -87,6 +91,7 @@ const FormCreateProduct = ({ product }) => {
       setIsLoading(false);
       navigate("/admin/products");
     } catch (error) {
+      setIsLoading(false);
       setError(true);
       console.log(error.response.data.message);
       console.log(error.response.data.message);
@@ -102,9 +107,9 @@ const FormCreateProduct = ({ product }) => {
     <Loader />
   ) : (
     <>
-      <div>
+      {/* <div>
         <Toaster />
-      </div>
+      </div> */}
       <form
         onSubmit={(event) => {
           handleSubmitForm(event);
@@ -114,8 +119,8 @@ const FormCreateProduct = ({ product }) => {
           <ImageUpload
             setPicture={setPicture}
             picture={picture}
-            productImage={productImage}
-            setProductImage={setProductImage}
+            currentImage={currentImage}
+            setCurrentImage={setCurrentImage}
             labelText="Modifier la photo du produit"
             error={error}
           />

@@ -9,6 +9,7 @@ import baseApiURL from "../api";
 import Button from "../components/Button";
 import BreadCrumb from "../components/Breadcrumb";
 import ListProduct from "../components/ListProduct";
+import ShopName from "../components/ShopName";
 
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
@@ -55,7 +56,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       Cookies.set("orderToModify", response.data._id);
 
       const orderId = response.data._id;
-      navigate(`/paiement/${orderId}`);
+      navigate(`/payment/${orderId}`);
     } catch (error) {
       console.log(error.message);
     }
@@ -87,7 +88,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       console.log("response.data >>>", response.data);
 
       const orderId = response.data._id;
-      navigate(`/paiement/${orderId}`);
+      navigate(`/payment/${orderId}`);
     } catch (error) {
       console.log(error);
     }
@@ -95,22 +96,23 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
 
   return (
     // <section className="flex w-screen flex-col ">
-    <main className="flex h-screen flex-col items-center">
-      <div className="h-100 border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2 border-b bg-white ">
-        <div className="my-6 flex w-11/12 flex-col items-center justify-center gap-2 bg-white">
-          <nav className="self-start">
+    <main className="flex h-screen w-screen flex-col items-center">
+      <div className="border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2 border-b bg-white ">
+        <div className="flex w-screen flex-col items-center justify-center gap-2 bg-white">
+          <nav className="mx-[10px] mt-[15px] self-start">
             <BreadCrumb
               text={"Retourner à ma commande"}
               func={() => navigate("/home")}
             />
           </nav>
-          <div className=" m-2 flex justify-center">
+          <ShopName />
+          <div className="mb-3 flex justify-center">
             <p className="font-bold">Mon panier</p>
           </div>
         </div>
       </div>
 
-      <div className="mb-24 mt-28 flex w-screen flex-col items-center pb-[140px]">
+      <div className="mb-24 mt-32 flex w-screen flex-col items-center pb-[140px]">
         <ListProduct
           data={cart}
           cart={cart}
@@ -122,14 +124,14 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       <div className="border-lightgrey  fixed bottom-0 mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t bg-white py-6">
         <Button
           text={`Commande pour un total de ${total} €`}
-          className={"btn-client mx-[10px]  w-available bg-black text-white"}
+          className={"btn-client w-available  mx-[10px] bg-black text-white"}
           func={Cookies.get("orderToModify") ? modifyOrder : createOrder}
           disabled={isDisabled}
         />
         <Button
           text={"Ajouter des articles"}
           className={
-            "btn-client mx-[10px] w-available bg-greyAddArticlesButton text-black"
+            "btn-client w-available bg-greyAddArticlesButton mx-[10px] text-black"
           }
           func={handleNavigateToHome}
           disabled={isDisabled}

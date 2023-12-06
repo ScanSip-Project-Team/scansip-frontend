@@ -69,8 +69,8 @@ const ProductLine = (props) => {
 
   return (
     <>
-      <div className="border-lightgrey  flex h-[100px] items-center justify-start border-b p-[5px] pr-1 text-sm">
-        <div className="flex h-full w-2/6 items-center justify-center">
+      <div className="border-lightgrey  text-s mb-2 flex h-[100px] items-center  justify-start   border-t  p-[5px] pl-1 pr-2">
+        <div className="flex h-full w-3/12 items-center justify-between  ">
           <img
             className="h-20 w-20 rounded-sm bg-[#F3F3F3] object-cover "
             src={item.product_image.secure_url}
@@ -83,7 +83,7 @@ const ProductLine = (props) => {
             }}
           />
         </div>
-        <div className="w-4/6  pl-2">
+        <div className="w-7/12     pl-2">
           <p className="title-product text-sm font-medium">
             {item.product_name}
           </p>
@@ -91,17 +91,24 @@ const ProductLine = (props) => {
             {item.product_price.toFixed(2)} €
           </p>
         </div>
-        <div>
+        <div className="mr-1 flex w-2/12 justify-center ">
           {item.quantity ? (
-            <div className="flex h-[28px]  items-center justify-center rounded-[20px] bg-[#E8E8E8] p-1.5 text-xs">
-              <ButtonQuantity text={"-"} func={() => handleClickMinus(item)} />
-              <p> {item.quantity}</p>
+            <div className="flex justify-center">
+              <div className="flex h-[38px] items-center  rounded-[20px]    bg-[#E8E8E8] p-1.5 text-xs">
+                <ButtonQuantity
+                  text={"-"}
+                  func={() => handleClickMinus(item)}
+                />
+                <p> {item.quantity}</p>
 
-              <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
+                <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
+              </div>
             </div>
           ) : (
-            <div className="mr-4 flex  h-[28px] items-center justify-center rounded-[20px]  p-1.5 text-xs">
-              <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
+            <div className="flex justify-center">
+              <div className="flex  h-[38px] items-center justify-center rounded-[20px]   p-1.5 text-xs">
+                <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
+              </div>
             </div>
           )}
         </div>

@@ -29,13 +29,11 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      controlInput();
-      if (alert.input === "") {
+      if (controlInput()) {
         const response = await axios.post(`${baseApiURL}/admin/signup`, {
           email: email,
           password: password,
         });
-        console.log(response);
         if (response.status === 200) {
           Cookies.set("scanSipToken", response.data.token, { expires: 7 });
           setAdminToken(response.data.token);
@@ -65,38 +63,44 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
 
   const controlInput = () => {
     if (!email) {
-      return setAlert({
+      setAlert({
         input: "email",
         message: "Veuillez rentrer une adresse.",
       });
+      return false;
     } else {
       setAlert({ input: "", message: "" });
     }
 
     if (!password) {
-      return setAlert({
+      setAlert({
         input: "password",
         message: "Veuillez renseigner un mot de passe",
       });
+      return false;
     }
     if (!confirmPassword) {
-      return setAlert({
+      setAlert({
         input: "confirm-password",
         message: "Veuillez confirmer le mot de passe",
       });
+      return false;
     }
     if (password !== confirmPassword) {
-      return setAlert({
+      setAlert({
         input: "same-password",
-        message: "Veuillez renseigner les mêmes mots de passe",
+        message: "Mots de passe différents",
       });
+      return false;
     }
     if (password.length < 6) {
-      return setAlert({
+      setAlert({
         input: "same-password",
         message: "Mot de passe trop court",
       });
+      return false;
     }
+    return true;
   };
 
   return (
@@ -111,7 +115,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="mt-5  flex w-300 flex-col gap-1.5"
+          className="w-300  mt-5 flex flex-col gap-1.5"
         >
           <div className=" flex flex-col gap-1">
             <label htmlFor="email" className="font-medium">
@@ -127,7 +131,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "email"
                   ? "h-7.5 rounded-5 border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
               }
             />
           </div>
@@ -144,7 +148,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
               className={
                 alert.input === "same-password" || alert.input === "password"
                   ? "h-7.5 rounded-5 border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
               }
               value={password}
             />
@@ -164,7 +168,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
                 alert.input === "confirm-password" ||
                 alert.input === "same-password"
                   ? "h-7.5 rounded-5 border border-red-600 px-1"
-                  : "h-7.5 rounded-5 border  border-darkGrey px-1"
+                  : "h-7.5 rounded-5 border-darkGrey  border px-1"
               }
             />
           </div>
@@ -176,7 +180,7 @@ const AdminSignUp = ({ adminToken, setAdminToken }) => {
           />
         </form>
         <p
-          className="font-medium text-greenScanSip underline underline-offset-4"
+          className="text-greenScanSip font-medium underline underline-offset-4"
           onClick={() => navigate("/admin/signin")}
         >
           Déja inscrit ? Me connecter

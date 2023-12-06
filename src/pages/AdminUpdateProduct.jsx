@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
+import toast, { Toaster } from "react-hot-toast";
 import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 
@@ -11,6 +12,7 @@ import FormUpdateProduct from "../components/Form/FormUpdateProduct";
 
 const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const location = useLocation();
 
@@ -21,6 +23,7 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
 
   // console.log("product is=>", product);
 
+  console.log("chargement page =>", isLoading);
   useEffect(() => {
     console.log("Useffect in");
     if (adminToken) {
@@ -29,6 +32,10 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
       if (location.state !== null) {
         console.log("if product ok in");
         setIsLoading(false);
+        // if (error) {
+        //   toast.error(error.response.data.message);
+        //   console.log("ERROR====>")
+        // }
       } else {
         console.log("esle no product in");
         navigate("/admin/products");
@@ -42,6 +49,9 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
+      <div>
+        <Toaster />
+      </div>
       <Header adminToken={adminToken} setAdminToken={setAdminToken} />
       <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
       <div className="">
@@ -49,7 +59,14 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
           Mettre à jour un produit
         </h1>
         <div className="p-6">
-          <FormUpdateProduct product={location.state.product} />
+          <FormUpdateProduct
+            product={location.state.product}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            toast={toast}
+            // error={error}
+            // setError={setError}
+          />
         </div>
       </div>
     </>

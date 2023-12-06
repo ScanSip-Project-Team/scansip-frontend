@@ -7,6 +7,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import CentsToEuro from "../function/CentsToEuro";
+
+// Import Components
 import Button from "./Button";
 
 const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
@@ -55,11 +57,11 @@ const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
       onSubmit={handleSubmit}
       className={`align-center flex h-full w-full flex-col justify-between`}
     >
-      <div className="h-available flex flex-col justify-center">
+      <div className="my-auto flex h-[300px] flex-col justify-center">
         <PaymentElement id="payment-element" />
       </div>
       <section className="flex flex-col gap-2.5">
-        <div className=" border-y border-grey-232">
+        <div className="min-h-20 max-h-32 border-y border-grey-232 ">
           <ul>
             <li className="w-available flex justify-between">
               <p>Sous-total</p>
@@ -84,7 +86,7 @@ const PaiementForm = ({ prices, total, clientSecret, order_id }) => {
             Erreur : {message}
           </div>
         )}
-        <div className="w-available my-[10px] mb-[10px] flex flex-col items-center">
+        <div className="w-available my-[10px] mb-[10px] flex h-[41px] flex-col items-center">
           <Button
             text={
               isProcessing

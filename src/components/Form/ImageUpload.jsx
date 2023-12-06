@@ -3,14 +3,14 @@ import imgPlaceholder from "../../assets/placeholder.png";
 const ImageUpload = ({
   setPicture,
   picture,
-  productImage,
-  setProductImage,
+  currentImage,
+  setCurrentImage,
   labelText,
   error,
 }) => {
   return (
     <div className="relative flex w-1/3 flex-1 flex-col items-center sm:items-start">
-      {!picture && !productImage ? (
+      {!picture && !currentImage ? (
         <img
           className={`m-auto mb-6 w-64 rounded-lg border ${
             error && !picture ? "border-red-300" : "border-gray-300"
@@ -23,8 +23,8 @@ const ImageUpload = ({
           <FontAwesomeIcon
             onClick={() => {
               setPicture();
-              if (setProductImage) {
-                setProductImage();
+              if (setCurrentImage) {
+                setCurrentImage();
               }
             }}
             className="primary-color absolute -right-3 -top-2 text-3xl"
@@ -37,10 +37,10 @@ const ImageUpload = ({
               alt=""
             />
           ) : (
-            productImage && (
+            currentImage && (
               <img
                 className=" m-auto mb-6 w-64 rounded border border-green-400"
-                src={productImage}
+                src={currentImage.secure_url}
                 alt=""
               />
             )
@@ -58,6 +58,7 @@ const ImageUpload = ({
         <input
           onChange={(event) => {
             setPicture(event.target.files[0]);
+            setCurrentImage();
 
             console.log("event.target.files[0]=>", event.target.files[0]);
           }}

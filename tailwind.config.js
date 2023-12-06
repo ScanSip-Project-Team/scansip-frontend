@@ -42,6 +42,7 @@ export default {
       },
       height: {
         available: "-webkit-fill-available",
+        svh: "100svh",
         7.5: "30px",
       },
       rounded: {
