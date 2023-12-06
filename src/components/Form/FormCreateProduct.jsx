@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+// import toast, { Toaster } from "react-hot-toast";
 import baseApiURL from "../../api";
 
 // Import Components
@@ -12,7 +12,7 @@ import SelectBox from "./SelectBox";
 import ImageUpload from "./ImageUpload";
 import Loader from "../Loader";
 
-const FormCreateProduct = () => {
+const FormCreateProduct = ({ toast }) => {
   const [name, setName] = useState("");
   const [picture, setPicture] = useState();
   const [description, setDescription] = useState("");
@@ -26,7 +26,6 @@ const FormCreateProduct = () => {
   const [fibers, setFibers] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -77,6 +76,7 @@ const FormCreateProduct = () => {
       setIsLoading(false);
       navigate("/admin/products");
     } catch (error) {
+      setIsLoading(false);
       setError(true);
       console.log(error.response.data.message);
       toast.error(error.response.data.message);
@@ -86,13 +86,22 @@ const FormCreateProduct = () => {
     setError(false);
     setter(event.target.value);
   };
+  const handleOnChangeInt = (event, setter) => {
+    setError(false);
+    if (event.target.value.includes(",")) {
+      console.log("change int");
+      event.target.value = event.target.value.replace(",", ".");
+      console.log("change value", event.target.value);
+    }
+    setter(event.target.value);
+  };
   return isLoading ? (
     <Loader />
   ) : (
     <>
-      <div>
+      {/* <div>
         <Toaster />
-      </div>
+      </div> */}
       <form
         onSubmit={(event) => {
           handleSubmitForm(event);
@@ -137,7 +146,7 @@ const FormCreateProduct = () => {
               <div className="flex w-full flex-row gap-3 text-sm sm:flex-col">
                 <div className="flex flex-1 flex-col justify-between sm:flex-row">
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setEnergy}
                     stateValue={energy}
                     label="Energie (kcal)"
@@ -150,7 +159,7 @@ const FormCreateProduct = () => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setFat}
                     stateValue={fat}
                     label="Matières grasses (g)"
@@ -163,7 +172,7 @@ const FormCreateProduct = () => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setSugar}
                     stateValue={sugar}
                     label="Glucides (g)"
@@ -177,7 +186,7 @@ const FormCreateProduct = () => {
                 </div>
                 <div className="flex flex-1 flex-col justify-between sm:flex sm:flex-row">
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setFibers}
                     stateValue={fibers}
                     label="Fibres"
@@ -190,7 +199,7 @@ const FormCreateProduct = () => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setProteins}
                     stateValue={proteins}
                     label="Protéines (g)"
@@ -203,7 +212,7 @@ const FormCreateProduct = () => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setSalt}
                     stateValue={salt}
                     label="Sel"
@@ -220,7 +229,7 @@ const FormCreateProduct = () => {
 
             <div className="mb-6 flex-1 flex-col items-center justify-center gap-6 sm:flex sm:flex-row">
               <CustomInput
-                handleOnChange={handleOnChange}
+                handleOnChange={handleOnChangeInt}
                 setStateValue={setPrice}
                 stateValue={price}
                 label="Price (€)"

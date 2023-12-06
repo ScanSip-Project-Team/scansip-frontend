@@ -103,6 +103,16 @@ const FormCreateProduct = ({ product, toast }) => {
     setError(false);
     setter(event.target.value);
   };
+
+  const handleOnChangeInt = (event, setter) => {
+    setError(false);
+    if (event.target.value.includes(",")) {
+      console.log("change int");
+      event.target.value = event.target.value.replace(",", ".");
+      console.log("change value", event.target.value);
+    }
+    setter(event.target.value);
+  };
   return isLoading ? (
     <Loader />
   ) : (
@@ -156,7 +166,7 @@ const FormCreateProduct = ({ product, toast }) => {
               <div className="flex w-full flex-row gap-3 text-sm sm:flex-col">
                 <div className="flex flex-1 flex-col justify-between sm:flex-row">
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setEnergy}
                     stateValue={energy}
                     label="Energie (kcal)"
@@ -169,7 +179,7 @@ const FormCreateProduct = ({ product, toast }) => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setFat}
                     stateValue={fat}
                     label="Matières grasses (g)"
@@ -182,7 +192,7 @@ const FormCreateProduct = ({ product, toast }) => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setSugar}
                     stateValue={sugar}
                     label="Glucides (g)"
@@ -196,7 +206,7 @@ const FormCreateProduct = ({ product, toast }) => {
                 </div>
                 <div className="flex flex-1 flex-col justify-between sm:flex sm:flex-row">
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setFibers}
                     stateValue={fibers}
                     label="Fibres"
@@ -209,7 +219,7 @@ const FormCreateProduct = ({ product, toast }) => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setProteins}
                     stateValue={proteins}
                     label="Protéines (g)"
@@ -222,7 +232,7 @@ const FormCreateProduct = ({ product, toast }) => {
                   />
 
                   <CustomInput
-                    handleOnChange={handleOnChange}
+                    handleOnChange={handleOnChangeInt}
                     setStateValue={setSalt}
                     stateValue={salt}
                     label="Sel"
@@ -238,7 +248,7 @@ const FormCreateProduct = ({ product, toast }) => {
             </div>
             <div className="mb-6 flex-1 flex-col items-center justify-center gap-6 sm:flex sm:flex-row">
               <CustomInput
-                handleOnChange={handleOnChange}
+                handleOnChange={handleOnChangeInt}
                 setStateValue={setPrice}
                 stateValue={price}
                 label="Price (€)"

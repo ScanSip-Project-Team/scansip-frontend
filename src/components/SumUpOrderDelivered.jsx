@@ -12,27 +12,15 @@ const SumUpOrderDelivered = ({
     try {
       const key = "order_status";
       const value = "paid";
-      // toast.promise(axios.put(`${baseApiURL}/orders/${id}/${key}/${value}`), {
-      //   loading: "...",
-      //   success: <b>La commande a été renvoyée en service !</b>,
-      //   error: (
-      //     <b>La commande n'a pas pu être renvoyée en service! Ressayez!.</b>
-      //   ),
-      // });
 
-      // // const response = await axios.put(`${baseApiURL}/orders/${id}/${status}`);
-
-      // setIsOrderUpdated(!isOrderUpdated);
       const response = await axios.put(
         `${baseApiURL}/orders/${id}/${key}/${value}`,
       );
 
       if (response.status === 200) {
-        toast.success("<b>La commande est prête 👏👏 ! </b>");
+        toast.success("La commande est prête 👏👏 ! <");
       } else {
-        toast.error(
-          "<b>😕 La commande n'a pas pu être validé! Ressayez 😉!.</b>",
-        );
+        toast.error("😕 La commande n'a pas pu être validé! Ressayez 😉!.<");
       }
       console.log("response.data=>", response);
       setIsOrderUpdated(!isOrderUpdated);
@@ -76,7 +64,7 @@ const SumUpOrderDelivered = ({
       <Button
         func={handleUpdateOrder}
         elementId={element._id}
-        className={"btn-black"}
+        className={"btn-black p-2"}
         text={"Renvoyer en service"}
       />
     </div>

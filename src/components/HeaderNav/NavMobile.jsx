@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ItemNav from "./ItemNav";
 import ItemNavMobile from "./ItemNavMobille";
-const NavMobile = ({ displayNav }) => {
+const NavMobile = ({ displayNav, setDisplayNav }) => {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [displayService, setDisplayService] = useState(false);
   const [isDropDown, setIsDropDown] = useState(false);
@@ -14,6 +14,8 @@ const NavMobile = ({ displayNav }) => {
       <ItemNavMobile
         setDisplayState={setDisplayMenu}
         displayState={displayMenu}
+        setDisplayNav={setDisplayNav}
+        displayNav={displayNav}
         subMenuPaths={[
           { name: "/admin/products", label: "Mes produits" },
           { name: "/admin/new-product", label: "Créer produits" },
@@ -23,6 +25,8 @@ const NavMobile = ({ displayNav }) => {
       <ItemNavMobile
         setDisplayState={setDisplayService}
         displayState={displayService}
+        setDisplayNav={setDisplayNav}
+        displayNav={displayNav}
         subMenuPaths={[
           { name: "/admin/orders", label: "Services en cours" },
           { name: "/admin/history", label: "Historique" },

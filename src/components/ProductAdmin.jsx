@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import ModalDelete from "./ModalDelete";
 
-const ProductAdmin = ({ product }) => {
+const ProductAdmin = ({
+  product,
+  setIsLoading,
+  isProductUpdate,
+  setIsProductUpdate,
+}) => {
   const [visible, setVisible] = useState(false);
 
   const handleUpdatekBtn = () => {
@@ -51,6 +56,9 @@ const ProductAdmin = ({ product }) => {
           visible={visible}
           setVisible={setVisible}
           id={product._id}
+          setIsLoading={setIsLoading}
+          isProductUpdate={isProductUpdate}
+          setIsProductUpdate={setIsProductUpdate}
         />
       )}
     </div>

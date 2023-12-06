@@ -3,16 +3,25 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ItemNav from "./ItemNav";
-const Nav = () => {
-  const [displayMenu, setDisplayMenu] = useState(false);
-  const [displayService, setDisplayService] = useState(false);
+const Nav = ({
+  navRef,
+  displayMenu,
+  setDisplayMenu,
+  displayService,
+  setDisplayService,
+  setDisplayLogout,
+}) => {
+  // const [displayMenu, setDisplayMenu] = useState(false);
+  // const [displayService, setDisplayService] = useState(false);
   const [isDropDown, setIsDropDown] = useState(false);
   const location = useLocation();
   return (
-    <ul className="flex gap-2">
+    <ul ref={navRef} id="navigation" className="flex gap-2">
       <ItemNav
+        setDisplayAlterState={setDisplayService}
         setDisplayState={setDisplayMenu}
         displayState={displayMenu}
+        setDisplayLogout={setDisplayLogout}
         subMenuPaths={[
           { name: "/admin/products", label: "Mes produits" },
           { name: "/admin/new-product", label: "Créer produits" },
@@ -20,8 +29,10 @@ const Nav = () => {
         label="Ma carte"
       />
       <ItemNav
+        setDisplayAlterState={setDisplayMenu}
         setDisplayState={setDisplayService}
         displayState={displayService}
+        setDisplayLogout={setDisplayLogout}
         subMenuPaths={[
           { name: "/admin/orders", label: "Services en cours" },
           { name: "/admin/history", label: "Historique" },

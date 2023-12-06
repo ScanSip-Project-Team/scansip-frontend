@@ -1,5 +1,5 @@
 //Import Packages
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
@@ -10,14 +10,15 @@ import NavMobile from "./NavMobile";
 import logo from "../../assets/logo.svg";
 
 const HeaderMobile = ({ adminToken, setAdminToken }) => {
-  const navigate = useNavigate();
   const [displayNav, setDisplayNav] = useState(false);
   const [displayMenu, setDisplayMenu] = useState(false);
   const [displayService, setDisplayService] = useState(false);
   const [displayLogout, setDisplayLogout] = useState(false);
   const [isDropDown, setIsDropDown] = useState(false);
   const location = useLocation();
-  console.log(location);
+
+  const navigate = useNavigate();
+  const userMenuRef = useRef();
 
   const handleLogOut = () => {
     Cookies.remove("scanSipToken");
@@ -25,7 +26,12 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
     navigate("/admin/signin");
   };
 
-  console.log(adminToken);
+  window.onclick = (event) => {
+    if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      setDisplayLogout(false);
+    }
+  };
+
   return (
     <header className="relative mb-10 flex items-center justify-between bg-black px-4 sm:hidden">
       {adminToken && (
@@ -38,7 +44,14 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
         />
       )}
 
-      <img className="mr-2 w-28" src={logo} alt="" />
+      <img
+        onClick={() => {
+          navigate("/admin/orders");
+        }}
+        className="mr-2 w-28"
+        src={logo}
+        alt=""
+      />
       {adminToken && (
         <>
           {displayNav && (
@@ -54,11 +67,15 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
                 className=" absolute right-10  z-20 text-3xl text-white"
                 icon="fa-solid fa-circle-xmark"
               />
-              <NavMobile displayNav={displayNav} />
+              <NavMobile
+                displayNav={displayNav}
+                setDisplayNav={setDisplayNav}
+              />
             </div>
           )}
           <div className="relative">
             <FontAwesomeIcon
+              ref={userMenuRef}
               onClick={() => {
                 setDisplayLogout(!displayLogout);
               }}

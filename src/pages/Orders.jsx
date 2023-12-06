@@ -59,11 +59,14 @@ const Orders = ({ adminToken, setAdminToken }) => {
   //UPDATE ORDER DELIVERED isEnabled ==> false
   const handleOdersIsEnabled = async () => {
     try {
-      toast.promise(axios.put(`${baseApiURL}/orders`), {
-        loading: "...",
-        success: <b>Liste vidée 👍! </b>,
-        error: <b>😕 La liste n'a pas pu être vidée! Ressayez 😉!.</b>,
-      });
+      const response = await axios.put(`${baseApiURL}/orders`);
+
+      if (response.status === 200) {
+        toast.success("La liste a bien été vidée 👍!!");
+      } else {
+        toast.error("😕 La liste n'a pas pu être vidée! Ressayez 😉!");
+      }
+
       setIsOrderUpdated(!isOrderUpdated);
       console.log("UPDATE!!!!");
     } catch (error) {
@@ -119,8 +122,8 @@ const Orders = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
-      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
-      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
+      {/* <Header adminToken={adminToken} setAdminToken={setAdminToken} /> */}
+      {/* <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} /> */}
 
       <div className="container m-auto h-screen">
         <div>
