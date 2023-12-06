@@ -12,7 +12,6 @@ import FormUpdateProduct from "../components/Form/FormUpdateProduct";
 
 const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   const location = useLocation();
 
@@ -32,10 +31,6 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
       if (location.state !== null) {
         console.log("if product ok in");
         setIsLoading(false);
-        // if (error) {
-        //   toast.error(error.response.data.message);
-        //   console.log("ERROR====>")
-        // }
       } else {
         console.log("esle no product in");
         navigate("/admin/products");
@@ -52,21 +47,14 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
       <div>
         <Toaster />
       </div>
-      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
-      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
+      {/* <Header adminToken={adminToken} setAdminToken={setAdminToken} /> */}
+      {/* <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} /> */}
       <div className="">
         <h1 className="border-b border-solid border-black p-6 text-3xl">
           Mettre à jour un produit
         </h1>
         <div className="p-6">
-          <FormUpdateProduct
-            product={location.state.product}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            toast={toast}
-            // error={error}
-            // setError={setError}
-          />
+          <FormUpdateProduct product={location.state.product} toast={toast} />
         </div>
       </div>
     </>

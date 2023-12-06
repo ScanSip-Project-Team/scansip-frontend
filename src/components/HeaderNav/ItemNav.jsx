@@ -3,7 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SubMenu from "./SubMenu";
-const ItemNav = ({ setDisplayState, displayState, subMenuPaths, label }) => {
+const ItemNav = ({
+  setDisplayAlterState,
+  setDisplayState,
+  displayState,
+  setDisplayLogout,
+  subMenuPaths,
+  label,
+}) => {
   const [isDropDown, setIsDropDown] = useState(false);
   const location = useLocation();
 
@@ -18,9 +25,15 @@ const ItemNav = ({ setDisplayState, displayState, subMenuPaths, label }) => {
   };
 
   return (
-    <li className="relative cursor-pointer text-white">
+    <li
+      onClick={() => {
+        setDisplayAlterState(false);
+        setDisplayLogout(false);
+      }}
+      className="li-target relative cursor-pointer text-white"
+    >
       <span
-        onClick={(event) => {
+        onClick={() => {
           setDisplayState(!displayState);
           setIsDropDown(!isDropDown);
         }}

@@ -1,12 +1,12 @@
 //Import Packages
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
 //Import Components
 import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
-import FormCreateProduct from "../components/Form/FormCreateProduct";
 import Loader from "../components/Loader";
+import FormCreateProduct from "../components/Form/FormCreateProduct";
 
 const AdminNewProduct = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,14 +25,17 @@ const AdminNewProduct = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
-      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
-      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
+      <div>
+        <Toaster />
+      </div>
+      {/* <Header adminToken={adminToken} setAdminToken={setAdminToken} /> */}
+      {/* <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} /> */}
       <div className="">
         <h1 className="border-b border-solid border-black p-6 text-3xl">
           Créer un produit
         </h1>
         <div className="p-6">
-          <FormCreateProduct />
+          <FormCreateProduct toast={toast} />
         </div>
       </div>
     </>

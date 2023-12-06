@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SubMenu from "./SubMenu";
 const ItemNavMobile = ({
+  displayNav,
+  setDisplayNav,
   setDisplayState,
   displayState,
   subMenuPaths,
   label,
 }) => {
-  const [isDropDown, setIsDropDown] = useState(false);
   const location = useLocation();
 
   const getMenuPath = (pathMacth, subMenuPaths) => {
@@ -34,6 +35,9 @@ const ItemNavMobile = ({
         {subMenuPaths.map((path) => {
           return (
             <Link
+              onClick={() => {
+                setDisplayNav(false);
+              }}
               key={path.name}
               to={path.name}
               className={`mb-3 block ${
