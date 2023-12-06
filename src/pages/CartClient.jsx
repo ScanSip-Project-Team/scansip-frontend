@@ -54,7 +54,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       Cookies.set("orderToModify", response.data._id);
 
       const orderId = response.data._id;
-      navigate(`/payement/${orderId}`);
+      navigate(`/payment/${orderId}`);
     } catch (error) {
       console.log(error.message);
     }
@@ -84,7 +84,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
       console.log("response.data >>>", response.data);
 
       const orderId = response.data._id;
-      navigate(`/payement/${orderId}`);
+      navigate(`/payment/${orderId}`);
     } catch (error) {
       console.log(error);
     }
