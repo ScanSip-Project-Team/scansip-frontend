@@ -45,7 +45,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
     <>
       <Header adminToken={adminToken} setAdminToken={setAdminToken} />
       <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
-      <div className="p-8">
+      <div className=" relative  p-8">
         <div className="flex items-center justify-between border-b border-black">
           <h1 className="mb-4  p-6 text-3xl">Mes produits ({data.count})</h1>
           <Link to="/admin/new-product">
