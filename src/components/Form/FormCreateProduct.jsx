@@ -1,6 +1,6 @@
 // Import Packages
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 // import toast, { Toaster } from "react-hot-toast";
 import baseApiURL from "../../api";
@@ -251,6 +251,12 @@ const FormCreateProduct = ({ toast }) => {
               />
             </div>
             <div className="flex justify-center gap-4">
+              <Link to="/admin/products">
+                <button className="btn-black w-36 text-lg">
+                  Retourner aux produits
+                </button>
+              </Link>
+
               <button type="submit" className="btn-primary w-36 text-lg">
                 Valider
               </button>

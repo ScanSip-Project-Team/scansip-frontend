@@ -1,6 +1,6 @@
 //Import Packages
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -43,17 +43,21 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
-      {/* <Header adminToken={adminToken} setAdminToken={setAdminToken} /> */}
-      {/* <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} /> */}
-      <div className="p-8">
-        <h1 className="mb-6 border-b border-solid border-black p-6 text-3xl">
-          Mes produits ({data.count})
-        </h1>
+      <div className=" relative  p-8">
+        <div className="flex items-center justify-between border-b border-black">
+          <h1 className="mb-4  p-6 text-3xl">Mes produits ({data.count})</h1>
+          <Link to="/admin/new-product">
+            <button className=" mr-4 w-[84px] rounded-full bg-black px-4 py-1 text-white">
+              Add
+            </button>
+          </Link>
+        </div>
 
         {/* Big Carousel Section */}
-        <div className="flex flex-nowrap gap-1 overflow-scroll sm:gap-4">
-          <div className="shrink-0 border-r-2 p-2">
-            <h2 className="text-bold mb-3 text-xl">Mes Softs</h2>
+        <div className="mt-4 flex flex-nowrap gap-1 overflow-scroll sm:gap-4">
+          <div className="shrink-0  border-r-2 p-2">
+            <h2 className="text-bold mb-3  text-xl">Mes Softs</h2>
+
             <div className="flex flex-col">
               {data.products
                 .filter((element) => element.product_category === "Softs")
@@ -72,6 +76,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
           </div>
           <div className="shrink-0 border-r-2 p-2">
             <h2 className="text-bold mb-3 text-xl">Mes Snacks</h2>
+
             <div className="flex flex-col gap-6">
               {data.products
                 .filter((element) => element.product_category === "Snacks")
@@ -90,6 +95,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
           </div>
           <div className="shrink-0 border-r-2 p-2">
             <h2 className="text-bold mb-3 text-xl">Mes Alcools</h2>
+
             <div className="flex flex-col">
               {data.products
                 .filter((element) => element.product_category === "Alcools")

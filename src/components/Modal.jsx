@@ -56,10 +56,10 @@ const Modal = ({
 
   return (
     <>
-      <div className="absolute top-[0px]  z-10 h-[2000px] w-screen bg-slate-500 bg-opacity-25"></div>
+      <div className="absolute top-[0px]  z-10 m-auto h-[2000px] w-screen bg-slate-500 bg-opacity-25"></div>
       <div className="fixed top-0 z-20  h-screen">
         <div className={`flex h-full w-full flex-col  text-white `}>
-          <div className="h-available flex  items-center justify-center text-black">
+          <div className="flex h-available  items-center justify-center text-black">
             {data && (
               // <div className={`absolute left-0 top-[40px]  h-full w-full `}>
               <div className="z-10 m-4 flex h-fit flex-col justify-center rounded-lg bg-white pb-5 pl-5 pr-[10px]">
@@ -115,7 +115,7 @@ const Modal = ({
             <Button
               text={`Voir le panier • ${total} €`}
               className={
-                "btn-client w-available  mx-[10px] bg-black text-white"
+                "btn-client mx-[10px]  w-available bg-black text-white"
               }
               func={handleNavigate}
             />
