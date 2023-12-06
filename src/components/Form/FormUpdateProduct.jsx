@@ -61,7 +61,7 @@ const FormCreateProduct = ({ product }) => {
       formData.append("public_id", public_id);
 
       const response = await axios.put(
-        `${import.meta.env.VITE_URL_BACKEND}admin/update/${product._id}`,
+        `${baseApiURL}/admin/update/${product._id}`,
         formData,
         {
           headers: {
