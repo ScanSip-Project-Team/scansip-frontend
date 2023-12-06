@@ -55,7 +55,13 @@ const ItemNav = ({
         )}
       </span>
 
-      {displayState && <SubMenu subMenuPaths={subMenuPaths} />}
+      {displayState && (
+        <SubMenu
+          subMenuPaths={subMenuPaths}
+          setDisplayLogout={setDisplayLogout}
+          setDisplayState={setDisplayState}
+        />
+      )}
     </li>
   );
 };

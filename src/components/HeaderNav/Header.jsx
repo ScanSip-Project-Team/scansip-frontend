@@ -16,7 +16,7 @@ const Header = ({ adminToken, setAdminToken }) => {
   const userMenuRef = useRef();
   const navRef = useRef();
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   const handleLogOut = () => {
     Cookies.remove("scanSipToken");
@@ -24,29 +24,31 @@ const Header = ({ adminToken, setAdminToken }) => {
     navigate("/admin/signin");
   };
 
-  useEffect(() => {
-    window.onclick = (event) => {
-      console.log("event.target", event.target);
-      console.log("navRef", navRef);
-      console.log("userRef", userMenuRef);
-      if (
-        navRef.current &&
-        !navRef.current.contains(event.target) &&
-        userMenuRef.current &&
-        !userMenuRef.current.contains(event.target)
-      ) {
-        setDisplayLogout(false);
-        setDisplayMenu(false);
-        setDisplayService(false);
-      }
-    };
-  }, []);
+  window.onclick = (event) => {
+    console.log("event.target", event.target);
+    console.log("navRef", navRef);
+    console.log("userRef", userMenuRef);
+    if (
+      navRef.current &&
+      !navRef.current.contains(event.target) &&
+      userMenuRef.current &&
+      !userMenuRef.current.contains(event.target)
+    ) {
+      console.log("OUTSIDE");
+      setDisplayLogout(false);
+      setDisplayMenu(false);
+      setDisplayService(false);
+    }
+  };
+  // useEffect(() => {
+  // }, []);
   return (
     <header className="mb-10 hidden items-center justify-between bg-black px-4 sm:flex">
       <div className="flex w-96 items-center">
         <img
           onClick={() => {
             navigate("/admin/orders");
+            console.log("HELLO");
           }}
           className="mr-2 w-20"
           src={logo}
@@ -80,12 +82,20 @@ const Header = ({ adminToken, setAdminToken }) => {
               <p
                 onClick={() => {
                   handleLogOut();
+                  setDisplayLogout(false);
                 }}
                 className=" mb-2"
               >
                 Me deconnecter
               </p>
-              <Link to="/home">UI de vente</Link>
+              <Link
+                onClick={() => {
+                  setDisplayLogout(false);
+                }}
+                to="/home"
+              >
+                UI de vente
+              </Link>
             </div>
           )}
         </div>

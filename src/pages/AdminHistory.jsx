@@ -50,10 +50,8 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     setTriggerToast(false);
   };
   useEffect(() => {
-    console.log("USEFFECT");
     const fetchData = async () => {
       try {
-        console.log("ECCOMI");
         const response = await axios.get(`${baseApiURL}/orders-history`);
         console.log(response.data.orders);
         //if response.data il bigger thant data it means that we have a new order
@@ -76,8 +74,6 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
         navigate("/admin/signin");
       }
     } else {
-      console.log("FETCH");
-
       fetchData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,9 +93,6 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
-      {/* <Header adminToken={adminToken} setAdminToken={setAdminToken} /> */}
-      {/* <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} /> */}
-
       <div className="container m-auto h-screen">
         <div>
           <Toaster />

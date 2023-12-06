@@ -11,23 +11,14 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
       const key = "order_status";
       const value = "delivered";
 
-      // toast.promise(axios.put(`${baseApiURL}/orders/${id}/${key}/${value}`), {
-      //   loading: "...",
-      //   success: <b>La commande est prête 👏👏 ! </b>,
-
-      //   error: <b>😕 La commande n'a pas pu être validé! Ressayez 😉!.</b>,
-      // });
-
       const response = await axios.put(
         `${baseApiURL}/orders/${id}/${key}/${value}`,
       );
 
       if (response.status === 200) {
-        toast.success("<b>La commande est prête 👏👏 ! </b>");
+        toast.success("La commande est prête 👏👏 !");
       } else {
-        toast.error(
-          "<b>😕 La commande n'a pas pu être validé! Ressayez 😉!.</b>",
-        );
+        toast.error("😕 La commande n'a pas pu être validé! Ressayez 😉!");
       }
       console.log("response.data=>", response);
       setIsOrderUpdated(!isOrderUpdated);

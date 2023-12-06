@@ -26,13 +26,11 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
     navigate("/admin/signin");
   };
 
-  useEffect(() => {
-    window.onclick = (event) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-        setDisplayLogout(false);
-      }
-    };
-  }, []);
+  window.onclick = (event) => {
+    if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      setDisplayLogout(false);
+    }
+  };
 
   return (
     <header className="relative mb-10 flex items-center justify-between bg-black px-4 sm:hidden">

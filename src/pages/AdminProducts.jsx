@@ -5,8 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 //Import Components
-import Header from "../components/HeaderNav/Header";
-import HeaderMobile from "../components/HeaderNav/HeaderMobile";
+
 import ProductAdmin from "../components/ProductAdmin";
 import Loader from "../components/Loader";
 import baseApiURL from "../api";
@@ -15,6 +14,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
+  const [isProductUpdate, setIsProductUpdate] = useState(false);
   console.log("data=>", data);
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +37,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
     } else {
       fetchData();
     }
-  }, []);
+  }, [isProductUpdate]);
 
   return isLoading ? (
     <Loader />
@@ -58,7 +58,15 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
               {data.products
                 .filter((element) => element.product_category === "Softs")
                 .map((product) => {
-                  return <ProductAdmin key={product._id} product={product} />;
+                  return (
+                    <ProductAdmin
+                      key={product._id}
+                      product={product}
+                      setIsLoading={setIsLoading}
+                      isProductUpdate={isProductUpdate}
+                      setIsProductUpdate={setIsProductUpdate}
+                    />
+                  );
                 })}
             </div>
           </div>
@@ -68,7 +76,15 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
               {data.products
                 .filter((element) => element.product_category === "Snacks")
                 .map((product) => {
-                  return <ProductAdmin key={product._id} product={product} />;
+                  return (
+                    <ProductAdmin
+                      key={product._id}
+                      product={product}
+                      setIsLoading={setIsLoading}
+                      isProductUpdate={isProductUpdate}
+                      setIsProductUpdate={setIsProductUpdate}
+                    />
+                  );
                 })}
             </div>
           </div>
@@ -78,7 +94,15 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
               {data.products
                 .filter((element) => element.product_category === "Alcools")
                 .map((product) => {
-                  return <ProductAdmin key={product._id} product={product} />;
+                  return (
+                    <ProductAdmin
+                      key={product._id}
+                      product={product}
+                      setIsLoading={setIsLoading}
+                      isProductUpdate={isProductUpdate}
+                      setIsProductUpdate={setIsProductUpdate}
+                    />
+                  );
                 })}
             </div>
           </div>
@@ -88,7 +112,15 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
               {data.products
                 .filter((element) => element.product_category === "Cocktails")
                 .map((product) => {
-                  return <ProductAdmin key={product._id} product={product} />;
+                  return (
+                    <ProductAdmin
+                      key={product._id}
+                      product={product}
+                      setIsLoading={setIsLoading}
+                      isProductUpdate={isProductUpdate}
+                      setIsProductUpdate={setIsProductUpdate}
+                    />
+                  );
                 })}
             </div>
           </div>
