@@ -69,8 +69,8 @@ const ProductLine = (props) => {
 
   return (
     <>
-      <div className="border-lightgrey  mb-2 flex h-[100px] items-center justify-start border-t p-[5px] pr-1 text-sm">
-        <div className="flex h-full w-2/6 items-center justify-center">
+      <div className="border-lightgrey  mb-2 flex h-[100px] items-center justify-start border-t p-[5px] pl-1 pr-2 text-sm">
+        <div className="flex h-full w-2/6 items-center justify-center ">
           <img
             className="h-20 w-20 rounded-sm bg-[#F3F3F3] object-cover "
             src={item.product_image.secure_url}
@@ -83,7 +83,7 @@ const ProductLine = (props) => {
             }}
           />
         </div>
-        <div className="w-4/6  pl-2">
+        <div className="w-3/6   pl-2">
           <p className="title-product text-sm font-medium">
             {item.product_name}
           </p>
@@ -91,7 +91,7 @@ const ProductLine = (props) => {
             {item.product_price.toFixed(2)} €
           </p>
         </div>
-        <div>
+        <div className="w-1/6">
           {item.quantity ? (
             <div className="flex h-[32px] w-20 items-center justify-center rounded-[20px] bg-[#E8E8E8] p-1.5 text-xs">
               <ButtonQuantity text={"-"} func={() => handleClickMinus(item)} />
@@ -102,6 +102,7 @@ const ProductLine = (props) => {
           ) : (
             <div className="  flex h-[32px]  w-20 items-center justify-center rounded-[20px]  p-1.5 text-xs">
               <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
+
             </div>
           )}
         </div>
