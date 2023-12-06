@@ -3,21 +3,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import baseApiURL from "../api";
 
-// Yohann code ----------------
 //Import components
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Loader from "../components/Loader";
 import ListProduct from "../components/ListProduct";
 import CardCategory from "../components/CardCategory";
+import ShopName from "../components/ShopName";
 
+// Import Assets
 import softsPicto from "../assets/softs-picto.png";
 import snacksPicto from "../assets/snacks-picto.png";
 import alcoolsPicto from "../assets/alcools-picto.png";
 import cocktailsPicto from "../assets/cocktails-picto.png";
-// Yohann code ----------------
-import baseApiURL from "../api";
 
 const Selection = ({
   setCart,
@@ -125,8 +125,9 @@ const Selection = ({
   ) : (
     // SELECTION BANNER
     <div className="flex w-screen flex-col items-center justify-center  scroll-smooth  bg-white">
-      <div className="h-100 border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2 border-b bg-white shadow-md">
-        <div className="my-6 flex w-11/12 items-center justify-center gap-2 bg-white">
+      <div className="h-100 border-lightgrey fixed top-0 flex w-screen flex-col items-center justify-center border-b bg-white shadow-md">
+        <ShopName />
+        <div className="mb-6 flex w-11/12 items-center justify-center gap-2 bg-white">
           <CardCategory
             func={handleClickSofts}
             icon={softsPicto}
@@ -154,7 +155,7 @@ const Selection = ({
         </div>
       </div>
 
-      <section className="mb-24 mt-28 flex w-screen flex-col items-center">
+      <section className="mb-24 mt-36 flex w-screen flex-col items-center">
         <ListProduct
           data={softsTab}
           setOpenModal={setOpenModal}
@@ -215,7 +216,6 @@ const Selection = ({
         />
       </div>
 
-      {/* Yohann code ----------------------------- */}
       {openModal && (
         <Modal
           setOpenModal={setOpenModal}
@@ -225,7 +225,6 @@ const Selection = ({
           openModal={openModal}
         />
       )}
-      {/* Yohann code ----------------------------- */}
     </div>
   );
 };
