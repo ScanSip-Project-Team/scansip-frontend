@@ -69,7 +69,7 @@ const ProductLine = (props) => {
 
   return (
     <>
-      <div className="border-lightgrey  mb-2 flex h-[100px] items-center justify-start border-t p-[5px] pr-1 text-sm">
+      <div className="border-lightgrey  mb-2 flex h-[100px] items-center justify-start border-t p-[5px] pl-1 pr-2 text-sm">
         <div className="flex h-full w-2/6 items-center justify-center ">
           <img
             className="h-20 w-20 rounded-sm bg-[#F3F3F3] object-cover "
@@ -91,7 +91,7 @@ const ProductLine = (props) => {
             {item.product_price.toFixed(2)} €
           </p>
         </div>
-        <div className="flex w-1/6 justify-center  ">
+        <div className="w-1/6">
           {item.quantity ? (
             <div>
               <div className="flex h-[36px] items-center justify-center rounded-[20px]  bg-[#E8E8E8] p-1.5 text-xs">
