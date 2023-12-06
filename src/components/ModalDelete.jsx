@@ -18,11 +18,11 @@ const ModalDelete = ({ visible, setVisible, id }) => {
   };
 
   return (
-    <div className=" left-50 top-200 absolute right-0  h-full   w-full items-center justify-center overflow-y-auto overflow-x-hidden  bg-white pl-10 pt-8 md:inset-0">
+    <div className="absolute left-96 top-40 h-96   w-96 items-center justify-center overflow-y-auto overflow-x-hidden  bg-green-500 pl-10 pt-8 opacity-90 ">
       <div>
         <Toaster />
       </div>
-      <p className="mb-6 mt-6">
+      <p className="mb-6 mt-4 ">
         Êtes vous certain de vouloir supprimer ce produit ?
       </p>
       <div className="flex gap-14">
