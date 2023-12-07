@@ -5,7 +5,6 @@ const Loader = () => {
       <div className="mb-3">
         <img className=" w-36  md:w-44  " src={loaderGif} alt="" />
       </div>
-      <p className="primary-color text-bold text-xl">Loading ...</p>
     </div>
   );
 };
