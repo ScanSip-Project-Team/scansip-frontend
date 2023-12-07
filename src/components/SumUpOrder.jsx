@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Toaster } from "sonner";
 import { toast } from "sonner";
-import Button from "./Button";
+
 import baseApiURL from "../api";
 
 // Import Components
@@ -25,7 +25,6 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
     } catch (error) {
       console.log(error);
     }
-
   };
 
   return (
