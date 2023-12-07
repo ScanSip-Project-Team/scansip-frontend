@@ -56,13 +56,13 @@ const Modal = ({
 
   return (
     <>
-      <div className="absolute top-[0px]  z-10 h-[2000px] w-screen  bg-slate-500 bg-opacity-25"></div>
+      <div className="absolute top-[0px]  z-10 m-auto h-[2000px] w-screen bg-slate-500 bg-opacity-25"></div>
       <div className="fixed top-0 z-20  h-screen">
         <div className={`flex h-full w-full flex-col  text-white `}>
           <div className="flex h-available  items-center justify-center text-black">
             {data && (
               // <div className={`absolute left-0 top-[40px]  h-full w-full `}>
-              <div className="z-10 m-4 flex h-fit flex-col justify-center rounded-lg bg-white pb-5 pl-5 pr-[10px]">
+              <div className="z-10 m-4 flex  h-5/6 w-5/6 flex-col justify-center rounded-lg bg-white  pl-5 pr-[10px]">
                 <div className=" mt-1 flex justify-end">
                   <p
                     onClick={handleCloseModal}

@@ -58,7 +58,9 @@ const ImageUpload = ({
         <input
           onChange={(event) => {
             setPicture(event.target.files[0]);
-            setCurrentImage();
+            if (currentImage) {
+              setCurrentImage();
+            }
 
             console.log("event.target.files[0]=>", event.target.files[0]);
           }}

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-const SubMenu = ({ subMenuPaths }) => {
+const SubMenu = ({ subMenuPaths, setDisplayState }) => {
   const location = useLocation();
 
   console.log("subMenuPaths=>", subMenuPaths);
@@ -9,6 +9,9 @@ const SubMenu = ({ subMenuPaths }) => {
       {subMenuPaths.map((path) => {
         return (
           <Link
+            onClick={() => {
+              setDisplayState(false);
+            }}
             key={path.name}
             to={path.name}
             className={`mb-3 block ${

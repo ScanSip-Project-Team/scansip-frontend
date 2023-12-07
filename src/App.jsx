@@ -11,7 +11,7 @@ import {
   faTrashCan,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 //Import Components
 import FlashScreen from "./pages/FlashScreen";
@@ -24,8 +24,8 @@ import Lab from "./pages/Lab";
 import AdminProducts from "./pages/AdminProducts";
 import AdminNewProduct from "./pages/AdminNewProduct";
 import AdminHistory from "./pages/AdminHistory";
-// import Header from "./components/HeaderNav/Header";
-// import HeaderMobile from "./components/HeaderNav/HeaderMobile";
+import Header from "./components/HeaderNav/Header";
+import HeaderMobile from "./components/HeaderNav/HeaderMobile";
 import AdminUpdateProduct from "./pages/AdminUpdateProduct";
 import AdminSignUp from "./pages/AdminSignUp";
 import AdminSignIn from "./pages/AdminSignIn";
@@ -49,11 +49,40 @@ function App() {
   const [adminToken, setAdminToken] = useState(
     Cookies.get("scanSipToken") || null,
   );
+
   console.log("width", window.innerWidth);
   console.log("cart before return >>>", cart);
 
+  // useEffect(() => {
+  //   window.onclick = (event) => {
+  //     console.log("event.target", event.target);
+  //     console.log("navRef", navRef);
+  //     if (
+  //       navRef.current &&
+  //       !navRef.current.contains(event.target)
+  //       // event.target.contains(navRef.current) &&
+  //       // event.target !== navRef.current
+  //     ) {
+  //       console.log("YOU CLICKED OUTSIDE");
+  //     } else {
+  //       console.log("YOU CLICKED INSIDE");
+  //     }
+  //   };
+  // }, []);
   return (
     <Router>
+      {adminToken && (
+        <>
+          <Header
+            adminToken={adminToken}
+            setAdminToken={setAdminToken}
+            // navRef={navRef}
+            // userMenuRef={userMenuRef}
+          />
+          <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
+        </>
+      )}
+
       <Routes>
         <Route path="/" element={<FlashScreen />} />
         <Route

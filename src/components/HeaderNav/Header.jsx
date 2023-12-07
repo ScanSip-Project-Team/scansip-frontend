@@ -1,5 +1,5 @@
 //Import Packages
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
@@ -9,31 +9,70 @@ import Nav from "./Nav";
 import logo from "../../assets/logo.svg";
 
 const Header = ({ adminToken, setAdminToken }) => {
-  const navigate = useNavigate();
-  // const [displayMenu, setDisplayMenu] = useState(false);
-  // const [displayService, setDisplayService] = useState(false);
+  const [displayMenu, setDisplayMenu] = useState(false);
+  const [displayService, setDisplayService] = useState(false);
   const [displayLogout, setDisplayLogout] = useState(false);
-  // const [isDropDown, setIsDropDown] = useState(false);
-  const location = useLocation();
-  console.log(location);
+  // const [isDropDown, setIsDropDown] = useState(false
+  const userMenuRef = useRef();
+  const navRef = useRef();
+  const navigate = useNavigate();
+  // const location = useLocation();
 
   const handleLogOut = () => {
     Cookies.remove("scanSipToken");
     setAdminToken("");
     navigate("/admin/signin");
   };
+
+  window.onclick = (event) => {
+    console.log("event.target", event.target);
+    console.log("navRef", navRef);
+    console.log("userRef", userMenuRef);
+    if (
+      navRef.current &&
+      !navRef.current.contains(event.target) &&
+      userMenuRef.current &&
+      !userMenuRef.current.contains(event.target)
+    ) {
+      console.log("OUTSIDE");
+      setDisplayLogout(false);
+      setDisplayMenu(false);
+      setDisplayService(false);
+    }
+  };
+  // useEffect(() => {
+  // }, []);
   return (
     <header className="mb-10 hidden items-center justify-between bg-black px-4 sm:flex">
       <div className="flex w-96 items-center">
-        <img className="mr-2 w-20" src={logo} alt="logo ScanSip" />
-        {adminToken && <Nav />}
-        
+        <img
+          onClick={() => {
+            navigate("/admin/orders");
+            console.log("HELLO");
+          }}
+          className="mr-2 w-20"
+          src={logo}
+          alt="logo ScanSip"
+        />
+        {adminToken && (
+          <Nav
+            displayMenu={displayMenu}
+            setDisplayMenu={setDisplayMenu}
+            displayService={displayService}
+            setDisplayService={setDisplayService}
+            setDisplayLogout={setDisplayLogout}
+            navRef={navRef}
+          />
+        )}
       </div>
       {adminToken && (
         <div className="relative">
           <FontAwesomeIcon
+            ref={userMenuRef}
             onClick={() => {
               setDisplayLogout(!displayLogout);
+              setDisplayMenu(false);
+              setDisplayService(false);
             }}
             className="text-3xl text-white"
             icon="fa-solid fa-user"
@@ -43,12 +82,20 @@ const Header = ({ adminToken, setAdminToken }) => {
               <p
                 onClick={() => {
                   handleLogOut();
+                  setDisplayLogout(false);
                 }}
                 className=" mb-2"
               >
                 Me deconnecter
               </p>
-              <Link to="/home">UI de vente</Link>
+              <Link
+                onClick={() => {
+                  setDisplayLogout(false);
+                }}
+                to="/home"
+              >
+                UI de vente
+              </Link>
             </div>
           )}
         </div>

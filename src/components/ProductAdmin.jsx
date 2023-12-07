@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import ModalDelete from "./ModalDelete";
 
-const ProductAdmin = ({ product }) => {
+const ProductAdmin = ({
+  product,
+  setIsLoading,
+  isProductUpdate,
+  setIsProductUpdate,
+}) => {
   const [visible, setVisible] = useState(false);
 
   const handleUpdatekBtn = () => {
@@ -19,7 +24,7 @@ const ProductAdmin = ({ product }) => {
     console.log("DELETE!");
   };
   return (
-    <div className="flex w-80 justify-between gap-3 border-b  py-2">
+    <div className="flex w-80 justify-between gap-3 border  border-b  py-2">
       <img
         className="w-20 rounded-md object-cover"
         src={product.product_image.secure_url}
@@ -51,6 +56,9 @@ const ProductAdmin = ({ product }) => {
           visible={visible}
           setVisible={setVisible}
           id={product._id}
+          setIsLoading={setIsLoading}
+          isProductUpdate={isProductUpdate}
+          setIsProductUpdate={setIsProductUpdate}
         />
       )}
     </div>
