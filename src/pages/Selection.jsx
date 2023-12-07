@@ -155,7 +155,7 @@ const Selection = ({
         </div>
       </div>
 
-      <section className="mb-24 mt-1 flex w-screen flex-col items-center">
+      <section className="mb-24 mt-36 flex w-screen flex-col items-center">
         <ListProduct
           data={softsTab}
           setOpenModal={setOpenModal}
