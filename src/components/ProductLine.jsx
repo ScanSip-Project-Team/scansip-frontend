@@ -72,7 +72,7 @@ const ProductLine = (props) => {
 
   return (
     <>
-      <div className="border-lightgrey  text-s mb-2 flex h-[100px] items-center  justify-start   border-t  p-[5px] pl-1 pr-2">
+      <div className="border-lightgrey  text-s mb-2  flex h-[100px]  items-center     justify-start  border-t p-[5px] pl-1 pr-2">
         <div className="flex h-full w-3/12 items-center justify-between  ">
           <img
             className="h-20 w-20 rounded-sm bg-[#F3F3F3] object-cover "

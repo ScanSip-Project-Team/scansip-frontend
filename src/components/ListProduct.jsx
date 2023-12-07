@@ -17,7 +17,7 @@ const ListProduct = (props) => {
     <>
       <div
         id={id}
-        className=" border-grey-500 w-full scroll-mt-36 border-y px-[5px] "
+        className=" border-grey-500  w-full scroll-mt-36 border border-y  px-[5px] "
       >
         <div className="flex justify-center ">
           <div className="border-lightgrey flex w-full justify-start border-b  ">
