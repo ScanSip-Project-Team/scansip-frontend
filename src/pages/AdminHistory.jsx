@@ -1,7 +1,9 @@
 //Import Packages
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+// import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
+import { toast } from "sonner";
 import axios from "axios";
 import Cookies from "js-cookie";
 import baseApiURL from "../api";
@@ -18,25 +20,25 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
 
   const [data, setData] = useState({});
   const [counter, setCounter] = useState(0);
-  const [refresh, setRefresh] = useState(false);
-  const [triggerToast, setTriggerToast] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
+  // const [triggerToast, setTriggerToast] = useState(false);
   const navigate = useNavigate();
 
   //run the toast message et set the trigger state false to reinitiate the toastState
-  const triggerToastFunc = () => {
-    toast((t) => (
-      <span>
-        Une nouvelle commande a été enregistrée
-        <button
-          className="rounded-md bg-green-500 p-2 text-center text-white"
-          onClick={() => toast.dismiss(t.id)}
-        >
-          OK
-        </button>
-      </span>
-    ));
-    setTriggerToast(false);
-  };
+  // const triggerToastFunc = () => {
+  //   toast((t) => (
+  //     <span>
+  //       Une nouvelle commande a été enregistrée
+  //       <button
+  //         className="rounded-md bg-green-500 p-2 text-center text-white"
+  //         onClick={() => toast.dismiss(t.id)}
+  //       >
+  //         OK
+  //       </button>
+  //     </span>
+  //   ));
+  //   setTriggerToast(false);
+  // };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +47,8 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
         //if response.data il bigger thant data it means that we have a new order
         //if so, we trigger a message toast for the waiter
         if (data && data.count < response.data.count) {
-          setTriggerToast(true);
+          const toastId = toast("Une nouvelle commande a été enregistrée");
+          toast.dismiss(toastId);
         }
         setData(response.data);
         setIsLoading(false);
@@ -77,7 +80,7 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
         <div>
           <Toaster />
         </div>
-        {triggerToast && triggerToastFunc()}
+
         <h1 className="border-b border-solid border-black p-6 text-3xl">
           Historique des commandes
           <span className="primary-color">({data.count})</span>
