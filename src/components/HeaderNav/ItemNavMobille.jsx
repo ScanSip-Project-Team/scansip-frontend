@@ -16,7 +16,6 @@ const ItemNavMobile = ({
   const getMenuPath = (pathMacth, subMenuPaths) => {
     for (let i = 0; i < subMenuPaths.length; i++) {
       if (pathMacth === subMenuPaths[i].name) {
-        console.log("TRUE!!=>", subMenuPaths[i].name);
         return true;
       }
     }

@@ -22,18 +22,6 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
   const [triggerToast, setTriggerToast] = useState(false);
   const navigate = useNavigate();
 
-  //We reload the page every 30 seconds in order to fetch new orders if exist
-  // let action;
-  // const refreshPage = () => {
-  //   action = setInterval(() => {
-  //     setCounter((prevCount) => prevCount + 1);
-
-  //     console.log("refresh function!");
-  //     setRefresh(!refresh);
-  //   }, 30000);
-
-  //   return () => clearInterval(action);
-  // };
   //run the toast message et set the trigger state false to reinitiate the toastState
   const triggerToastFunc = () => {
     // toast.success("Vous avez une nouvelle commande!");
@@ -54,11 +42,10 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${baseApiURL}/orders-history`);
-        console.log(response.data.orders);
+
         //if response.data il bigger thant data it means that we have a new order
         //if so, we trigger a message toast for the waiter
         if (data && data.count < response.data.count) {
-          console.log("IF");
           setTriggerToast(true);
         }
         setData(response.data);
@@ -80,15 +67,6 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter, adminToken]);
 
-  // useEffect(() => {
-  //   console.log("2ème useEffect avant if");
-  //   //If first useEffect has been done and data fetched we run the second useEffect
-  //   if (!isLoading) {
-  //     console.log("2ème useEffect dans if ", counter);
-  //     refreshPage();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isLoading]);
 
   return isLoading ? (
     <Loader />

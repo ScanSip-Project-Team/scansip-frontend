@@ -48,24 +48,7 @@ function App() {
     Cookies.get("scanSipToken") || null,
   );
 
-  // console.log("cart before return >>>", cart);
 
-  // useEffect(() => {
-  //   window.onclick = (event) => {
-  //     console.log("event.target", event.target);
-  //     console.log("navRef", navRef);
-  //     if (
-  //       navRef.current &&
-  //       !navRef.current.contains(event.target)
-  //       // event.target.contains(navRef.current) &&
-  //       // event.target !== navRef.current
-  //     ) {
-  //       console.log("YOU CLICKED OUTSIDE");
-  //     } else {
-  //       console.log("YOU CLICKED INSIDE");
-  //     }
-  //   };
-  // }, []);
   return (
     <Router>
       {/* {adminToken && (

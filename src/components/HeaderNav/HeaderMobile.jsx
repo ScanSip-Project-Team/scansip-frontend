@@ -27,20 +27,13 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
   };
 
   useEffect(() => {
-    console.log("dans useEffectfor detect clikc");
     const handleClickWindow = (event) => {
-      console.log("salut");
-      console.log("event.target", event.target);
-
-      console.log("userRef", userMenuRef);
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-        console.log("OUTSIDE");
         setDisplayLogout(false);
       }
     };
     window.addEventListener("click", handleClickWindow);
     return () => {
-      console.log("nettoyage");
       window.removeEventListener("click", handleClickWindow);
     };
   }, []);

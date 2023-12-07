@@ -93,7 +93,6 @@ const Modal = ({
                 </div>
                 <p className="font-bold">TABLEAU NUTRITIONNEL : </p>
                 {nutritionalValues.map((elem) => {
-                  // console.log(elem);
                   return (
                     <div key={elem.type}>
                       <div
@@ -153,7 +152,7 @@ const Modal = ({
     //           </div>
     //           <p className="font-bold">TABLEAU NUTRITIONNEL : </p>
     //           {nutritionalValues.map((elem) => {
-    //             // console.log(elem);
+    //
     //             return (
     //               <div key={elem.type}>
     //                 <div

@@ -15,9 +15,6 @@ const FormCreateProduct = ({ product, toast }) => {
   // const location = useLocation();
   // const { product } = location.state;
   const public_id = product.product_image.public_id;
-  console.log("product >>>>", product);
-  console.log("product._id >>>", product._id);
-  console.log("public_id >>>", public_id);
 
   const [name, setName] = useState(product.product_name);
   const [picture, setPicture] = useState();
@@ -37,7 +34,6 @@ const FormCreateProduct = ({ product, toast }) => {
 
   const navigate = useNavigate();
 
-  console.log("chargement component =>", isLoading);
   const handleSubmitForm = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -86,8 +82,6 @@ const FormCreateProduct = ({ product, toast }) => {
       setFat("");
       setFibers("");
 
-      console.log(response.data);
-
       setIsLoading(false);
       navigate("/admin/products");
     } catch (error) {
@@ -107,9 +101,7 @@ const FormCreateProduct = ({ product, toast }) => {
   const handleOnChangeInt = (event, setter) => {
     setError(false);
     if (event.target.value.includes(",")) {
-      console.log("change int");
       event.target.value = event.target.value.replace(",", ".");
-      console.log("change value", event.target.value);
     }
     setter(event.target.value);
   };

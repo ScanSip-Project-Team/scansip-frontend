@@ -20,7 +20,6 @@ const UserPaiement = ({ total }) => {
   let order_id = useParams();
 
   order_id = order_id.id;
-  // console.log(order_id);
 
   // Pour empecher l'utilisateur de revenir en sur la page paiement si il à déjà payé
   const verifyOrderInCookie = Cookies.get("idOrder");

@@ -7,8 +7,6 @@ const ProductLine = (props) => {
 
   const handleClickMinus = (item) => {
     if (item.quantity !== 1) {
-      console.log(" IF productToFind pas dans le panier");
-
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
 
@@ -18,8 +16,6 @@ const ProductLine = (props) => {
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity - 1;
       setCart(cartCopy);
       setTotal(total - Number(item.product_price));
-
-      console.log("cart >>>", cart);
     } else {
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
@@ -32,14 +28,10 @@ const ProductLine = (props) => {
 
       delete item.quantity;
       setTotal(total - Number(item.product_price));
-
-      console.log("cart >>>", cart);
     }
   };
 
   const handleClickPlus = (item) => {
-    console.log("cart length", cart);
-
     // je vérifie si le produit est déjà dans le panier
     const productToFind = cart.find((e) => e._id === item._id);
 
@@ -51,20 +43,15 @@ const ProductLine = (props) => {
       cartCopy.push(itemCopy);
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
-
-      console.log("cart >>>", cart);
     }
     // s'il est déjà dans le panier j'augmente la quantité de 1
     else {
-      console.log(" ELSE clickPlus");
       const indexOfProduct = cart.indexOf(productToFind);
       const cartCopy = [...cart];
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity + 1;
 
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
-
-      console.log("cart >>>", cart);
     }
   };
 
