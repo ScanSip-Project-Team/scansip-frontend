@@ -1,6 +1,7 @@
-import { useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+// import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
+import { toast } from "sonner";
 import Button from "./Button";
 import baseApiURL from "../api";
 
@@ -19,12 +20,12 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
       } else {
         toast.error("😕 La commande n'a pas pu être validé! Ressayez 😉!");
       }
-      console.log("response.data=>", response);
+      // console.log("response.data=>", response);
       setIsOrderUpdated(!isOrderUpdated);
     } catch (error) {
       console.log(error);
     }
-    console.log("CLICK to order id ==>", id);
+    // console.log("CLICK to order id ==>", id);
   };
 
   return (
