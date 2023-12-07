@@ -96,7 +96,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
 
   return (
     // <section className="flex w-screen flex-col ">
-    <main className="flex h-screen w-screen flex-col items-center">
+    <main className="flex h-svh w-screen flex-col items-center">
       <div className="border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2    bg-white">
         <div className="flex w-screen flex-col items-center justify-center gap-2 bg-white">
           <nav className="mx-[10px] mt-[15px] self-start">
@@ -112,7 +112,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
         </div>
       </div>
 
-      <div className=" mt-2 flex w-screen flex-col items-center   pb-[20px]">
+      <div className=" mt-32 flex w-screen flex-col items-center    pb-[20px]">
         <ListProduct
           data={cart}
           cart={cart}
@@ -121,7 +121,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
           total={total}
         />
       </div>
-      <div className="border-lightgrey   mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t bg-white py-6">
+      <div className="border-lightgrey  fixed bottom-0 mx-[10px] flex w-screen flex-col  items-center  gap-2.5 border-t bg-white py-6">
         <Button
           text={`Commande pour un total de ${total} €`}
           className={"btn-client mx-[10px]  w-available bg-black text-white"}
