@@ -13,15 +13,9 @@ const ProductAdmin = ({
 }) => {
   const [visible, setVisible] = useState(false);
 
-  const handleUpdatekBtn = () => {
-    console.log("UPDATE!");
-  };
+  const handleUpdatekBtn = () => {};
   const handleDeletekBtn = () => {
     setVisible(true);
-    console.log("visible >>>", visible);
-    console.log("product._id >>>>", product._id);
-
-    console.log("DELETE!");
   };
   return (
     <div className="flex w-80 justify-between gap-3 border  border-b  py-2">

@@ -17,14 +17,13 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [isProductUpdate, setIsProductUpdate] = useState(false);
-  console.log("data=>", data);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${baseApiURL}/admin/products`);
         setData(response.data);
         setIsLoading(false);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }

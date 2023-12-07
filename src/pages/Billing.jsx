@@ -43,7 +43,7 @@ const Billing = () => {
     };
     const fetchData = async () => {
       const response = await axios.get(`${baseApiURL}/orders/${order_id}`);
-      // console.log(response.data);
+
       setData(response.data);
       setTotal(`${response.data.total_price + 2}`);
       setIsLoading(false);
@@ -134,7 +134,6 @@ const Billing = () => {
           <div className="ml-5 mr-5">
             <div className="flex flex-col">
               {data.product_list.map((elem) => {
-                console.log(elem);
                 return (
                   <div key={elem.product._id} className="flex justify-between">
                     <span>

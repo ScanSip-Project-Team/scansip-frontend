@@ -26,7 +26,6 @@ const ProductLine = (props) => {
       setCart(cartCopy);
 
       setTotal(total - Number(item.product_price));
-      console.log("cart >>>", cart);
     } else {
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
@@ -38,7 +37,6 @@ const ProductLine = (props) => {
       setCart(cartCopy);
       delete item.quantity;
       setTotal(total - Number(item.product_price));
-      console.log("cart >>>", cart);
     }
   };
 
@@ -48,19 +46,15 @@ const ProductLine = (props) => {
 
     // s'il n'est pas dans le panier, je lui ajoute une clé quantité et je le push dans le panier
     if (productToFind === undefined) {
-      console.log(" IF clickPlus");
-
       const cartCopy = [...cart];
       item.quantity = 1;
       cartCopy.push(item);
       setCart(cartCopy);
 
       setTotal(total + Number(item.product_price));
-      console.log("cart >>>", cart);
     }
     // s'il est déjà dans le panier j'augmente la quantité de 1
     else {
-      console.log(" ELSE clickPlus");
       const indexOfProduct = cart.indexOf(productToFind);
       const cartCopy = [...cart];
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity + 1;
@@ -68,19 +62,16 @@ const ProductLine = (props) => {
       //update sessionStorage
       //parse carteStorage to Obj
       const storageArray = JSON.parse(cartStorage);
-      console.log("storageState existe dejà dans else=>", storageArray);
 
       //find the product to update inside the array
       for (const product of storageArray) {
         if (productToFind._id === product._id) {
           product.quantity += 1;
-          console.log("product is=>", product);
         }
       }
-      // console.log(storagetoObj);
+
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
-      console.log("cart >>>", cart);
     }
   };
 
@@ -94,7 +85,6 @@ const ProductLine = (props) => {
             alt="product"
             // Yohann code -----------------------------
             onClick={() => {
-              console.log(item._id);
               setOpenModal(true);
               setProductID(item._id);
             }}

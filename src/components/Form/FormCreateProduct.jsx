@@ -72,13 +72,12 @@ const FormCreateProduct = ({ toast }) => {
       setFibers("");
       // setErrorMessage("");
 
-      console.log(response.data);
       setIsLoading(false);
       navigate("/admin/products");
     } catch (error) {
       setIsLoading(false);
       setError(true);
-      console.log(error.response.data.message);
+
       toast.error(error.response.data.message);
     }
   };
@@ -89,9 +88,7 @@ const FormCreateProduct = ({ toast }) => {
   const handleOnChangeInt = (event, setter) => {
     setError(false);
     if (event.target.value.includes(",")) {
-      console.log("change int");
       event.target.value = event.target.value.replace(",", ".");
-      console.log("change value", event.target.value);
     }
     setter(event.target.value);
   };

@@ -61,8 +61,6 @@ const ImageUpload = ({
             if (currentImage) {
               setCurrentImage();
             }
-
-            console.log("event.target.files[0]=>", event.target.files[0]);
           }}
           className="hidden"
           type="file"

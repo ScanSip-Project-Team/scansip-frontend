@@ -19,12 +19,11 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
       } else {
         toast.error("😕 La commande n'a pas pu être validé! Ressayez 😉!");
       }
-      console.log("response.data=>", response);
+
       setIsOrderUpdated(!isOrderUpdated);
     } catch (error) {
       console.log(error);
     }
-    console.log("CLICK to order id ==>", id);
   };
 
   return (
