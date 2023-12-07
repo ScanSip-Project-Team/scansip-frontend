@@ -142,7 +142,7 @@ const Orders = ({ adminToken, setAdminToken }) => {
         </div>
         {/* {triggerToast && triggerToastFunc()} */}
         <h1 className="border-b border-solid border-black p-6 text-3xl">
-          Service 🔥 {counter}
+          Service 🔥
         </h1>
 
         <div className="flex h-auto flex-col pt-8 md:flex-row">
