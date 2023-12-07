@@ -9,6 +9,8 @@ import Cookies from "js-cookie";
 import ProductAdmin from "../components/ProductAdmin";
 import Loader from "../components/Loader";
 import baseApiURL from "../api";
+import Header from "../components/HeaderNav/Header";
+import HeaderMobile from "../components/HeaderNav/HeaderMobile";
 const AdminProducts = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
 
@@ -43,6 +45,8 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
       <div className=" relative  p-8">
         <div className="flex items-center justify-between border-b border-black">
           <h1 className="mb-4  p-6 text-3xl">Mes produits ({data.count})</h1>

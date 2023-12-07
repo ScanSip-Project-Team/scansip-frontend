@@ -26,11 +26,30 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
     navigate("/admin/signin");
   };
 
-  window.onclick = (event) => {
-    if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-      setDisplayLogout(false);
-    }
-  };
+  useEffect(() => {
+    console.log("dans useEffectfor detect clikc");
+    const handleClickWindow = (event) => {
+      console.log("salut");
+      console.log("event.target", event.target);
+
+      console.log("userRef", userMenuRef);
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        console.log("OUTSIDE");
+        setDisplayLogout(false);
+      }
+    };
+    window.addEventListener("click", handleClickWindow);
+    return () => {
+      console.log("nettoyage");
+      window.removeEventListener("click", handleClickWindow);
+    };
+  }, []);
+
+  // window.onclick = (event) => {
+  //   if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+  //     setDisplayLogout(false);
+  //   }
+  // };
 
   return (
     <header className="relative mb-10 flex items-center justify-between bg-black px-4 sm:hidden">
