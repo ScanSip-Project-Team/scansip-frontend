@@ -18,7 +18,7 @@ const SumUpOrderDelivered = ({
       );
 
       if (response.status === 200) {
-        toast.success("La commande est prête 👏👏 ! <");
+        toast.success("La commande est renvoyée en service 👏👏 !");
       } else {
         toast.error("😕 La commande n'a pas pu être validé! Ressayez 😉!.<");
       }
@@ -49,10 +49,6 @@ const SumUpOrderDelivered = ({
           </span>
         </div>
         <div className="flex flex-col gap-3">
-          <span className="text-sm ">
-            Nom (carte):
-            <span className="font-semibold"> Tiktac </span>
-          </span>
           <span className="mb-4 text-sm ">
             Prix :
             <span className="font-semibold">

@@ -93,6 +93,8 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
       <div className="container m-auto h-screen">
         <div>
           <Toaster />

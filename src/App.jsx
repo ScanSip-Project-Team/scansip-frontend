@@ -50,7 +50,6 @@ function App() {
     Cookies.get("scanSipToken") || null,
   );
 
-  console.log("width", window.innerWidth);
   console.log("cart before return >>>", cart);
 
   // useEffect(() => {
@@ -71,7 +70,7 @@ function App() {
   // }, []);
   return (
     <Router>
-      {adminToken && (
+      {/* {adminToken && (
         <>
           <Header
             adminToken={adminToken}
@@ -81,7 +80,7 @@ function App() {
           />
           <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
         </>
-      )}
+      )} */}
 
       <Routes>
         <Route path="/" element={<FlashScreen />} />

@@ -47,8 +47,8 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
       <div>
         <Toaster />
       </div>
-      {/* <Header adminToken={adminToken} setAdminToken={setAdminToken} /> */}
-      {/* <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} /> */}
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
       <div className="">
         <h1 className="border-b border-solid border-black p-6 text-3xl">
           Mettre à jour un produit

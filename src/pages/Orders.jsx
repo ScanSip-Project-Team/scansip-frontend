@@ -22,7 +22,7 @@ const Orders = ({ adminToken, setAdminToken }) => {
   const [refresh, setRefresh] = useState(false);
   // const [token, setToken] = useState("scanSip");
   const [counter, setCounter] = useState(0);
-  const [triggerToast, setTriggerToast] = useState(false);
+  // const [triggerToast, setTriggerToast] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,28 +33,28 @@ const Orders = ({ adminToken, setAdminToken }) => {
       setCounter((prevCount) => prevCount + 1);
 
       console.log("refresh function!");
-      setRefresh(!refresh);
+      // setRefresh(!refresh);
     }, 30000);
 
     return () => clearInterval(action);
   };
 
   //run the toast message et set the trigger state false to reinitiate the toastState
-  const triggerToastFunc = () => {
-    // toast.success("Vous avez une nouvelle commande!");
-    toast((t) => (
-      <span>
-        Vous avez une nouvelle <b>commande 🔥🔥</b>
-        <button
-          className="rounded-md bg-green-500 p-2 text-center text-white"
-          onClick={() => toast.dismiss(t.id)}
-        >
-          OK
-        </button>
-      </span>
-    ));
-    setTriggerToast(false);
-  };
+  // const triggerToastFunc = () => {
+  //   // toast.success("Vous avez une nouvelle commande!");
+  //   toast((t) => (
+  //     <span>
+  //       Vous avez une nouvelle <b>commande 🔥🔥</b>
+  //       <button
+  //         className="rounded-md bg-green-500 p-2 text-center text-white"
+  //         onClick={() => toast.dismiss(t.id)}
+  //       >
+  //         OK
+  //       </button>
+  //     </span>
+  //   ));
+  //   setTriggerToast(false);
+  // };
 
   //UPDATE ORDER DELIVERED isEnabled ==> false
   const handleOdersIsEnabled = async () => {
@@ -79,17 +79,28 @@ const Orders = ({ adminToken, setAdminToken }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${baseApiURL}/orders`);
-        console.log("response ==> ", response.data);
-        console.log("refresh");
-        console.log("data.length after axios=>", data.length);
+        console.log("response commandes ==> ", response.data);
+        // console.log("refresh");
 
         //if response.data il bigger thant data it means that we have a new order
         //if so, we trigger a message toast for the waiter
         if (data.length < response.data.length) {
-          setTriggerToast(true);
+          // setTriggerToast(true);
+          toast((t) => (
+            <span>
+              Vous avez une nouvelle <b>commande 🔥🔥</b>
+              <button
+                className="rounded-md bg-green-500 p-2 text-center text-white"
+                onClick={() => toast.dismiss(t.id)}
+              >
+                OK
+              </button>
+            </span>
+          ));
         }
         // setData(response.data.reverse());
         setData(response.data);
+        console.log("response.data.length after axios=>", response.data.length);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -109,10 +120,10 @@ const Orders = ({ adminToken, setAdminToken }) => {
   }, [isOrderUpdated, counter, adminToken]);
 
   useEffect(() => {
-    console.log("2ème useEffect avant if");
+    // console.log("2ème useEffect avant if");
     //If first useEffect has been done and data fetched we run the second useEffect
     if (!isLoading) {
-      console.log("2ème useEffect dans if ", counter);
+      // console.log("2ème useEffect dans if ", counter);
       refreshPage();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -122,16 +133,16 @@ const Orders = ({ adminToken, setAdminToken }) => {
     <Loader />
   ) : (
     <>
-      {/* <Header adminToken={adminToken} setAdminToken={setAdminToken} /> */}
-      {/* <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} /> */}
+      <Header adminToken={adminToken} setAdminToken={setAdminToken} />
+      <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
 
       <div className="container m-auto h-screen">
         <div>
           <Toaster />
         </div>
-        {triggerToast && triggerToastFunc()}
+        {/* {triggerToast && triggerToastFunc()} */}
         <h1 className="border-b border-solid border-black p-6 text-3xl">
-          Service 🔥
+          Service 🔥 {counter}
         </h1>
 
         <div className="flex h-auto flex-col pt-8 md:flex-row">
@@ -149,16 +160,15 @@ const Orders = ({ adminToken, setAdminToken }) => {
             </h2>
 
             {data.map((element) => {
+              console.log("id", element._id);
               if (element.order_status === "paid") {
                 return (
-                  <>
-                    <OrderComponent
-                      key={element._id}
-                      element={element}
-                      setIsOrderUpdated={setIsOrderUpdated}
-                      isOrderUpdated={isOrderUpdated}
-                    />
-                  </>
+                  <OrderComponent
+                    key={element._id}
+                    element={element}
+                    setIsOrderUpdated={setIsOrderUpdated}
+                    isOrderUpdated={isOrderUpdated}
+                  />
                 );
               }
               return null;

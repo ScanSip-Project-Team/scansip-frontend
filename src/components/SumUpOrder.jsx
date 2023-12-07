@@ -4,7 +4,6 @@ import toast, { Toaster } from "react-hot-toast";
 import Button from "./Button";
 import baseApiURL from "../api";
 
-import audioSucces from "../assets/success_bell.mp3";
 const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
   const handleUpdateOrder = async (id) => {
     try {

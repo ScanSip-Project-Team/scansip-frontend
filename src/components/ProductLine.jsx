@@ -46,8 +46,9 @@ const ProductLine = (props) => {
     // s'il n'est pas dans le panier, je lui ajoute une clé quantité et je le push dans le panier
     if (productToFind === undefined) {
       const cartCopy = [...cart];
-      item.quantity = 1;
-      cartCopy.push(item);
+      const itemCopy = { ...item };
+      itemCopy.quantity = 1;
+      cartCopy.push(itemCopy);
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
 
@@ -66,6 +67,8 @@ const ProductLine = (props) => {
       console.log("cart >>>", cart);
     }
   };
+
+  const itemInCart = cart.find((e) => e._id === item._id);
 
   return (
     <>
@@ -92,14 +95,14 @@ const ProductLine = (props) => {
           </p>
         </div>
         <div className="mr-1 flex w-2/12 justify-center ">
-          {item.quantity ? (
+          {itemInCart?.quantity ? (
             <div className="flex justify-center">
               <div className="flex h-[38px] items-center  rounded-[20px]    bg-[#E8E8E8] p-1.5 text-xs">
                 <ButtonQuantity
                   text={"-"}
                   func={() => handleClickMinus(item)}
                 />
-                <p> {item.quantity}</p>
+                <p> {itemInCart.quantity}</p>
 
                 <ButtonQuantity text={"+"} func={() => handleClickPlus(item)} />
               </div>

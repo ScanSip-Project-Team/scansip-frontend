@@ -13,10 +13,22 @@ const OrderComponentHistory = ({
   const [isDropDown, setIsDropDown] = useState(false);
 
   let status = "";
-  if (element.order_status === "paid") {
-    status = "payée - en préparation";
-  } else if (element.order_status === "delivered") {
-    status = "servie";
+
+  switch (element.order_status) {
+    case "paid":
+      status = "payée - en préparation";
+      break;
+    case "delivered":
+      status = "servie";
+      break;
+    case "in progress":
+      status = "en cours";
+      break;
+    case "rejected":
+      status = "payiement rejeté";
+      break;
+    default:
+      status = "";
   }
 
   const handleDropDown = (id) => {
