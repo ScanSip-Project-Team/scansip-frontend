@@ -16,27 +16,17 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
   const location = useLocation();
 
   // const { product } = location.state;
-  console.log("location=>", location);
 
   const navigate = useNavigate();
 
-  // console.log("product is=>", product);
-
-  console.log("chargement page =>", isLoading);
   useEffect(() => {
-    console.log("Useffect in");
     if (adminToken) {
-      console.log("if token ok in");
-
       if (location.state !== null) {
-        console.log("if product ok in");
         setIsLoading(false);
       } else {
-        console.log("esle no product in");
         navigate("/admin/products");
       }
     } else {
-      console.log("else no token in");
       navigate("/admin/signin");
     }
   }, []);

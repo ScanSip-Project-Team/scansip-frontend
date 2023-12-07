@@ -25,52 +25,41 @@ const Header = ({ adminToken, setAdminToken }) => {
   };
 
   // window.onclick = (event) => {
-  //   console.log("event.target", event.target);
-  //   console.log("navRef", navRef);
-  //   console.log("userRef", userMenuRef);
+  //
   //   if (
   //     navRef.current &&
   //     !navRef.current.contains(event.target) &&
   //     userMenuRef.current &&
   //     !userMenuRef.current.contains(event.target)
   //   ) {
-  //     console.log("OUTSIDE");
+  //
   //     setDisplayLogout(false);
   //     setDisplayMenu(false);
   //     setDisplayService(false);
   //   }
   // };
   useEffect(() => {
-    console.log("ezeza");
     const handleClickWindow = (event) => {
-      console.log("salut");
-      console.log("event.target", event.target);
-      console.log("navRef", navRef);
-      console.log("userRef", userMenuRef);
       if (
         navRef.current &&
         !navRef.current.contains(event.target) &&
         userMenuRef.current &&
         !userMenuRef.current.contains(event.target)
       ) {
-        console.log("OUTSIDE");
         setDisplayLogout(false);
         setDisplayMenu(false);
         setDisplayService(false);
       }
     };
     // window.onclick = (event) => {
-    //   console.log("salut");
-    //   console.log("event.target", event.target);
-    //   console.log("navRef", navRef);
-    //   console.log("userRef", userMenuRef);
+
     //   if (
     //     navRef.current &&
     //     !navRef.current.contains(event.target) &&
     //     userMenuRef.current &&
     //     !userMenuRef.current.contains(event.target)
     //   ) {
-    //     console.log("OUTSIDE");
+
     //     setDisplayLogout(false);
     //     setDisplayMenu(false);
     //     setDisplayService(false);
@@ -80,7 +69,6 @@ const Header = ({ adminToken, setAdminToken }) => {
     window.addEventListener("click", handleClickWindow);
 
     return () => {
-      console.log("nettoyage");
       window.removeEventListener("click", handleClickWindow);
     };
   }, []);
@@ -90,7 +78,6 @@ const Header = ({ adminToken, setAdminToken }) => {
         <img
           onClick={() => {
             navigate("/admin/orders");
-            console.log("HELLO");
           }}
           className="mr-2 w-20"
           src={logo}

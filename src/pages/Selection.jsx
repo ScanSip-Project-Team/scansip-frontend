@@ -85,7 +85,7 @@ const Selection = ({
       try {
         const response = await axios.get(`${baseApiURL}/products`);
         setData(response.data);
-        // console.log(response.data);
+
         setIsLoading(false);
       } catch (error) {
         console.log(error);

@@ -14,9 +14,6 @@ import ShopName from "../components/ShopName";
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
 
-  console.log("cartClient page ==>", cart);
-
-  // console.log(total);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +36,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   const createOrder = async () => {
     try {
       setIsDisable(true);
-      console.log(orderToSend);
+
       const response = await axios.post(
         `${baseApiURL}/orders/new`,
         {
@@ -51,7 +48,6 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
           },
         },
       );
-      console.log(response.data);
 
       Cookies.set("orderToModify", response.data._id);
 
@@ -67,7 +63,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   const modifyOrder = async () => {
     try {
       const orderIdToModify = Cookies.get("orderToModify");
-      console.log(orderToSend);
+
       const response = await axios.put(
         `${baseApiURL}/orders/update`,
         {
@@ -85,7 +81,6 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
           },
         },
       );
-      console.log("response.data >>>", response.data);
 
       const orderId = response.data._id;
       navigate(`/payment/${orderId}`);
@@ -96,7 +91,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
 
   return (
     // <section className="flex w-screen flex-col ">
-    <main className="flex h-svh w-screen flex-col items-center">
+    <main className="h-svh flex w-screen flex-col items-center">
       <div className="border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2    bg-white">
         <div className="flex w-screen flex-col items-center justify-center gap-2 bg-white">
           <nav className="mx-[10px] mt-[15px] self-start">
