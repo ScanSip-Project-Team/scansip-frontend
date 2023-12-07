@@ -62,7 +62,7 @@ const Modal = ({
           <div className="flex h-available  items-center justify-center text-black">
             {data && (
               // <div className={`absolute left-0 top-[40px]  h-full w-full `}>
-              <div className="z-10 m-4 flex h-fit flex-col justify-center rounded-lg bg-white pb-5 pl-5 pr-[10px]">
+              <div className="z-10 m-4 flex  h-5/6 w-5/6 flex-col justify-center rounded-lg bg-white  pl-5 pr-[10px]">
                 <div className=" mt-1 flex justify-end">
                   <p
                     onClick={handleCloseModal}
@@ -86,7 +86,9 @@ const Modal = ({
                 </div>
                 <p className="mb-2 font-bold">INGREDIENTS :</p>
                 <div className="ml-2 flex w-11/12	">
-                  <p className="mb-2">{data.product_description}</p>
+                  <p className="mb-2 max-h-32 overflow-scroll">
+                    {data.product_description}
+                  </p>
                 </div>
                 <p className="font-bold">TABLEAU NUTRITIONNEL : </p>
                 {nutritionalValues.map((elem) => {

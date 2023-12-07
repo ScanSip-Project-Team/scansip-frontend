@@ -14,6 +14,8 @@ import ShopName from "../components/ShopName";
 const CartClient = ({ setCart, cart, setTotal, total }) => {
   const [isDisabled, setIsDisable] = useState(false);
 
+  console.log("cartClient page ==>", cart);
+
   // console.log(total);
   const navigate = useNavigate();
 
@@ -70,10 +72,12 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
         `${baseApiURL}/orders/update`,
         {
           id: orderIdToModify,
-          key: "product_list",
-          value: orderToSend,
-          keyparams: "total_price",
-          valueparams: total,
+          key_product_list: "product_list",
+          value_product_list: orderToSend,
+          key_total_price: "total_price",
+          value_total_price: total,
+          key_total_items: "total_items",
+          value_total_items: orderToSend.length,
         },
         {
           headers: {

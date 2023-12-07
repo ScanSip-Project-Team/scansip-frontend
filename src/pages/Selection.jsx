@@ -85,7 +85,7 @@ const Selection = ({
       try {
         const response = await axios.get(`${baseApiURL}/products`);
         setData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -211,7 +211,7 @@ const Selection = ({
       <div className="border-lightgrey fixed  bottom-0 mx-[10px] w-screen border-t bg-white py-6">
         <Button
           text={`Voir le panier • ${total} €`}
-          className={"btn-client w-available  mx-[10px] bg-black text-white"}
+          className={"btn-client mx-[10px]  w-available bg-black text-white"}
           func={handleNavigate}
         />
       </div>
