@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import toast, { Toaster } from "react-hot-toast";
+
 import { Toaster } from "sonner";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //Import Components
 import OrderComponent from "../components/OrderComponent";
@@ -22,7 +21,6 @@ const Orders = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [isOrderUpdated, setIsOrderUpdated] = useState(true);
-  // const [refresh, setRefresh] = useState(false);
 
   const [counter, setCounter] = useState(0);
 
@@ -48,13 +46,9 @@ const Orders = ({ adminToken, setAdminToken }) => {
     }
   };
   useEffect(() => {
-    // console.log("1er useEffect avant if");
-    // console.log("data.length before axios=>", data.length);
     const fetchData = async () => {
       try {
         const response = await axios.get(`${baseApiURL}/orders`);
-        // console.log("response commandes ==> ", response.data);
-        // console.log("refresh");
 
         //if response.data il bigger thant data it means that we have a new order
         //if so, we trigger a message toast for the waiter
@@ -62,9 +56,9 @@ const Orders = ({ adminToken, setAdminToken }) => {
           const toastId = toast("Vous avez une nouvelle commande 🔥🔥");
           toast.dismiss(toastId);
         }
-        // setData(response.data.reverse());
+
         setData(response.data);
-        // console.log("response.data.length after axios=>", response.data.length);
+
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -83,14 +77,6 @@ const Orders = ({ adminToken, setAdminToken }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOrderUpdated, counter, adminToken]);
 
-  // useEffect(() => {
-  //   //If first useEffect has been done and data fetched we run the second useEffect
-  //   if (!isLoading) {
-  //     refreshPage();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isLoading]);
-
   return isLoading ? (
     <Loader />
   ) : (
@@ -105,7 +91,7 @@ const Orders = ({ adminToken, setAdminToken }) => {
         </div>
 
         <h1 className="border-b border-solid border-black p-6 text-3xl">
-          Service 🔥 {counter}
+          Service 🔥
         </h1>
 
         <div className="flex h-auto flex-col pt-8 md:flex-row">

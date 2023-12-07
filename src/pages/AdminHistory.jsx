@@ -15,7 +15,7 @@ import { RefreshComponent } from "../utils/RefreshComponent";
 
 const AdminHistory = ({ adminToken, setAdminToken }) => {
   const [isLoading, setIsLoading] = useState(true);
-  //   const [isOrderUpdated, setIsOrderUpdated] = useState(true);
+
   const [data, setData] = useState({});
   const [counter, setCounter] = useState(0);
   const [refresh, setRefresh] = useState(false);
@@ -24,7 +24,6 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
 
   //run the toast message et set the trigger state false to reinitiate the toastState
   const triggerToastFunc = () => {
-    // toast.success("Vous avez une nouvelle commande!");
     toast((t) => (
       <span>
         Une nouvelle commande a été enregistrée
@@ -67,7 +66,6 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter, adminToken]);
 
-
   return isLoading ? (
     <Loader />
   ) : (
@@ -81,7 +79,7 @@ const AdminHistory = ({ adminToken, setAdminToken }) => {
         </div>
         {triggerToast && triggerToastFunc()}
         <h1 className="border-b border-solid border-black p-6 text-3xl">
-          Historique des commandes {counter}
+          Historique des commandes
           <span className="primary-color">({data.count})</span>
         </h1>
 

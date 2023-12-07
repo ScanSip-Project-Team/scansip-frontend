@@ -20,7 +20,6 @@ import Selection from "./pages/Selection";
 import UserPaiement from "./pages/UserPaiement";
 import Billing from "./pages/Billing";
 import CartClient from "./pages/CartClient";
-import Lab from "./pages/Lab";
 import AdminProducts from "./pages/AdminProducts";
 import AdminNewProduct from "./pages/AdminNewProduct";
 import AdminHistory from "./pages/AdminHistory";
@@ -48,21 +47,8 @@ function App() {
     Cookies.get("scanSipToken") || null,
   );
 
-
   return (
     <Router>
-      {/* {adminToken && (
-        <>
-          <Header
-            adminToken={adminToken}
-            setAdminToken={setAdminToken}
-            // navRef={navRef}
-            // userMenuRef={userMenuRef}
-          />
-          <HeaderMobile adminToken={adminToken} setAdminToken={setAdminToken} />
-        </>
-      )} */}
-
       <Routes>
         <Route path="/" element={<FlashScreen />} />
         <Route
@@ -154,9 +140,6 @@ function App() {
             />
           }
         />
-
-        {/* page de test SAMUEL */}
-        <Route path="/lab" element={<Lab />} />
       </Routes>
     </Router>
   );
