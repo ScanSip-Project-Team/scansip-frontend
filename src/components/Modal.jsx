@@ -59,10 +59,11 @@ const Modal = ({
       <div className="absolute top-[0px]  z-10 m-auto h-[2000px] w-screen bg-slate-500 bg-opacity-25"></div>
       <div className="fixed top-0 z-20  h-screen">
         <div className={`flex h-full w-full flex-col  text-white `}>
-          <div className="flex h-available  items-center justify-center text-black">
+          <div className="mt-14 flex h-available w-screen justify-center text-black">
             {data && (
               // <div className={`absolute left-0 top-[40px]  h-full w-full `}>
-              <div className="z-10 m-4 flex  h-5/6 w-5/6 flex-col justify-center rounded-lg bg-white  pl-5 pr-[10px]">
+
+              <div className="z-10 flex h-fit w-5/6 flex-col justify-center rounded-lg bg-white pb-5  pl-5 pr-[10px]">
                 <div className=" mt-1 flex justify-end">
                   <p
                     onClick={handleCloseModal}
@@ -86,7 +87,7 @@ const Modal = ({
                 </div>
                 <p className="mb-2 font-bold">INGREDIENTS :</p>
                 <div className="ml-2 flex w-11/12	">
-                  <p className="mb-2 max-h-32 overflow-scroll">
+                  <p className="mb-2 h-20 overflow-scroll">
                     {data.product_description}
                   </p>
                 </div>
@@ -110,10 +111,9 @@ const Modal = ({
                   );
                 })}
               </div>
-              // </div>
             )}
           </div>
-          <div className="border-lightgrey  bottom-0 left-0 w-screen border-t bg-white py-6">
+          {/* <div className="border-lightgrey  bottom-0 left-0 w-screen border-t bg-white py-6">
             <Button
               text={`Voir le panier • ${total} €`}
               className={
@@ -121,7 +121,7 @@ const Modal = ({
               }
               func={handleNavigate}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </>
