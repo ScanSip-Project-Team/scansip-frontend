@@ -112,7 +112,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
         </div>
       </div>
 
-      <div className=" mt-32 flex w-screen flex-col items-center    pb-[20px]">
+      <div className=" mt-32 flex w-screen flex-col items-center pb-32">
         <ListProduct
           data={cart}
           cart={cart}
