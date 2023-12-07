@@ -28,14 +28,12 @@ const ModalDelete = ({
   };
 
   return (
-    <div className="absolute left-0 top-0 h-full w-full border border-red-300 bg-white bg-opacity-90">
-      <div className="absolute left-96 top-40 h-64   w-96 items-center justify-center overflow-y-auto overflow-x-hidden   bg-slate-100 pl-10 pt-8 opacity-100 ">
+    <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center  bg-white bg-opacity-90">
+      <div className="absolute  flex   flex-col justify-between  gap-4 overflow-y-auto overflow-x-hidden  bg-slate-100 p-10  opacity-100">
         <div>
           <Toaster />
         </div>
-        <p className="mb-6 mt-4 ">
-          Êtes vous certain de vouloir supprimer ce produit ?
-        </p>
+        <p>Êtes vous certain de vouloir supprimer ce produit ?</p>
         <div className="flex gap-14">
           <button
             className="h-10 w-20 rounded bg-black text-white"
