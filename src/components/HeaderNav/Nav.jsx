@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+//Import Components
 import ItemNav from "./ItemNav";
+
 const Nav = ({
   navRef,
   displayMenu,
@@ -11,10 +9,6 @@ const Nav = ({
   setDisplayService,
   setDisplayLogout,
 }) => {
-  // const [displayMenu, setDisplayMenu] = useState(false);
-  // const [displayService, setDisplayService] = useState(false);
-  const [isDropDown, setIsDropDown] = useState(false);
-  const location = useLocation();
   return (
     <ul ref={navRef} id="navigation" className="flex gap-2">
       <ItemNav

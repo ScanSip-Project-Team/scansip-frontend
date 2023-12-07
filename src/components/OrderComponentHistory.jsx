@@ -1,12 +1,13 @@
+// Import Packages
 import { useState } from "react";
-import ProductOrder from "./ProductOrder";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Import Components
 import SumUpOrderHistory from "./SumUpOrderHistory";
+import ProductOrder from "./ProductOrder";
 
 const OrderComponentHistory = ({
   element,
-
   setIsOrderUpdated,
   isOrderUpdated,
 }) => {

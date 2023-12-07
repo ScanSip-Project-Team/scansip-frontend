@@ -21,7 +21,6 @@ const UserPaiement = ({ total }) => {
 
   order_id = order_id.id;
 
-  // Pour empecher l'utilisateur de revenir en sur la page paiement si il à déjà payé
   const verifyOrderInCookie = Cookies.get("idOrder");
 
   if (verifyOrderInCookie) {
@@ -43,9 +42,6 @@ const UserPaiement = ({ total }) => {
       accessibleColorOnColorPrimary: "#262626",
     },
     rules: {
-      // ".BillingAddressForm": {
-      //   display: "none",
-      // },
       ".Block": {
         backgroundColor: "var(--colorBackground)",
         boxShadow: "none",
@@ -112,7 +108,7 @@ const UserPaiement = ({ total }) => {
 
   return (
     <>
-      <main className=" h-svh padding-container flex flex-col items-center">
+      <main className=" padding-container flex h-svh flex-col items-center">
         <nav className="h-fit self-start">
           <BreadCrumb
             text={"Retourner au panier"}

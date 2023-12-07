@@ -1,8 +1,11 @@
-import { useState } from "react";
+// Import Packages
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import Button from "./Button";
 import baseApiURL from "../api";
+
+// Import Components
+import Button from "./Button";
+
 const SumUpOrderDelivered = ({
   element,
   setIsOrderUpdated,
@@ -22,7 +25,6 @@ const SumUpOrderDelivered = ({
       } else {
         toast.error("😕 La commande n'a pas pu être validé! Ressayez 😉!.<");
       }
-
       setIsOrderUpdated(!isOrderUpdated);
     } catch (error) {
       console.log(error);

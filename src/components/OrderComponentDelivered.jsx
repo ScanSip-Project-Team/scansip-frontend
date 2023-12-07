@@ -1,8 +1,10 @@
+// Import Packages
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Import Components
 import ProductOrder from "./ProductOrder";
 import SumUpOrderDelivered from "./SumUpOrderDelivered";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const OrderComponentDelivered = ({
   element,
@@ -12,7 +14,7 @@ const OrderComponentDelivered = ({
 }) => {
   const [isDropDown, setIsDropDown] = useState(false);
 
-  const handleDropDown = (id) => {
+  const handleDropDown = () => {
     setIsDropDown(!isDropDown);
   };
 

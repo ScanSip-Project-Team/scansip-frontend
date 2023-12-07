@@ -1,12 +1,9 @@
-import { useState } from "react";
+//Import Packages
 import { Link, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SubMenu from "./SubMenu";
 const ItemNavMobile = ({
-  displayNav,
   setDisplayNav,
-  setDisplayState,
   displayState,
   subMenuPaths,
   label,

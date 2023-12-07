@@ -1,12 +1,8 @@
+// Import Components
 import ProductOrder from "./ProductOrder";
 import SumUpOrder from "./SumUpOrder";
 
-const OrderComponent = ({
-  setIsOrderUpdated,
-  isOrderUpdated,
-
-  element,
-}) => {
+const OrderComponent = ({ setIsOrderUpdated, isOrderUpdated, element }) => {
   return (
     <div className="mb-4  rounded bg-slate-100 p-4">
       <div className="flex justify-between pl-4 pr-4">

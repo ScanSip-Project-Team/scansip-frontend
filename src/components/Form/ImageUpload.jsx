@@ -1,5 +1,9 @@
+//Import Packages
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+//Import Assets
 import imgPlaceholder from "../../assets/placeholder.png";
+
 const ImageUpload = ({
   setPicture,
   picture,

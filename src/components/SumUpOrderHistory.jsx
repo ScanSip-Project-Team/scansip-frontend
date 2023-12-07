@@ -1,10 +1,3 @@
-import { useState } from "react";
-import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
-import Button from "./Button";
-import baseApiURL from "../api";
-
-import audioSucces from "../assets/success_bell.mp3";
 const SumUpOrderHistory = ({ element }) => {
   return (
     <div

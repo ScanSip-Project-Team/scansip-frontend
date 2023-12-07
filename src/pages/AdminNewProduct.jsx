@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+
 //Import Components
 import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
@@ -21,6 +22,7 @@ const AdminNewProduct = ({ adminToken, setAdminToken }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return isLoading ? (
     <Loader />
   ) : (

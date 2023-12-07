@@ -36,7 +36,6 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   const createOrder = async () => {
     try {
       setIsDisable(true);
-
       const response = await axios.post(
         `${baseApiURL}/orders/new`,
         {
@@ -48,9 +47,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
           },
         },
       );
-
       Cookies.set("orderToModify", response.data._id);
-
       const orderId = response.data._id;
       navigate(`/payment/${orderId}`);
     } catch (error) {
@@ -59,7 +56,6 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   };
 
   // Modification d'une commande
-
   const modifyOrder = async () => {
     try {
       const orderIdToModify = Cookies.get("orderToModify");
@@ -90,8 +86,7 @@ const CartClient = ({ setCart, cart, setTotal, total }) => {
   };
 
   return (
-    // <section className="flex w-screen flex-col ">
-    <main className="h-svh flex w-screen flex-col items-center">
+    <main className="flex h-svh w-screen flex-col items-center">
       <div className="border-lightgrey fixed top-0 flex w-screen items-center justify-center  gap-2    bg-white">
         <div className="flex w-screen flex-col items-center justify-center gap-2 bg-white">
           <nav className="mx-[10px] mt-[15px] self-start">

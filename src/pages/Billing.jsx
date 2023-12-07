@@ -4,21 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import axios from "axios";
-import Loader from "../components/Loader";
 import Cookies from "js-cookie";
-
 import baseApiURL from "../api";
 
+// Import Components
+import Loader from "../components/Loader";
+
+// Import Assests
 import billPicto from "../assets/bill-picto.png";
 import snacksPicto from "../assets/snacks-picto.png";
 
 const Billing = () => {
-  Cookies.remove("orderToModify");
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState();
-
-  // eslint-disable-next-line no-unused-vars
   const [delay, setDelay] = useState(1);
 
   const navigate = useNavigate();
@@ -26,6 +25,7 @@ const Billing = () => {
   order_id = order_id.id;
 
   useEffect(() => {
+    Cookies.remove("orderToModify");
     const fetchDelay = async () => {
       const { data } = await axios.get(`${baseApiURL}/delay`);
       setDelay(Math.ceil(data.minutes_delay));
@@ -43,12 +43,12 @@ const Billing = () => {
     };
     const fetchData = async () => {
       const response = await axios.get(`${baseApiURL}/orders/${order_id}`);
-
       setData(response.data);
       setTotal(`${response.data.total_price + 2}`);
       setIsLoading(false);
 
-      const tokenOrder = Cookies.set("idOrder", response.data._id);
+      Cookies.set("idOrder", response.data._id);
+
       if (total === 0 || total === 2) {
         navigate("/home");
       }
@@ -89,7 +89,6 @@ const Billing = () => {
       pdf.save("bill.pdf");
     });
   };
-  // fonction pour le pdf
 
   return isLoading && !total ? (
     <Loader />
@@ -106,13 +105,11 @@ const Billing = () => {
         </div>
         <div className="absolute bottom-0 right-3 flex items-end ">
           <img
-            // src="/src/assets/black-soft.png"
             src={billPicto}
             alt="Soft black drink"
             className="h-10 w-14 object-cover"
           />
           <img
-            // src="/src/assets/Biere.png"
             src={snacksPicto}
             alt="Beer"
             className="h-15 relative right-3 w-12"

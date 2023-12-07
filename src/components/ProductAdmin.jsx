@@ -1,8 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "./Button";
-
+// Import Packages
 import { Link } from "react-router-dom";
 import { useState } from "react";
+
+// Import Components
+import Button from "./Button";
 import ModalDelete from "./ModalDelete";
 
 const ProductAdmin = ({

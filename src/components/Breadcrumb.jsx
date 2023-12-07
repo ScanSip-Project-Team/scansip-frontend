@@ -1,3 +1,4 @@
+// Import Assets
 import chevron from "../assets/chevron.svg";
 
 const BreadCrumb = ({ text, func }) => {

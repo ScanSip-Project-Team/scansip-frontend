@@ -1,11 +1,4 @@
-const SelectBox = ({
-  handleOnChange,
-  setStateValue,
-  stateValue,
-  label,
-  id,
-  error,
-}) => {
+const SelectBox = ({ handleOnChange, setStateValue, stateValue, error }) => {
   return (
     <div className="w-3/3 flex flex-1 flex-col">
       <label className="mb-2" htmlFor="category">
