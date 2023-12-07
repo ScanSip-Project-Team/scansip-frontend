@@ -1,21 +1,18 @@
 //Import Packages
 import { useState, useRef, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
-//Import Component
 
+//Import Component
 import NavMobile from "./NavMobile";
+
 // Import Asset
 import logo from "../../assets/logo.svg";
 
 const HeaderMobile = ({ adminToken, setAdminToken }) => {
   const [displayNav, setDisplayNav] = useState(false);
-  const [displayMenu, setDisplayMenu] = useState(false);
-  const [displayService, setDisplayService] = useState(false);
   const [displayLogout, setDisplayLogout] = useState(false);
-  const [isDropDown, setIsDropDown] = useState(false);
-  const location = useLocation();
 
   const navigate = useNavigate();
   const userMenuRef = useRef();
@@ -37,12 +34,6 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
       window.removeEventListener("click", handleClickWindow);
     };
   }, []);
-
-  // window.onclick = (event) => {
-  //   if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-  //     setDisplayLogout(false);
-  //   }
-  // };
 
   return (
     <header className="relative mb-10 flex items-center justify-between bg-black px-4 sm:hidden">
@@ -107,7 +98,7 @@ const HeaderMobile = ({ adminToken, setAdminToken }) => {
                 <Link to="/home">UI de vente</Link>
               </div>
             )}
-          </div>{" "}
+          </div>
         </>
       )}
     </header>

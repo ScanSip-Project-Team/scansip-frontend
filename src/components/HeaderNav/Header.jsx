@@ -1,10 +1,12 @@
 //Import Packages
 import { useState, useRef, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
+
 //Import Component
 import Nav from "./Nav";
+
 // Import Asset
 import logo from "../../assets/logo.svg";
 
@@ -12,11 +14,10 @@ const Header = ({ adminToken, setAdminToken }) => {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [displayService, setDisplayService] = useState(false);
   const [displayLogout, setDisplayLogout] = useState(false);
-  // const [isDropDown, setIsDropDown] = useState(false
+
   const userMenuRef = useRef();
   const navRef = useRef();
   const navigate = useNavigate();
-  // const location = useLocation();
 
   const handleLogOut = () => {
     Cookies.remove("scanSipToken");
@@ -24,20 +25,6 @@ const Header = ({ adminToken, setAdminToken }) => {
     navigate("/admin/signin");
   };
 
-  // window.onclick = (event) => {
-  //
-  //   if (
-  //     navRef.current &&
-  //     !navRef.current.contains(event.target) &&
-  //     userMenuRef.current &&
-  //     !userMenuRef.current.contains(event.target)
-  //   ) {
-  //
-  //     setDisplayLogout(false);
-  //     setDisplayMenu(false);
-  //     setDisplayService(false);
-  //   }
-  // };
   useEffect(() => {
     const handleClickWindow = (event) => {
       if (
@@ -51,20 +38,6 @@ const Header = ({ adminToken, setAdminToken }) => {
         setDisplayService(false);
       }
     };
-    // window.onclick = (event) => {
-
-    //   if (
-    //     navRef.current &&
-    //     !navRef.current.contains(event.target) &&
-    //     userMenuRef.current &&
-    //     !userMenuRef.current.contains(event.target)
-    //   ) {
-
-    //     setDisplayLogout(false);
-    //     setDisplayMenu(false);
-    //     setDisplayService(false);
-    //   }
-    // };
 
     window.addEventListener("click", handleClickWindow);
 

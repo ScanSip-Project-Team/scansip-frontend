@@ -1,8 +1,11 @@
+//Import Packages
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//Import Components
 import SubMenu from "./SubMenu";
+
 const ItemNav = ({
   setDisplayAlterState,
   setDisplayState,

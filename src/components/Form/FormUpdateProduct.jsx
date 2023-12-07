@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 import axios from "axios";
-// import toast, { Toaster } from "react-hot-toast";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import baseApiURL from "../../api";
 import CustomInput from "./CustomInput";
@@ -12,8 +11,6 @@ import ImageUpload from "./ImageUpload";
 import Loader from "../Loader";
 
 const FormCreateProduct = ({ product, toast }) => {
-  // const location = useLocation();
-  // const { product } = location.state;
   const public_id = product.product_image.public_id;
 
   const [name, setName] = useState(product.product_name);
@@ -109,9 +106,6 @@ const FormCreateProduct = ({ product, toast }) => {
     <Loader />
   ) : (
     <>
-      {/* <div>
-        <Toaster />
-      </div> */}
       <form
         onSubmit={(event) => {
           handleSubmitForm(event);

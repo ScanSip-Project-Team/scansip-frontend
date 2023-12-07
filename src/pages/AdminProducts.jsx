@@ -5,19 +5,18 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 //Import Components
-
 import ProductAdmin from "../components/ProductAdmin";
 import Loader from "../components/Loader";
 import baseApiURL from "../api";
 import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
+
 const AdminProducts = ({ adminToken, setAdminToken }) => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [isProductUpdate, setIsProductUpdate] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,6 +37,7 @@ const AdminProducts = ({ adminToken, setAdminToken }) => {
     } else {
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isProductUpdate]);
 
   return isLoading ? (

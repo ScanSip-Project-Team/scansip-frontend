@@ -1,14 +1,13 @@
+//Import Packages
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import ItemNav from "./ItemNav";
+//Import Components
 import ItemNavMobile from "./ItemNavMobille";
+
 const NavMobile = ({ displayNav, setDisplayNav }) => {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [displayService, setDisplayService] = useState(false);
-  const [isDropDown, setIsDropDown] = useState(false);
-  const location = useLocation();
+
   return (
     <ul className={`flex flex-col gap-6 ${displayNav ? "animate-items" : ""}`}>
       <ItemNavMobile

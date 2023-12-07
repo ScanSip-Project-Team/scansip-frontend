@@ -1,16 +1,17 @@
 import axios from "axios";
-// import toast, { Toaster } from "react-hot-toast";
 import { Toaster } from "sonner";
 import { toast } from "sonner";
 import Button from "./Button";
 import baseApiURL from "../api";
+
+// Import Components
+import Button from "./Button";
 
 const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
   const handleUpdateOrder = async (id) => {
     try {
       const key = "order_status";
       const value = "delivered";
-
       const response = await axios.put(
         `${baseApiURL}/orders/${id}/${key}/${value}`,
       );
@@ -20,7 +21,6 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
       } else {
         toast.error("😕 La commande n'a pas pu être validé! Ressayez 😉!");
       }
-
       setIsOrderUpdated(!isOrderUpdated);
     } catch (error) {
       console.log(error);
@@ -48,10 +48,6 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
           </span>
         </div>
         <div className="flex  flex-1 flex-col gap-3">
-          {/* <span className="text-sm ">
-            Nom (carte):
-            <span className="font-semibold">Tiktac </span>
-          </span> */}
           <span className="mb-4 text-sm ">
             Prix :
             <span className="font-semibold">

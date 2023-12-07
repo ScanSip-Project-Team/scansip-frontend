@@ -1,9 +1,9 @@
+// Import Packages
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import baseApiURL from "../api";
 
 const ModalDelete = ({
-  visible,
   setVisible,
   id,
   setIsLoading,
@@ -16,12 +16,11 @@ const ModalDelete = ({
   const handleDelete = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.delete(`${baseApiURL}/admin/delete/${id}`);
+      await axios.delete(`${baseApiURL}/admin/delete/${id}`);
       setFalse();
       setIsProductUpdate(!isProductUpdate);
       setIsLoading(false);
       toast.success("Le produit a été supprimé");
-      // setTimeout(setFalse, 1000);
     } catch (error) {
       console.log(error);
     }

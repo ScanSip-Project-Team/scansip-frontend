@@ -1,23 +1,20 @@
+// Import Packages
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
+
+// Import Components
 import Header from "../components/HeaderNav/Header";
 import HeaderMobile from "../components/HeaderNav/HeaderMobile";
-
 import Loader from "../components/Loader";
-import Button from "../components/Button";
-// import FormCreateProduct from "../components/FormCreateProduct";
 import FormUpdateProduct from "../components/Form/FormUpdateProduct";
 
 const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
   const location = useLocation();
 
-  // const { product } = location.state;
-
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (adminToken) {
@@ -29,7 +26,9 @@ const AdminUpdateProduct = ({ adminToken, setAdminToken }) => {
     } else {
       navigate("/admin/signin");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return isLoading ? (
     <Loader />
   ) : (

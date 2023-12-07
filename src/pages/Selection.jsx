@@ -19,41 +19,39 @@ import snacksPicto from "../assets/snacks-picto.png";
 import alcoolsPicto from "../assets/alcools-picto.png";
 import cocktailsPicto from "../assets/cocktails-picto.png";
 
-const Selection = ({
-  setCart,
-  cart,
-  setTotal,
-  total,
-  cartProductsStorage,
-  setCartProductsStorage,
-  cartTotalStorage,
-  setCartTotalStorage,
-}) => {
+const Selection = ({ setCart, cart, setTotal, total }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState("Softs");
+  const [openModal, setOpenModal] = useState(false);
+  const [productID, setProductID] = useState();
 
   const snacksTab = [];
   const softsTab = [];
   const alcoolsTab = [];
   const cocktailsTab = [];
 
-  // Yohann code -----------------------------
-  const [openModal, setOpenModal] = useState(false);
-  const [productID, setProductID] = useState();
-  const [emptyCart, setEmptyCart] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseApiURL}/products`);
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [category]);
 
   const navigate = useNavigate();
   Cookies.remove("idOrder");
 
   const handleNavigate = () => {
-    if (!total) {
-      setEmptyCart(true);
-    } else {
+    if (total) {
       navigate("/cart");
     }
   };
-  // Yohann code -----------------------------
 
   const handleClickSofts = () => {
     setCategory("Softs");
@@ -70,29 +68,6 @@ const Selection = ({
   const handleClickCocktails = () => {
     setCategory("Cocktails");
   };
-
-  // const [counter, setCounter] = useState();
-
-  // setCounter(counter + 1);
-
-  // setCounter((prevCounter) => {
-
-  //   return prevCounter +1
-  // });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${baseApiURL}/products`);
-        setData(response.data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [category]);
 
   if (!isLoading && data) {
     for (let m = 0; m < data.length; m++) {
@@ -123,7 +98,6 @@ const Selection = ({
   return isLoading ? (
     <Loader />
   ) : (
-    // SELECTION BANNER
     <div className="flex w-screen flex-col items-center justify-center  scroll-smooth  bg-white">
       <div className="h-100 border-lightgrey fixed top-0 flex w-screen flex-col items-center justify-center border-b bg-white shadow-md">
         <ShopName />

@@ -33,7 +33,6 @@ const FormCreateProduct = ({ toast }) => {
     event.preventDefault();
     setIsLoading(true);
     //Validation form is dealed in the backend
-    // setErrorMessage("");
     setError(false);
     try {
       const formData = new FormData();
@@ -70,7 +69,6 @@ const FormCreateProduct = ({ toast }) => {
       setSalt("");
       setFat("");
       setFibers("");
-      // setErrorMessage("");
 
       setIsLoading(false);
       navigate("/admin/products");
@@ -96,9 +94,6 @@ const FormCreateProduct = ({ toast }) => {
     <Loader />
   ) : (
     <>
-      {/* <div>
-        <Toaster />
-      </div> */}
       <form
         onSubmit={(event) => {
           handleSubmitForm(event);

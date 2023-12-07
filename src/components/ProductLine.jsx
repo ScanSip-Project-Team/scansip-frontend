@@ -1,4 +1,4 @@
-import { useState } from "react";
+// Import Components
 import ButtonQuantity from "./ButtonQuantity";
 
 const ProductLine = (props) => {
@@ -9,7 +9,6 @@ const ProductLine = (props) => {
     if (item.quantity !== 1) {
       // je cherche le produit dans le panier
       const productToFind = cart.find((e) => e._id === item._id);
-
       const indexOfProduct = cart.indexOf(productToFind);
       // et je diminue sa quantité de 1
       const cartCopy = [...cart];
@@ -34,7 +33,6 @@ const ProductLine = (props) => {
   const handleClickPlus = (item) => {
     // je vérifie si le produit est déjà dans le panier
     const productToFind = cart.find((e) => e._id === item._id);
-
     // s'il n'est pas dans le panier, je lui ajoute une clé quantité et je le push dans le panier
     if (productToFind === undefined) {
       const cartCopy = [...cart];
@@ -49,7 +47,6 @@ const ProductLine = (props) => {
       const indexOfProduct = cart.indexOf(productToFind);
       const cartCopy = [...cart];
       cartCopy[indexOfProduct].quantity = cart[indexOfProduct].quantity + 1;
-
       setCart(cartCopy);
       setTotal(total + Number(item.product_price));
     }
