@@ -11,7 +11,7 @@ import {
   faTrashCan,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 //Import Components
 import FlashScreen from "./pages/FlashScreen";
@@ -24,8 +24,6 @@ import Lab from "./pages/Lab";
 import AdminProducts from "./pages/AdminProducts";
 import AdminNewProduct from "./pages/AdminNewProduct";
 import AdminHistory from "./pages/AdminHistory";
-import Header from "./components/HeaderNav/Header";
-import HeaderMobile from "./components/HeaderNav/HeaderMobile";
 import AdminUpdateProduct from "./pages/AdminUpdateProduct";
 import AdminSignUp from "./pages/AdminSignUp";
 import AdminSignIn from "./pages/AdminSignIn";
@@ -49,6 +47,7 @@ function App() {
   const [adminToken, setAdminToken] = useState(
     Cookies.get("scanSipToken") || null,
   );
+
 
   return (
     <Router>

@@ -1,6 +1,7 @@
-import { useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+// import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
+import { toast } from "sonner";
 import Button from "./Button";
 import baseApiURL from "../api";
 
@@ -24,6 +25,7 @@ const SumUpOrder = ({ element, setIsOrderUpdated, isOrderUpdated }) => {
     } catch (error) {
       console.log(error);
     }
+
   };
 
   return (
