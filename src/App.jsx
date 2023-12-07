@@ -51,6 +51,7 @@ function App() {
   );
   console.log("width", window.innerWidth);
   console.log("cart before return >>>", cart);
+
   return (
     <Router>
       <Routes>
